@@ -17,11 +17,12 @@
 package com.zhouhaoo.sample.utils
 
 import android.app.Activity
+import android.support.annotation.StringRes
 import android.widget.Toast
 
 /**
  * Created by zhou on 17/11/14.
  */
-fun Activity.toast(text: String) {
-    Toast.makeText(this, text, Toast.LENGTH_LONG).show()
-}
+inline fun Activity.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+
+inline fun Activity.toast(@StringRes resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
