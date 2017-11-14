@@ -32,6 +32,7 @@ class SplashActivity : BaseActivity() {
         tvHello.text = "hello kotlin"
         tvHello.setOnClickListener { toast("哈哈哈") }
         e("哈哈哈哈")
+        e("哈哈哈哈")
         application.registerActivityLifecycleCallbacks(ActivityLifecycle())
     }
 }
