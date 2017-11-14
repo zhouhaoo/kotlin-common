@@ -17,6 +17,7 @@
 package com.zhouhaoo.sample.utils
 
 import android.util.Log
+import com.zhouhaoo.sample.BuildConfig
 
 /**
  * Created by zhou on 17/11/14.
@@ -56,14 +57,26 @@ fun Any.e(msg: String) = e(TAG, msg)
 
 fun Any.wtf(msg: String) = wtf(TAG, msg)
 
-inline fun v(tag: String, msg: String) = Log.v(tag, msg)
+inline fun v(tag: String, msg: String) {
+    if (BuildConfig.DEBUG) Log.v(tag, msg)
+}
 
-inline fun d(tag: String, msg: String) = Log.d(tag, msg)
+inline fun d(tag: String, msg: String) {
+    if (BuildConfig.DEBUG) Log.d(tag, msg)
+}
 
-inline fun i(tag: String, msg: String) = Log.i(tag, msg)
+inline fun i(tag: String, msg: String) {
+    if (BuildConfig.DEBUG) Log.i(tag, msg)
+}
 
-inline fun w(tag: String, msg: String) = Log.w(tag, msg)
+inline fun w(tag: String, msg: String) {
+    if (BuildConfig.DEBUG) Log.w(tag, msg)
+}
 
-inline fun e(tag: String, msg: String) = Log.e(tag, msg)
+inline fun e(tag: String, msg: String) {
+    if (BuildConfig.DEBUG) Log.e(tag, msg)
+}
 
-inline fun wtf(tag: String, msg: String) = Log.wtf(tag, msg)
+inline fun wtf(tag: String, msg: String) {
+    if (BuildConfig.DEBUG) Log.wtf(tag, msg)
+}
