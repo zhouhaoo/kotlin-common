@@ -14,18 +14,27 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample
+package com.zhouhaoo.sample.base
 
 import android.os.Bundle
-import com.zhouhaoo.sample.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_splash.*
+import android.support.v7.app.AppCompatActivity
 
-class SplashActivity : BaseActivity() {
+/**
+ * Created by zhou on 17/11/14.
+ */
+abstract class BaseActivity : AppCompatActivity() {
+    /**
+     * 初始化布局
+     */
+    abstract val layoutId: Int
 
-    override val layoutId: Int
-        get() = R.layout.activity_splash
-
-    override fun initData(savedInstanceState: Bundle?) {
-        tvHello.text = "hello kotlin"
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val layoutId = layoutId
+        setContentView(layoutId)
+        initData(savedInstanceState)
     }
+
+    abstract fun initData(savedInstanceState: Bundle?)
+
 }
