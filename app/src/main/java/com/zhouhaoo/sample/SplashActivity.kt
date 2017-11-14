@@ -18,6 +18,7 @@ package com.zhouhaoo.sample
 
 import android.os.Bundle
 import com.zhouhaoo.sample.base.BaseActivity
+import com.zhouhaoo.sample.utils.e
 import com.zhouhaoo.sample.utils.toast
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -29,5 +30,6 @@ class SplashActivity : BaseActivity() {
     override fun initData(savedInstanceState: Bundle?) {
         tvHello.text = "hello kotlin"
         tvHello.setOnClickListener { toast("哈哈哈") }
+        e("哈哈哈哈")
     }
 }
