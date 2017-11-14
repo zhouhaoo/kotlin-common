@@ -14,20 +14,15 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample
+package com.zhouhaoo.sample.utils
 
-import android.os.Bundle
-import com.zhouhaoo.sample.base.BaseActivity
-import com.zhouhaoo.sample.utils.toast
-import kotlinx.android.synthetic.main.activity_splash.*
+import android.app.Activity
+import android.support.annotation.StringRes
+import android.widget.Toast
 
-class SplashActivity : BaseActivity() {
+/**
+ * Created by zhou on 17/11/14.
+ */
+inline fun Activity.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 
-    override val layoutId: Int
-        get() = R.layout.activity_splash
-
-    override fun initData(savedInstanceState: Bundle?) {
-        tvHello.text = "hello kotlin"
-        tvHello.setOnClickListener { toast("哈哈哈") }
-    }
-}
+inline fun Activity.toast(@StringRes resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
