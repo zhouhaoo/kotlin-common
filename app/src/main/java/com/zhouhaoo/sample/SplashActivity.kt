@@ -17,6 +17,7 @@
 package com.zhouhaoo.sample
 
 import android.os.Bundle
+import com.zhouhaoo.sample.base.ActivityLifecycle
 import com.zhouhaoo.sample.base.BaseActivity
 import com.zhouhaoo.sample.utils.e
 import com.zhouhaoo.sample.utils.toast
@@ -31,5 +32,6 @@ class SplashActivity : BaseActivity() {
         tvHello.text = "hello kotlin"
         tvHello.setOnClickListener { toast("哈哈哈") }
         e("哈哈哈哈")
+        application.registerActivityLifecycleCallbacks(ActivityLifecycle())
     }
 }

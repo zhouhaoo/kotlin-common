@@ -22,40 +22,38 @@ import com.zhouhaoo.sample.BuildConfig
 /**
  * Created by zhou on 17/11/14.
  */
-
-
-private val Any.TAG: String
+private val Any.tag: String
     get() = javaClass.simpleName
 
 fun Any.v(msg: () -> String) {
-    if (Log.isLoggable(TAG, Log.VERBOSE)) v(msg())
+    if (Log.isLoggable(tag, Log.VERBOSE)) v(msg())
 }
 
 fun Any.d(msg: () -> String) {
-    if (Log.isLoggable(TAG, Log.DEBUG)) d(msg())
+    if (Log.isLoggable(tag, Log.DEBUG)) d(msg())
 }
 
 fun Any.i(msg: () -> String) {
-    if (Log.isLoggable(TAG, Log.INFO)) i(msg())
+    if (Log.isLoggable(tag, Log.INFO)) i(msg())
 }
 
 fun Any.e(msg: () -> String) {
-    if (Log.isLoggable(TAG, Log.ERROR)) e(msg())
+    if (Log.isLoggable(tag, Log.ERROR)) e(msg())
 }
 
 fun Any.wtf(msg: () -> String) = w(msg())
 
-fun Any.v(msg: String) = v(TAG, msg)
+fun Any.v(msg: String) = v(tag, msg)
 
-fun Any.d(msg: String) = d(TAG, msg)
+fun Any.d(msg: String) = d(tag, msg)
 
-fun Any.i(msg: String) = i(TAG, msg)
+fun Any.i(msg: String) = i(tag, msg)
 
-fun Any.w(msg: String) = w(TAG, msg)
+fun Any.w(msg: String) = w(tag, msg)
 
-fun Any.e(msg: String) = e(TAG, msg)
+fun Any.e(msg: String) = e(tag, msg)
 
-fun Any.wtf(msg: String) = wtf(TAG, msg)
+fun Any.wtf(msg: String) = wtf(tag, msg)
 
 inline fun v(tag: String, msg: String) {
     if (BuildConfig.DEBUG) Log.v(tag, msg)
