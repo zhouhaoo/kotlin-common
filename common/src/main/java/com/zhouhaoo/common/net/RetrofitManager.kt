@@ -28,11 +28,12 @@ object RetrofitManager {
      * okHttp配置
      */
     private val okHttpClient by lazy {
-        OkHttpClient.Builder()
+        val client = OkHttpClient.Builder()
                 .writeTimeout(30_000, TimeUnit.MILLISECONDS)
                 .readTimeout(10_000, TimeUnit.MILLISECONDS)
                 .connectTimeout(15_000, TimeUnit.MILLISECONDS)
-                .build()
+
+        client.build()
     }
 
     /**
