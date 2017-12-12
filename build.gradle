@@ -35,7 +35,20 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
     }
+
+//    configurations.all {
+//        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//            def requested = details.requested
+//            if (requested.group == 'com.android.support') {
+//                if (!requested.name.startsWith("multidex") && !requested.name.startsWith("constraint")) {
+//                    details.useVersion '26.1.0'
+//                }
+//            }
+//        }
+//    }
 }
 
 task clean(type: Delete) {
