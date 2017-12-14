@@ -17,16 +17,31 @@
 package com.zhouhaoo.common.base
 
 import android.app.Application
+import android.content.Context
+import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
 
 /**
- * <pre>
+ *
  *新建app 需要在manifest声明此类
- * </pre>
+ *
  * Created by Zhouhaoo on 17/12/11.
  */
 class BaseApplication : Application() {
 
+    private var appLifecycle = AppLifecycleImpl()
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        appLifecycle.attachBaseContext(baseContext)
+    }
+
     override fun onCreate() {
         super.onCreate()
+        appLifecycle.onCreate(this)
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        appLifecycle.onTerminate(this)
     }
 }

@@ -14,13 +14,27 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.scope
+package com.zhouhaoo.common.base.delegate
 
-import javax.inject.Scope
+import android.app.Application
+import android.content.Context
 
 /**
- * Created by zhou on 17/12/11.
+ * 代理application的生命周期
+ *
+ * Created by zhou on 17/12/14.
  */
+class AppLifecycleImpl : AppLifecycle {
 
-@Scope
-@Retention annotation class ActivityScope
+    override fun attachBaseContext(context: Context) {
+
+    }
+
+    override fun onCreate(application: Application) {
+
+    }
+
+    override fun onTerminate(application: Application) {
+
+    }
+}

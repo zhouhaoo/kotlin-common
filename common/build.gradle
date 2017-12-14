@@ -62,6 +62,6 @@ dependencies {
 
     kapt annotationProcessorLibs
 
-    testImplementation junit
-    androidTestImplementation androidTestsLibs
+//    testImplementation junit
+//    androidTestImplementation androidTestsLibs
 }

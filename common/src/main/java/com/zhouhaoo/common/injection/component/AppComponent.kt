@@ -14,13 +14,11 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.scope
-
-import javax.inject.Scope
+package com.zhouhaoo.common.injection.component
 
 /**
- * Created by zhou on 17/12/11.
+ * Created by zhou on 17/12/14.
  */
+interface AppComponent {
 
-@Scope
-@Retention annotation class ActivityScope
+}

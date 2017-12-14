@@ -22,7 +22,7 @@ ext {
     versionCode = 1
     versionName = "1.0.0"
     versions = [
-            support         : "27.0.0",
+            support         : "27.0.2",
             constraintLayout: '1.0.2',
 
             okHttp          : '3.9.1',
