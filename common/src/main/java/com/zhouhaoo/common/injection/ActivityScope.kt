@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.scope
+package com.zhouhaoo.common.injection
 
 import javax.inject.Scope
 
