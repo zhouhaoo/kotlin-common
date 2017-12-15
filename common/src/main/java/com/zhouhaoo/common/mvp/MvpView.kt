@@ -20,4 +20,5 @@ package com.zhouhaoo.common.mvp
  * Created by zhou on 17/12/15.
  */
 interface MvpView {
+
 }

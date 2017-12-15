@@ -24,7 +24,7 @@ import dagger.Provides
  * Created by zhou on 17/12/14.
  */
 @Module
-class AppModule(private var application: Application) {
+class AppModule(private val application: Application) {
 
     @Provides
     internal fun provideApplication(): Application {

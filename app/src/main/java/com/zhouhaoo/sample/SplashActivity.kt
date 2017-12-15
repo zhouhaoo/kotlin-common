@@ -34,4 +34,5 @@ class SplashActivity : BaseActivity() {
         e("哈哈哈哈")
         application.registerActivityLifecycleCallbacks(ActivityLifecycle())
     }
+
 }

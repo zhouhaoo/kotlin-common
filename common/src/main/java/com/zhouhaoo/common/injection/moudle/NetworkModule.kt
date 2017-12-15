@@ -18,6 +18,14 @@ package com.zhouhaoo.common.injection.moudle
 
 import android.content.Context
 import dagger.Module
+import dagger.Provides
+import okhttp3.HttpUrl
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import timber.log.Timber
+import javax.inject.Singleton
 
 /**
  * Created by zhou on 17/12/15.
@@ -25,4 +33,42 @@ import dagger.Module
 @Module
 class NetworkModule(private val context: Context) {
 
+    @Singleton
+    @Provides
+    internal fun provideRetrofitBuilder(): Retrofit.Builder {
+        return Retrofit.Builder()
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideRetrofit(builder: Retrofit.Builder, baseUrl: HttpUrl,
+                                 okHttpClient: OkHttpClient): Retrofit {
+        return builder
+                .baseUrl(baseUrl)
+                .client(okHttpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideClientBuilder(): OkHttpClient.Builder {
+        return OkHttpClient.Builder()
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideOkHttpClient(builder: OkHttpClient.Builder, httpLoggingInterceptor: HttpLoggingInterceptor)
+            : OkHttpClient {
+        builder.addInterceptor(httpLoggingInterceptor)
+        return builder.build()
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor { message ->
+            Timber.d(message)
+        }.setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
 }

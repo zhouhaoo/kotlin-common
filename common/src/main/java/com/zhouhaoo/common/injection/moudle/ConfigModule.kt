@@ -23,4 +23,5 @@ import dagger.Module
  */
 @Module
 class ConfigModule {
+
 }
