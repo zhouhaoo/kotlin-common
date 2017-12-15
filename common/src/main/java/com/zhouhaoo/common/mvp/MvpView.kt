@@ -14,24 +14,10 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.component
-
-import android.app.Application
-import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
-import com.zhouhaoo.common.injection.moudle.AppModule
-import com.zhouhaoo.common.injection.moudle.ConfigModule
-import com.zhouhaoo.common.injection.moudle.NetworkModule
-import dagger.Component
-import javax.inject.Singleton
+package com.zhouhaoo.common.mvp
 
 /**
- * Created by zhou on 17/12/14.
+ * Created by zhou on 17/12/15.
  */
-@Singleton
-@Component(modules = [AppModule::class, NetworkModule::class, ConfigModule::class])
-interface AppComponent {
-
-    fun application(): Application
-
-    fun inject(appLifecycle: AppLifecycleImpl)
+interface MvpView {
 }
