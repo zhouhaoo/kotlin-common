@@ -16,9 +16,20 @@
 
 package com.zhouhaoo.common.injection.component
 
+import android.app.Application
+import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
+import com.zhouhaoo.common.injection.moudle.AppModule
+import dagger.Component
+import javax.inject.Singleton
+
 /**
  * Created by zhou on 17/12/14.
  */
+@Singleton
+@Component(modules = [AppModule::class])
 interface AppComponent {
 
+    fun application(): Application
+
+    fun inject(appLifecycle: AppLifecycleImpl)
 }

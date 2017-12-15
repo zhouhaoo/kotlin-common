@@ -16,9 +16,19 @@
 
 package com.zhouhaoo.common.injection.moudle
 
+import android.app.Application
+import dagger.Module
+import dagger.Provides
+
 /**
  * Created by zhou on 17/12/14.
  */
-class AppModule {
+@Module
+class AppModule(private var application: Application) {
+
+    @Provides
+    internal fun provideApplication(): Application {
+        return application
+    }
 
 }

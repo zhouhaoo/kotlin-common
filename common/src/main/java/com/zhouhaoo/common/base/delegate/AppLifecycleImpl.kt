@@ -18,6 +18,8 @@ package com.zhouhaoo.common.base.delegate
 
 import android.app.Application
 import android.content.Context
+import com.zhouhaoo.common.injection.component.DaggerAppComponent
+import com.zhouhaoo.common.injection.moudle.AppModule
 
 /**
  * 代理application的生命周期
@@ -31,7 +33,11 @@ class AppLifecycleImpl : AppLifecycle {
     }
 
     override fun onCreate(application: Application) {
-
+        DaggerAppComponent
+                .builder()
+                .appModule(AppModule(application))
+                .build()
+                .inject(this)
     }
 
     override fun onTerminate(application: Application) {

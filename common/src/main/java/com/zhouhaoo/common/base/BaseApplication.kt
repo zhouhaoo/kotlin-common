@@ -32,7 +32,7 @@ class BaseApplication : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        appLifecycle.attachBaseContext(baseContext)
+        appLifecycle.attachBaseContext(base!!)
     }
 
     override fun onCreate() {
