@@ -18,8 +18,10 @@ package com.zhouhaoo.common.base.delegate
 
 import android.app.Application
 import android.content.Context
+import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.common.injection.component.DaggerAppComponent
 import com.zhouhaoo.common.injection.moudle.AppModule
+import kotlin.properties.Delegates
 
 /**
  * 代理application的生命周期
@@ -28,16 +30,20 @@ import com.zhouhaoo.common.injection.moudle.AppModule
  */
 class AppLifecycleImpl : AppLifecycle {
 
+    companion object {
+        var mAppComponent by Delegates.notNull<AppComponent>()
+    }
+
     override fun attachBaseContext(context: Context) {
 
     }
 
     override fun onCreate(application: Application) {
-        DaggerAppComponent
+        mAppComponent = DaggerAppComponent
                 .builder()
                 .appModule(AppModule(application))
                 .build()
-                .inject(this)
+        mAppComponent.inject(this)
     }
 
     override fun onTerminate(application: Application) {
