@@ -18,7 +18,9 @@ package com.zhouhaoo.common.base
 
 import android.app.Application
 import android.content.Context
+import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
+import kotlin.properties.Delegates
 
 /**
  *
@@ -28,10 +30,13 @@ import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
  */
 class BaseApplication : Application() {
 
-    private var appLifecycle = AppLifecycleImpl()
+    companion object {
+        var appLifecycle by Delegates.notNull<AppLifecycle>()
+    }
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
+        appLifecycle = AppLifecycleImpl()
         appLifecycle.attachBaseContext(base!!)
     }
 
