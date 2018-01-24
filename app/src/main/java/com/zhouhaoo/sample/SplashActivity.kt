@@ -22,6 +22,7 @@ import com.zhouhaoo.sample.base.BaseActivity
 import com.zhouhaoo.sample.utils.e
 import com.zhouhaoo.sample.utils.toast
 import kotlinx.android.synthetic.main.activity_splash.*
+import java.net.Socket
 
 class SplashActivity : BaseActivity() {
 
@@ -33,6 +34,11 @@ class SplashActivity : BaseActivity() {
         tvHello.setOnClickListener { toast("哈哈哈") }
         e("哈哈哈哈")
         application.registerActivityLifecycleCallbacks(ActivityLifecycle())
+
+        var socket = Socket()
+        socket.apply {
+
+        }
     }
 
 }

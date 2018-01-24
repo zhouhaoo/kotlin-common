@@ -21,7 +21,6 @@ import android.content.Context
 import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.common.injection.component.DaggerAppComponent
 import com.zhouhaoo.common.injection.moudle.AppModule
-import kotlin.properties.Delegates
 
 /**
  * 代理application的生命周期
@@ -29,10 +28,7 @@ import kotlin.properties.Delegates
  * Created by zhou on 17/12/14.
  */
 class AppLifecycleImpl : AppLifecycle {
-
-    companion object {
-        var mAppComponent by Delegates.notNull<AppComponent>()
-    }
+    private lateinit var mAppComponent: AppComponent
 
     override fun attachBaseContext(context: Context) {
 

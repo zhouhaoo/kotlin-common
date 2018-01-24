@@ -30,9 +30,7 @@ import kotlin.properties.Delegates
  */
 class BaseApplication : Application() {
 
-    companion object {
-        var appLifecycle by Delegates.notNull<AppLifecycle>()
-    }
+    private var appLifecycle by Delegates.notNull<AppLifecycle>()
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
