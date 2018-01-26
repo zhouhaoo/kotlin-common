@@ -16,7 +16,7 @@
 
 package com.zhouhaoo.common.injection.moudle
 
-import android.content.Context
+import android.app.Application
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -31,17 +31,15 @@ import javax.inject.Singleton
  * Created by zhou on 17/12/15.
  */
 @Module
-class NetworkModule(private val context: Context) {
+class NetworkModule {
 
     @Singleton
     @Provides
-    internal fun provideRetrofitBuilder(): Retrofit.Builder {
-        return Retrofit.Builder()
-    }
+    internal fun provideRetrofitBuilder() = Retrofit.Builder()
 
     @Singleton
     @Provides
-    internal fun provideRetrofit(builder: Retrofit.Builder, baseUrl: HttpUrl,
+    internal fun provideRetrofit(application: Application, builder: Retrofit.Builder, baseUrl: HttpUrl,
                                  okHttpClient: OkHttpClient): Retrofit {
         return builder
                 .baseUrl(baseUrl)
@@ -52,20 +50,19 @@ class NetworkModule(private val context: Context) {
 
     @Singleton
     @Provides
-    internal fun provideClientBuilder(): OkHttpClient.Builder {
-        return OkHttpClient.Builder()
-    }
+    internal fun provideClientBuilder() = OkHttpClient.Builder()
 
-    @Provides
     @Singleton
-    internal fun provideOkHttpClient(builder: OkHttpClient.Builder, httpLoggingInterceptor: HttpLoggingInterceptor)
+    @Provides
+    internal fun provideOkHttpClient(builder: OkHttpClient.Builder,
+                                     httpLoggingInterceptor: HttpLoggingInterceptor)
             : OkHttpClient {
         builder.addInterceptor(httpLoggingInterceptor)
         return builder.build()
     }
 
-    @Provides
     @Singleton
+    @Provides
     internal fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor { message ->
             Timber.d(message)

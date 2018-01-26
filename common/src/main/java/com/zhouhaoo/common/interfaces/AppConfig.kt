@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,23 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.component
+package com.zhouhaoo.common.interfaces
 
 import android.app.Application
-import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
-import com.zhouhaoo.common.injection.moudle.AppModule
+import android.content.Context
+import android.support.v4.app.FragmentManager
+import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.injection.moudle.ConfigModule
-import com.zhouhaoo.common.injection.moudle.NetworkModule
-import dagger.Component
-import javax.inject.Singleton
 
 /**
- * Created by zhou on 17/12/14.
+ * Created by zhou on 18/1/25.
  */
-@Singleton
-@Component(modules = [AppModule::class, NetworkModule::class, ConfigModule::class])
-interface AppComponent {
-    fun application(): Application
+interface AppConfig {
+    fun applyOptions(context: Context, configModule: ConfigModule)
 
-    fun inject(appLifecycle: AppLifecycleImpl)
+    fun injectAppLifecycle(context: Context, appLifecycles: List<AppLifecycle>)
+
+    fun injectActivityLifecycle(context: Context, actLifecycles: List<Application.ActivityLifecycleCallbacks>)
+
+    fun injectFragmentLifecycle(context: Context, fragLifecycles: List<FragmentManager.FragmentLifecycleCallbacks>)
 }

@@ -18,7 +18,7 @@ ext {
     compileSdkVer = 27
     minSdkVer = 19
     targetSdkVer = 27
-    kotlin_version = "1.2.10"
+    kotlin_version = "1.2.21"
     versionCode = 1
     versionName = "1.0.0"
     versions = [

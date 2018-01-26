@@ -21,6 +21,5 @@ import javax.inject.Scope
 /**
  * Created by zhou on 17/12/11.
  */
-
 @Scope
 @Retention annotation class ActivityScope

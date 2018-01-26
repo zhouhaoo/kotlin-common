@@ -32,10 +32,10 @@ class BaseApplication : Application() {
 
     private var appLifecycle by Delegates.notNull<AppLifecycle>()
 
-    override fun attachBaseContext(base: Context?) {
+    override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
-        appLifecycle = AppLifecycleImpl()
-        appLifecycle.attachBaseContext(base!!)
+        appLifecycle = AppLifecycleImpl(base)
+        appLifecycle.attachBaseContext(base)
     }
 
     override fun onCreate() {

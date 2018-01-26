@@ -20,7 +20,7 @@ import android.app.Application
 import android.content.Context
 
 /**
- * 代理转移application的生命周期
+ *
  * Created by zhou on 17/12/14.
  */
 interface AppLifecycle {

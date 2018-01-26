@@ -19,6 +19,7 @@ package com.zhouhaoo.common.injection.moudle
 import android.app.Application
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Created by zhou on 17/12/14.
@@ -26,6 +27,7 @@ import dagger.Provides
 @Module
 class AppModule(private val application: Application) {
 
+    @Singleton
     @Provides
     internal fun provideApplication(): Application {
         return application

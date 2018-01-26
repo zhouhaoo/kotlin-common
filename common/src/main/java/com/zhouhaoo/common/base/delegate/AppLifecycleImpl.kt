@@ -18,26 +18,40 @@ package com.zhouhaoo.common.base.delegate
 
 import android.app.Application
 import android.content.Context
+import com.zhouhaoo.common.interfaces.AppConfig
 import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.common.injection.component.DaggerAppComponent
 import com.zhouhaoo.common.injection.moudle.AppModule
+import com.zhouhaoo.common.injection.moudle.NetworkModule
+import com.zhouhaoo.common.util.ManifestParser
 
 /**
  * 代理application的生命周期
  *
  * Created by zhou on 17/12/14.
  */
-class AppLifecycleImpl : AppLifecycle {
+class AppLifecycleImpl(base: Context) : AppLifecycle {
+
     private lateinit var mAppComponent: AppComponent
+    private var configs: List<AppConfig> = ManifestParser(base).parse()
+    private var mAppLifecycles: List<AppLifecycle> = ArrayList()
+    private var mActivityLifecycles: List<Application.ActivityLifecycleCallbacks> = ArrayList()
+
+    init {
+        configs.forEach {
+            it.injectAppLifecycle(base, mAppLifecycles)
+            it.injectActivityLifecycle(base, mActivityLifecycles)
+        }
+    }
 
     override fun attachBaseContext(context: Context) {
-
+        mAppLifecycles.forEach { it.attachBaseContext(context) }
     }
 
     override fun onCreate(application: Application) {
-        mAppComponent = DaggerAppComponent
-                .builder()
+        mAppComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(application))
+                .networkModule(NetworkModule())
                 .build()
         mAppComponent.inject(this)
     }

@@ -17,11 +17,12 @@
 package com.zhouhaoo.common.injection.moudle
 
 import dagger.Module
+import okhttp3.HttpUrl
 
 /**
  * Created by zhou on 17/12/15.
  */
 @Module
-class ConfigModule {
+class ConfigModule(var httpUrl: HttpUrl) {
 
 }
