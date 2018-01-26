@@ -14,15 +14,15 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.utils
+package com.zhouhaoo.common.injection.moudle
 
-import android.app.Activity
-import android.support.annotation.StringRes
-import android.widget.Toast
+import dagger.Module
+import okhttp3.HttpUrl
 
 /**
- * Created by zhou on 17/11/14.
+ * Created by zhou on 17/12/15.
  */
- fun Activity.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+@Module
+class ConfigModule(var httpUrl: HttpUrl) {
 
- fun Activity.toast(@StringRes resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+}

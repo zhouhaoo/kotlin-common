@@ -14,15 +14,23 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.utils
+package com.zhouhaoo.common.injection.moudle
 
-import android.app.Activity
-import android.support.annotation.StringRes
-import android.widget.Toast
+import android.app.Application
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
 /**
- * Created by zhou on 17/11/14.
+ * Created by zhou on 17/12/14.
  */
- fun Activity.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+@Module
+class AppModule(private val application: Application) {
 
- fun Activity.toast(@StringRes resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+    @Singleton
+    @Provides
+    internal fun provideApplication(): Application {
+        return application
+    }
+
+}

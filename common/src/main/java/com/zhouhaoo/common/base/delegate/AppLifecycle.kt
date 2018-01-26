@@ -14,15 +14,21 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.utils
+package com.zhouhaoo.common.base.delegate
 
-import android.app.Activity
-import android.support.annotation.StringRes
-import android.widget.Toast
+import android.app.Application
+import android.content.Context
 
 /**
- * Created by zhou on 17/11/14.
+ *
+ * Created by zhou on 17/12/14.
  */
- fun Activity.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+interface AppLifecycle {
 
- fun Activity.toast(@StringRes resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+    fun attachBaseContext(context: Context)
+
+    fun onCreate(application: Application)
+
+    fun onTerminate(application: Application)
+
+}

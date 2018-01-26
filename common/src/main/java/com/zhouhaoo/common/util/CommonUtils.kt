@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,10 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.utils
-
-import android.app.Activity
-import android.support.annotation.StringRes
-import android.widget.Toast
+package com.zhouhaoo.common.util
 
 /**
- * Created by zhou on 17/11/14.
+ * Created by zhou on 18/1/25.
  */
- fun Activity.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
-
- fun Activity.toast(@StringRes resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+class CommonUtils {
+}

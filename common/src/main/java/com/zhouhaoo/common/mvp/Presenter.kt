@@ -14,15 +14,11 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.utils
-
-import android.app.Activity
-import android.support.annotation.StringRes
-import android.widget.Toast
+package com.zhouhaoo.common.mvp
 
 /**
- * Created by zhou on 17/11/14.
+ * Created by zhou on 17/12/15.
  */
- fun Activity.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+interface Presenter {
 
- fun Activity.toast(@StringRes resId: Int) = Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+}
