@@ -17,6 +17,8 @@
 package com.zhouhaoo.common.injection.moudle
 
 import android.app.Application
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -33,4 +35,11 @@ class AppModule(private val application: Application) {
         return application
     }
 
+    @Singleton
+    @Provides
+    fun provideGson(application: Application, configuration: GsonBuilder.() -> Unit): Gson {
+        val builder = GsonBuilder()
+        builder.apply { configuration }
+        return builder.create()
+    }
 }

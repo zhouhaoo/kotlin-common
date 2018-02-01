@@ -19,30 +19,29 @@ package com.zhouhaoo.sample
 import android.app.Application
 import android.content.Context
 import android.support.v4.app.FragmentManager
-import com.zhouhaoo.common.interfaces.AppConfig
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.injection.moudle.ConfigModule
+import com.zhouhaoo.common.interfaces.AppConfig
 
 /**
  * Created by zhou on 18/1/25.
  */
 class TestAppConfig : AppConfig {
-    override fun applyOptions(context: Context, configModule: ConfigModule) {
-        configModule.apply {
-            //            httpUrl =
+    override fun applyOptions(context: Context, module: ConfigModule) {
+        module.apply {
+            gsonBuilder = { serializeNulls() }
         }
     }
 
-    override fun injectAppLifecycle(context: Context, appLifecycles: List<AppLifecycle>) {
+    override fun injectAppLifecycle(context: Context, appLifecycles: ArrayList<AppLifecycle>) {
 
     }
 
-    override fun injectActivityLifecycle(context: Context, actLifecycles: List<Application.ActivityLifecycleCallbacks>) {
+    override fun injectActivityLifecycle(context: Context, actLifecycles: ArrayList<Application.ActivityLifecycleCallbacks>) {
 
     }
 
-    override fun injectFragmentLifecycle(context: Context, fragLifecycles: List<FragmentManager.FragmentLifecycleCallbacks>) {
+    override fun injectFragmentLifecycle(context: Context, fragLifecycles: ArrayList<FragmentManager.FragmentLifecycleCallbacks>) {
 
     }
-
 }

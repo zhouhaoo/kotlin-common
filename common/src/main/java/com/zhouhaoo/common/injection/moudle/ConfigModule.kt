@@ -16,13 +16,29 @@
 
 package com.zhouhaoo.common.injection.moudle
 
+import android.app.Application
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
+import dagger.Provides
 import okhttp3.HttpUrl
+import javax.inject.Singleton
 
 /**
  * Created by zhou on 17/12/15.
  */
 @Module
-class ConfigModule(var httpUrl: HttpUrl) {
+class ConfigModule(var httpUrl: HttpUrl? = null,
+                   var gsonBuilder: GsonBuilder.() -> Unit = {}) {
+    @Singleton
+    @Provides
+    fun provideBuilder(): GsonBuilder.() -> Unit = gsonBuilder
 
+    @Singleton
+    @Provides
+    fun provideGson(application: Application, configuration: GsonBuilder.() -> Unit): Gson {
+        val builder = GsonBuilder()
+        builder.apply { configuration }
+        return builder.create()
+    }
 }

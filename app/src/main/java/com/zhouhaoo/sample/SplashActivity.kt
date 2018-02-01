@@ -34,12 +34,10 @@ class SplashActivity : BaseActivity() {
             toast("哈哈哈哈")
         }
         application.registerActivityLifecycleCallbacks(ActivityLifecycle())
-        var l = 1..23
-        l.forEach { e("-----------$it") }
+        (1..23).forEach { e("-----------$it") }
         var socket = Socket()
         socket.apply {
 
         }
     }
-
 }
