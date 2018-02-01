@@ -18,12 +18,15 @@ package com.zhouhaoo.common.base.delegate
 
 import android.app.Application
 import android.content.Context
-import com.zhouhaoo.common.interfaces.AppConfig
+import com.google.gson.GsonBuilder
 import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.common.injection.component.DaggerAppComponent
 import com.zhouhaoo.common.injection.moudle.AppModule
+import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.injection.moudle.NetworkModule
+import com.zhouhaoo.common.interfaces.AppConfig
 import com.zhouhaoo.common.util.ManifestParser
+import javax.inject.Inject
 
 /**
  * 代理application的生命周期
@@ -34,8 +37,10 @@ class AppLifecycleImpl(base: Context) : AppLifecycle {
 
     private lateinit var mAppComponent: AppComponent
     private var configs: List<AppConfig> = ManifestParser(base).parse()
-    private var mAppLifecycles: List<AppLifecycle> = ArrayList()
-    private var mActivityLifecycles: List<Application.ActivityLifecycleCallbacks> = ArrayList()
+    private var mAppLifecycles = ArrayList<AppLifecycle>()
+    private var mActivityLifecycles = ArrayList<Application.ActivityLifecycleCallbacks>()
+    @Inject
+    lateinit var actLifecycleImpl: ActLifecycleImpl
 
     init {
         configs.forEach {
@@ -52,8 +57,18 @@ class AppLifecycleImpl(base: Context) : AppLifecycle {
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(application))
                 .networkModule(NetworkModule())
+                .configModule(getConfigModule(application, configs))
                 .build()
         mAppComponent.inject(this)
+    }
+
+    private fun getConfigModule(application: Application, configs: List<AppConfig>): ConfigModule {
+        var configModule = ConfigModule()
+        configs.forEach { it.applyOptions(application, configModule) }
+        val builder = GsonBuilder()
+        builder.apply { configModule.gsonBuilder }
+        builder.create()
+        return configModule
     }
 
     override fun onTerminate(application: Application) {

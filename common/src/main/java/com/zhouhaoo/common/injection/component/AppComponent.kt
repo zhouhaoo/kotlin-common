@@ -22,6 +22,7 @@ import com.zhouhaoo.common.injection.moudle.AppModule
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.injection.moudle.NetworkModule
 import dagger.Component
+import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
 /**
@@ -31,6 +32,10 @@ import javax.inject.Singleton
 @Component(modules = [AppModule::class, NetworkModule::class, ConfigModule::class])
 interface AppComponent {
     fun application(): Application
+
+    fun okhttpClient(): OkHttpClient
+
+//    fun gson(): Gson
 
     fun inject(appLifecycle: AppLifecycleImpl)
 }

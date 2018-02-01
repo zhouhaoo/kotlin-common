@@ -17,6 +17,9 @@
 package com.zhouhaoo.common.injection.moudle
 
 import android.app.Application
+import com.google.gson.Gson
+import com.zhouhaoo.common.net.RetrofitConfiguration
+import com.zhouhaoo.common.net.config
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -24,6 +27,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import javax.inject.Singleton
 
@@ -39,12 +43,14 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    internal fun provideRetrofit(application: Application, builder: Retrofit.Builder, baseUrl: HttpUrl,
-                                 okHttpClient: OkHttpClient): Retrofit {
-        return builder
-                .baseUrl(baseUrl)
+    internal fun provideRetrofit(application: Application, builder: Retrofit.Builder,
+                                 retrofitConfiguration: RetrofitConfiguration?, baseUrl: HttpUrl,
+                                 okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+        return builder.baseUrl(baseUrl)
                 .client(okHttpClient)
+                .config(application, retrofitConfiguration)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
     }
 

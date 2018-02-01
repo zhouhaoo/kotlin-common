@@ -14,26 +14,31 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.interfaces
+package com.zhouhaoo.common.net
 
 import android.app.Application
 import android.content.Context
-import android.support.v4.app.FragmentManager
-import com.zhouhaoo.common.base.delegate.AppLifecycle
-import com.zhouhaoo.common.injection.moudle.ConfigModule
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
 
 /**
- * Created by zhou on 18/1/25.
+ * Created by zhou on 18/1/30.
  */
-interface AppConfig {
-    /**
-     * 配置信息
-     */
-    fun applyOptions(context: Context, module: ConfigModule)
+interface RetrofitConfiguration {
+    fun configRetrofit(context: Context, builder: Retrofit.Builder)
+}
 
-    fun injectAppLifecycle(context: Context, appLifecycles: ArrayList<AppLifecycle>)
+interface OkhttpConfiguration {
+    fun configOkhttp(context: Context, builder: OkHttpClient.Builder)
+}
 
-    fun injectActivityLifecycle(context: Context, actLifecycles: ArrayList<Application.ActivityLifecycleCallbacks>)
+interface GsonConfiguration {
+    open fun configGson(context: Context, builder: GsonBuilder)
+}
 
-    fun injectFragmentLifecycle(context: Context, fragLifecycles: ArrayList<FragmentManager.FragmentLifecycleCallbacks>)
+inline fun Retrofit.Builder.config(application: Application, retrofitConfiguration:
+RetrofitConfiguration?): Retrofit.Builder {
+    retrofitConfiguration?.configRetrofit(application, this)
+    return this
 }
