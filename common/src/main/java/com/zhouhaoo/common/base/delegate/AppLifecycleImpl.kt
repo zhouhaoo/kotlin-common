@@ -18,13 +18,13 @@ package com.zhouhaoo.common.base.delegate
 
 import android.app.Application
 import android.content.Context
-import com.google.gson.GsonBuilder
 import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.common.injection.component.DaggerAppComponent
 import com.zhouhaoo.common.injection.moudle.AppModule
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.injection.moudle.NetworkModule
 import com.zhouhaoo.common.interfaces.AppConfig
+import com.zhouhaoo.common.net.RequestInterceptor
 import com.zhouhaoo.common.util.ManifestParser
 import javax.inject.Inject
 
@@ -41,6 +41,8 @@ class AppLifecycleImpl(base: Context) : AppLifecycle {
     private var mActivityLifecycles = ArrayList<Application.ActivityLifecycleCallbacks>()
     @Inject
     lateinit var actLifecycleImpl: ActLifecycleImpl
+    @Inject
+    lateinit var interceptor: RequestInterceptor
 
     init {
         configs.forEach {
@@ -60,14 +62,14 @@ class AppLifecycleImpl(base: Context) : AppLifecycle {
                 .configModule(getConfigModule(application, configs))
                 .build()
         mAppComponent.inject(this)
+        var okhttpClient = mAppComponent.okhttpClient()
+        var globalHttpHandler = interceptor.globalHttpHandler
+        var interceptors = okhttpClient.interceptors()
     }
 
     private fun getConfigModule(application: Application, configs: List<AppConfig>): ConfigModule {
         var configModule = ConfigModule()
         configs.forEach { it.applyOptions(application, configModule) }
-        val builder = GsonBuilder()
-        builder.apply { configModule.gsonBuilder }
-        builder.create()
         return configModule
     }
 

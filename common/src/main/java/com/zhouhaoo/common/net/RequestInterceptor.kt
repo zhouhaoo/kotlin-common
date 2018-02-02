@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,23 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.moudle
+package com.zhouhaoo.common.net
 
-import android.app.Application
-import dagger.Module
-import dagger.Provides
+import okhttp3.Interceptor
+import okhttp3.Response
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Created by zhou on 17/12/14.
+ * Created by zhou on 18/2/1.
  */
-@Module
-class AppModule(private val application: Application) {
-
-    @Singleton
-    @Provides
-    internal fun provideApplication(): Application {
-        return application
+@Singleton
+class RequestInterceptor @Inject constructor(var globalHttpHandler: GlobalHttpHandler?, val level: Level) : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        return chain.proceed(chain.request())
     }
+}
+
+enum class Level {
+    NONE, REQUEST, RESPONSE, ALL
 }

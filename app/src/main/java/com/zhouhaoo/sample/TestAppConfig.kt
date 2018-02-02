@@ -22,14 +22,26 @@ import android.support.v4.app.FragmentManager
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.interfaces.AppConfig
+import com.zhouhaoo.common.net.GlobalHttpHandler
+import com.zhouhaoo.common.net.Level
+import okhttp3.Interceptor
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 
 /**
  * Created by zhou on 18/1/25.
  */
-class TestAppConfig : AppConfig {
+class AppConfigImpl : AppConfig {
     override fun applyOptions(context: Context, module: ConfigModule) {
         module.apply {
-            gsonBuilder = { serializeNulls() }
+            baseUrl = "https://api.github.com/"
+            gsonBuilder = { }
+            retrofitBuilder = { }
+            okhttpBuilder = { }
+            addInterceptor(HttpLoggingInterceptor())
+            globalHttpHandler = GlobalHttpHandlerImpl()
+            logLevel = Level.RESPONSE
         }
     }
 
@@ -43,5 +55,15 @@ class TestAppConfig : AppConfig {
 
     override fun injectFragmentLifecycle(context: Context, fragLifecycles: ArrayList<FragmentManager.FragmentLifecycleCallbacks>) {
 
+    }
+}
+
+class GlobalHttpHandlerImpl : GlobalHttpHandler {
+    override fun onHttpResultResponse(httpResult: String, chain: Interceptor.Chain, response: Response): Response {
+        return response
+    }
+
+    override fun onHttpRequestBefore(chain: Interceptor.Chain, request: Request): Request {
+        return request
     }
 }
