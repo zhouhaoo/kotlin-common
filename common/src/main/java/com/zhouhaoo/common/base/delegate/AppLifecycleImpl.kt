@@ -18,6 +18,9 @@ package com.zhouhaoo.common.base.delegate
 
 import android.app.Application
 import android.content.Context
+import com.zhouhaoo.common.BaseData
+import com.zhouhaoo.common.Data
+import com.zhouhaoo.common.GankApi
 import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.common.injection.component.DaggerAppComponent
 import com.zhouhaoo.common.injection.moudle.AppModule
@@ -26,6 +29,9 @@ import com.zhouhaoo.common.injection.moudle.NetworkModule
 import com.zhouhaoo.common.interfaces.AppConfig
 import com.zhouhaoo.common.net.RequestInterceptor
 import com.zhouhaoo.common.util.ManifestParser
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -62,9 +68,20 @@ class AppLifecycleImpl(base: Context) : AppLifecycle {
                 .configModule(getConfigModule(application, configs))
                 .build()
         mAppComponent.inject(this)
-        var okhttpClient = mAppComponent.okhttpClient()
-        var globalHttpHandler = interceptor.globalHttpHandler
-        var interceptors = okhttpClient.interceptors()
+        var gankApi = mAppComponent.repositoryManager()
+                .obtainRetrofitService(GankApi::class.java)
+        gankApi.getGank("Android", 10, 1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(BaseData<MutableList<Data>>::data)
+                .subscribeBy(
+                        onNext = {
+                            var model = it[0]
+                            var desc = model.desc
+                        }, onError = {
+                    it.printStackTrace()
+                }
+                )
     }
 
     private fun getConfigModule(application: Application, configs: List<AppConfig>): ConfigModule {

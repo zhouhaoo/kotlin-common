@@ -18,11 +18,17 @@ package com.zhouhaoo.sample.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.zhouhaoo.common.mvp.IPresenter
+import com.zhouhaoo.common.mvp.IView
+import javax.inject.Inject
 
 /**
  * Created by zhou on 17/11/14.
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<P : IPresenter> : AppCompatActivity(), IView {
+
+    @Inject
+    lateinit var mPresenter: P
     /**
      * 初始化布局
      */
@@ -37,4 +43,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
     abstract fun initData(savedInstanceState: Bundle?)
 
+    override fun showLoading() {
+    }
+
+    override fun hideLoading() {
+    }
+
+    override fun showMessage(message: String) {
+    }
 }

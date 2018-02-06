@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,29 +14,22 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.moudle
+package com.zhouhaoo.common.net
 
-import android.app.Application
 import com.zhouhaoo.common.interfaces.IRepositoryManager
-import com.zhouhaoo.common.net.RepositoryManager
-import dagger.Module
-import dagger.Provides
+import retrofit2.Retrofit
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Created by zhou on 17/12/14.
+ * Created by zhou on 18/2/6.
  */
-@Module
-class AppModule(private val application: Application) {
+@Singleton
+class RepositoryManager @Inject constructor(var mRetrofit: Retrofit) : IRepositoryManager {
 
-    @Singleton
-    @Provides
-    internal fun provideApplication(): Application = application
-
-
-    @Singleton
-    @Provides
-    internal fun provideRepositoryManager(repositoryManager: RepositoryManager): IRepositoryManager {
-        return repositoryManager
+    override fun <T> obtainRetrofitService(service: Class<T>): T {
+        return mRetrofit.create(service)
     }
+
+
 }

@@ -22,6 +22,7 @@ import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
 import com.zhouhaoo.common.injection.moudle.AppModule
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.injection.moudle.NetworkModule
+import com.zhouhaoo.common.interfaces.IRepositoryManager
 import dagger.Component
 import okhttp3.OkHttpClient
 import javax.inject.Singleton
@@ -35,6 +36,8 @@ interface AppComponent {
     fun application(): Application
 
     fun okhttpClient(): OkHttpClient
+
+    fun repositoryManager(): IRepositoryManager
 
     fun gson(): Gson
 

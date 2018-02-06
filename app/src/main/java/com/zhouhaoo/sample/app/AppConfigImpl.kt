@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample
+package com.zhouhaoo.sample.app
 
 import android.app.Application
 import android.content.Context
@@ -22,11 +22,7 @@ import android.support.v4.app.FragmentManager
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.interfaces.AppConfig
-import com.zhouhaoo.common.net.GlobalHttpHandler
-import com.zhouhaoo.common.net.Level
-import okhttp3.Interceptor
-import okhttp3.Request
-import okhttp3.Response
+import com.zhouhaoo.common.net.LogLevel
 import okhttp3.logging.HttpLoggingInterceptor
 
 /**
@@ -35,22 +31,23 @@ import okhttp3.logging.HttpLoggingInterceptor
 class AppConfigImpl : AppConfig {
     override fun applyOptions(context: Context, module: ConfigModule) {
         module.apply {
-            baseUrl = "https://api.github.com/"
+            baseUrl = "http://gank.io/api/"
             gsonBuilder = { }
             retrofitBuilder = { }
             okhttpBuilder = { }
+
             addInterceptor(HttpLoggingInterceptor())
-            globalHttpHandler = GlobalHttpHandlerImpl()
-            logLevel = Level.RESPONSE
+            globalHttpHandler = GlobalHttpHandlerImpl(context)
+            logLevel = LogLevel.RESPONSE
         }
     }
 
     override fun injectAppLifecycle(context: Context, appLifecycles: ArrayList<AppLifecycle>) {
-
+        appLifecycles.add(AppLifecycleImpl())
     }
 
     override fun injectActivityLifecycle(context: Context, actLifecycles: ArrayList<Application.ActivityLifecycleCallbacks>) {
-
+        actLifecycles.add(ActivityLifecycle())
     }
 
     override fun injectFragmentLifecycle(context: Context, fragLifecycles: ArrayList<FragmentManager.FragmentLifecycleCallbacks>) {
@@ -58,12 +55,4 @@ class AppConfigImpl : AppConfig {
     }
 }
 
-class GlobalHttpHandlerImpl : GlobalHttpHandler {
-    override fun onHttpResultResponse(httpResult: String, chain: Interceptor.Chain, response: Response): Response {
-        return response
-    }
 
-    override fun onHttpRequestBefore(chain: Interceptor.Chain, request: Request): Request {
-        return request
-    }
-}

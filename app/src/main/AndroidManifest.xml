@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <meta-data
-            android:name="com.zhouhaoo.sample.AppConfigImpl"
+            android:name="com.zhouhaoo.sample.app.AppConfigImpl"
             android:value="CommonConfig"/>
     </application>
 

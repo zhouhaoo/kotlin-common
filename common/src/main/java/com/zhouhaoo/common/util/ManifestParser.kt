@@ -26,7 +26,7 @@ import com.zhouhaoo.common.interfaces.AppConfig
 class ManifestParser constructor(private var context: Context) {
     private val commonConfig = "CommonConfig"
 
-     fun parse(): List<AppConfig> {
+    fun parse(): List<AppConfig> {
         var modules = ArrayList<AppConfig>()
         try {
             var appInfo = context.packageManager
@@ -57,12 +57,12 @@ class ManifestParser constructor(private var context: Context) {
         try {
             config = clazz.newInstance()
         } catch (e: InstantiationException) {
-            throw  RuntimeException("Unable to instantiate AppConfig implementation for " + clazz, e);
+            throw  RuntimeException("Unable to instantiate AppConfig implementation for $clazz", e);
         } catch (e: IllegalAccessException) {
-            throw  RuntimeException("Unable to instantiate AppConfig implementation for " + clazz, e);
+            throw  RuntimeException("Unable to instantiate AppConfig implementation for $clazz", e);
         }
         if (config !is AppConfig)
-            throw RuntimeException("Expected instanceof AppConfig, but found: " + config)
+            throw RuntimeException("Expected instanceof AppConfig, but found: $config")
         else
             return config
     }

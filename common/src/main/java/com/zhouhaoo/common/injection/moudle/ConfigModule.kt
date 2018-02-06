@@ -19,7 +19,7 @@ package com.zhouhaoo.common.injection.moudle
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.zhouhaoo.common.net.GlobalHttpHandler
-import com.zhouhaoo.common.net.Level
+import com.zhouhaoo.common.net.LogLevel
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -40,11 +40,11 @@ class ConfigModule {
     /**
      *全局http处理类
      */
-    var globalHttpHandler: GlobalHttpHandler? = null
+    var globalHttpHandler: GlobalHttpHandler? =null
     /**
      * 拦截器日志等级
      */
-    var logLevel: Level = Level.ALL
+    var logLevel: LogLevel = LogLevel.ALL
     /**
      * 额外拦截器
      */
@@ -66,7 +66,8 @@ class ConfigModule {
     @Provides
     internal fun provideBaseUrl(): HttpUrl {
         return if (baseUrl != null) {
-            HttpUrl.parse(baseUrl)!!
+            HttpUrl.parse(baseUrl)
+                    ?: throw IllegalArgumentException("$baseUrl isn't a well-formed HTTP or HTTPS url")
         } else {
             throw NullPointerException("BaseUrl can not be empty")
         }
@@ -89,7 +90,7 @@ class ConfigModule {
 
     @Singleton
     @Provides
-    internal fun provideLevel(): Level {
+    internal fun provideLevel(): LogLevel {
         return logLevel
     }
 

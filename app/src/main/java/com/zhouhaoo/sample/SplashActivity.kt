@@ -17,27 +17,32 @@
 package com.zhouhaoo.sample
 
 import android.os.Bundle
-import com.zhouhaoo.sample.base.ActivityLifecycle
+import com.zhouhaoo.common.mvp.IPresenter
 import com.zhouhaoo.sample.base.BaseActivity
+import com.zhouhaoo.sample.base.SchedulerUtils
 import com.zhouhaoo.sample.utils.e
 import com.zhouhaoo.sample.utils.toast
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.rxkotlin.toObservable
 import kotlinx.android.synthetic.main.activity_splash.*
-import java.net.Socket
 
-class SplashActivity : BaseActivity() {
+class SplashActivity<P : IPresenter> : BaseActivity<P>(), DemoView {
 
     override val layoutId: Int
         get() = R.layout.activity_splash
 
     override fun initData(savedInstanceState: Bundle?) {
         tvHello.setOnClickListener {
-            toast("哈哈哈哈")
+            val list = listOf("Alpha", "Beta", "Gamma", "Delta", "Epsilon")
+                    .toObservable()
+                    .compose(SchedulerUtils.ioToMain())
+                    .doOnNext({
+                        
+                    })
+                    .subscribeBy(onNext = {
+                        toast(it)
+                    })
         }
-        application.registerActivityLifecycleCallbacks(ActivityLifecycle())
         (1..23).forEach { e("-----------$it") }
-        var socket = Socket()
-        socket.apply {
-
-        }
     }
 }

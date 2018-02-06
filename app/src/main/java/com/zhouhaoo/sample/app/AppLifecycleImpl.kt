@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,29 +14,25 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.moudle
+package com.zhouhaoo.sample.app
 
 import android.app.Application
-import com.zhouhaoo.common.interfaces.IRepositoryManager
-import com.zhouhaoo.common.net.RepositoryManager
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import android.content.Context
+import com.zhouhaoo.common.base.delegate.AppLifecycle
 
 /**
- * Created by zhou on 17/12/14.
+ * Created by zhou on 18/2/2.
  */
-@Module
-class AppModule(private val application: Application) {
+class AppLifecycleImpl : AppLifecycle {
+    override fun attachBaseContext(context: Context) {
 
-    @Singleton
-    @Provides
-    internal fun provideApplication(): Application = application
+    }
 
+    override fun onCreate(application: Application) {
 
-    @Singleton
-    @Provides
-    internal fun provideRepositoryManager(repositoryManager: RepositoryManager): IRepositoryManager {
-        return repositoryManager
+    }
+
+    override fun onTerminate(application: Application) {
+
     }
 }

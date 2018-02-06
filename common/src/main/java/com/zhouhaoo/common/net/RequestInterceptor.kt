@@ -16,21 +16,43 @@
 
 package com.zhouhaoo.common.net
 
+import android.support.annotation.Nullable
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.nio.charset.Charset
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
  * Created by zhou on 18/2/1.
+ * 错误日志记录
  */
 @Singleton
-class RequestInterceptor @Inject constructor(var globalHttpHandler: GlobalHttpHandler?, val level: Level) : Interceptor {
-    override fun intercept(chain: Interceptor.Chain): Response {
-        return chain.proceed(chain.request())
-    }
-}
+class RequestInterceptor @Inject constructor(val level: LogLevel) : Interceptor {
+    @Inject
+    @Nullable
+    lateinit var globalHttpHandler: GlobalHttpHandler
 
-enum class Level {
-    NONE, REQUEST, RESPONSE, ALL
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val logRequest = level == LogLevel.ALL || (level != LogLevel.NONE && level == LogLevel.REQUEST)
+        if (logRequest) {
+            if (request.body() != null) {
+
+            } else {
+
+            }
+        }
+        val response = chain.proceed(request)
+        var responseBody = response.newBuilder().build().body()
+        val source = responseBody!!.source().buffer()
+        var charset: Charset? = Charset.forName("UTF-8")
+        val contentType = responseBody!!.contentType()
+        if (contentType != null) {
+            charset = contentType!!.charset(charset)
+        }
+        globalHttpHandler?.onHttpResultResponse(source.clone().readString(charset), chain, response)
+        return response
+    }
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,24 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.mvp
+package com.zhouhaoo.sample.base
+
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 
 /**
- * Created by zhou on 17/12/15.
+ * Created by zhou on 18/2/2.
  */
-interface Presenter {
+open abstract class CommonSubscriber<T> : Observer<T> {
 
+    override fun onComplete() {
+
+    }
+
+    override fun onSubscribe(d: Disposable) {
+    }
+
+
+    override fun onError(e: Throwable) {
+    }
 }

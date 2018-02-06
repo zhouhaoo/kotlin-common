@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.base
+package com.zhouhaoo.sample.app
 
 import android.app.Activity
 import android.app.Application
