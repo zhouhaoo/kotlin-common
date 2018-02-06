@@ -22,9 +22,9 @@ import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.sample.*
 import com.zhouhaoo.sample.injection.component.DaggerMainComponent
 import com.zhouhaoo.sample.injection.module.MainModule
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.rxkotlin.toObservable
+import com.zhouhaoo.sample.utils.toast
 import kotlinx.android.synthetic.main.activity_splash.*
+import java.util.*
 
 class SplashActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
@@ -43,19 +43,15 @@ class SplashActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
     override fun initData(savedInstanceState: Bundle?) {
         tvHello.setOnClickListener {
+            tvContent.text = ""
             mPresenter.requestData()
         }
     }
 
     override fun gankData(data: BaseData<MutableList<Data>>) {
-        var content: String
-        data.data.toObservable()
-                .map {
-                    it.toString()
-                }.subscribeBy(
-                        onNext = {
-                            tvContent.text = it
-                        }
-                )
+        toast("请求成功")
+        var list = data.data
+        val index = Random().nextInt(list.size - 1)
+        tvContent.text = list[index].toString()
     }
 }
