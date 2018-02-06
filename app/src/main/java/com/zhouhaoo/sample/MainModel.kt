@@ -17,27 +17,21 @@
 package com.zhouhaoo.sample
 
 import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.common.mvp.BasePresenter
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import com.zhouhaoo.common.interfaces.IRepositoryManager
+import com.zhouhaoo.common.mvp.BaseModel
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
- * Created by zhou on 18/2/5.
+ * Created by zhou on 18/2/6.
  */
 @ActivityScope
-class MainPresenter @Inject constructor(model: MainContract.Model, view: MainContract.View)
-    : BasePresenter<MainContract.Model, MainContract.View>(model, view) {
+class MainModel @Inject constructor(repositoryManager: IRepositoryManager)
+    : BaseModel(repositoryManager), MainContract.Model {
 
-    fun requestData() {
-        model.getData("Android", 10, 1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = {
-                            view.gankData(it)
-                        }
-                )
+    override fun getData(category: String, pageCount: Int, page: Int): Observable<BaseData<MutableList<Data>>> {
+        return repositoryManager.obtainRetrofitService(GankApi::class.java)
+                .getGank(category, pageCount, page)
     }
+
 }

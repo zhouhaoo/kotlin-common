@@ -19,20 +19,22 @@ package com.zhouhaoo.sample.features
 import android.os.Bundle
 import com.zhouhaoo.common.base.BaseActivity
 import com.zhouhaoo.common.injection.component.AppComponent
-import com.zhouhaoo.sample.DemoView
-import com.zhouhaoo.sample.MainPresenter
-import com.zhouhaoo.sample.R
-import com.zhouhaoo.sample.base.SchedulerUtils
-import com.zhouhaoo.sample.utils.e
-import com.zhouhaoo.sample.utils.toast
+import com.zhouhaoo.sample.*
+import com.zhouhaoo.sample.injection.component.DaggerMainComponent
+import com.zhouhaoo.sample.injection.module.MainModule
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.rxkotlin.toObservable
 import kotlinx.android.synthetic.main.activity_splash.*
 
-class SplashActivity : BaseActivity<MainPresenter>(), DemoView {
+class SplashActivity : BaseActivity<MainPresenter>(), MainContract.View {
 
     override fun setupActivityComponent(appComponent: AppComponent) {
-
+        DaggerMainComponent
+                .builder()
+                .appComponent(appComponent)
+                .mainModule(MainModule(this))
+                .build()
+                .inject(this)
     }
 
     override fun initView(savedInstanceState: Bundle?): Int {
@@ -41,16 +43,19 @@ class SplashActivity : BaseActivity<MainPresenter>(), DemoView {
 
     override fun initData(savedInstanceState: Bundle?) {
         tvHello.setOnClickListener {
-            val list = listOf("Alpha", "Beta", "Gamma", "Delta", "Epsilon")
-                    .toObservable()
-                    .compose(SchedulerUtils.ioToMain())
-                    .doOnNext({
-
-                    })
-                    .subscribeBy(onNext = {
-                        toast(it)
-                    })
+            mPresenter.requestData()
         }
-        (1..23).forEach { e("-----------$it") }
+    }
+
+    override fun gankData(data: BaseData<MutableList<Data>>) {
+        var content: String
+        data.data.toObservable()
+                .map {
+                    it.toString()
+                }.subscribeBy(
+                        onNext = {
+                            tvContent.text = it
+                        }
+                )
     }
 }

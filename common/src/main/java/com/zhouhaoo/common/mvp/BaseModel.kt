@@ -20,11 +20,12 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
+import com.zhouhaoo.common.interfaces.IRepositoryManager
 
 /**
  * Created by zhou on 17/12/15.
  */
-abstract class BaseModel : IModel, LifecycleObserver {
+open class BaseModel(var repositoryManager: IRepositoryManager) : IModel, LifecycleObserver {
 
     override fun onDestroy() {
 

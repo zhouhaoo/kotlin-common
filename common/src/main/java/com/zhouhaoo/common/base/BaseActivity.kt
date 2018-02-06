@@ -17,7 +17,6 @@
 package com.zhouhaoo.common.base
 
 import android.os.Bundle
-import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.zhouhaoo.common.base.delegate.IActivity
@@ -34,7 +33,6 @@ import javax.inject.Inject
 abstract class BaseActivity<P : IPresenter> : AppCompatActivity(), ActivityLifecycleable,
         IActivity, IView {
     @Inject
-    @Nullable
     lateinit var mPresenter: P
 
     private val mLifecycleSubject = BehaviorSubject.create<ActivityEvent>()
@@ -64,7 +62,7 @@ abstract class BaseActivity<P : IPresenter> : AppCompatActivity(), ActivityLifec
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mPresenter == null) {
+        if (mPresenter != null) {
             mPresenter.onDestroy()
         }
         mPresenter = null!!

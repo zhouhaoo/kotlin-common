@@ -18,9 +18,6 @@ package com.zhouhaoo.common.base.delegate
 
 import android.app.Application
 import android.content.Context
-import com.zhouhaoo.common.BaseData
-import com.zhouhaoo.common.Data
-import com.zhouhaoo.common.GankApi
 import com.zhouhaoo.common.base.App
 import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.common.injection.component.DaggerAppComponent
@@ -32,9 +29,6 @@ import com.zhouhaoo.common.integration.ActRxLifecycleImpl
 import com.zhouhaoo.common.interfaces.AppConfig
 import com.zhouhaoo.common.net.RequestInterceptor
 import com.zhouhaoo.common.util.ManifestParser
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -77,20 +71,6 @@ class AppLifecycleImpl(base: Context) : AppLifecycle, App {
         application.registerActivityLifecycleCallbacks(actLifecycle)
         application.registerActivityLifecycleCallbacks(actRxLifecycle)
 
-        var gankApi = mAppComponent.repositoryManager()
-                .obtainRetrofitService(GankApi::class.java)
-        gankApi.getGank("Android", 10, 1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(BaseData<MutableList<Data>>::data)
-                .subscribeBy(
-                        onNext = {
-                            var model = it[0]
-                            var desc = model.desc
-                        }, onError = {
-                    it.printStackTrace()
-                }
-                )
     }
 
     override fun getAppComponent(): AppComponent = mAppComponent

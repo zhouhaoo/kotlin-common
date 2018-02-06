@@ -14,23 +14,23 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common
+package com.zhouhaoo.sample
 
-import com.google.gson.annotations.SerializedName
+import com.zhouhaoo.common.mvp.IModel
+import com.zhouhaoo.common.mvp.IView
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
 
 /**
  * Created by zhou on 18/2/6.
  */
-interface GankApi {
-    @GET("data/{category}/{pageCount}/{page}")
-    fun getGank(@Path("category") category: String,
-                @Path("pageCount") pageCount: Int,
-                @Path("page") page: Int): Observable<BaseData<MutableList<Data>>>
+interface MainContract {
+
+    interface View : IView {
+        fun gankData(data: BaseData<MutableList<Data>>)
+    }
+
+    interface Model : IModel {
+        fun getData(category: String, pageCount: Int, page: Int):
+                Observable<BaseData<MutableList<Data>>>
+    }
 }
-
-open class BaseData<T>(var error: Boolean, @SerializedName("results") var data: T)
-
-data class Data(var desc: String, var type: String, var url: String)

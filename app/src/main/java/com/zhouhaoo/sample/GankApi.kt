@@ -14,29 +14,23 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.injection.module
+package com.zhouhaoo.sample
 
-import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.sample.MainContract
-import com.zhouhaoo.sample.MainModel
-import dagger.Module
-import dagger.Provides
+import com.google.gson.annotations.SerializedName
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * Created by zhou on 18/2/6.
  */
-@Module
-class MainModule(private var view: MainContract.View) {
-
-    @ActivityScope
-    @Provides
-    internal fun provideUserView(): MainContract.View {
-        return this.view
-    }
-
-    @ActivityScope
-    @Provides
-    internal fun provideUserModel(model: MainModel): MainContract.Model {
-        return model
-    }
+interface GankApi {
+    @GET("data/{category}/{pageCount}/{page}")
+    fun getGank(@Path("category") category: String,
+                @Path("pageCount") pageCount: Int,
+                @Path("page") page: Int): Observable<BaseData<MutableList<Data>>>
 }
+
+open class BaseData<T>(var error: Boolean, @SerializedName("results") var data: T)
+
+data class Data(var desc: String, var type: String, var url: String)

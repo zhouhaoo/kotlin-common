@@ -20,6 +20,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.zhouhaoo.common.base.delegate.IActivity
+import com.zhouhaoo.common.util.CommonUtils
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,7 +32,7 @@ class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCall
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (activity is IActivity) {
-//            activity.setupActivityComponent(CommonUtils.getAppComponent(activity))
+            activity.setupActivityComponent(CommonUtils.getAppComponent(activity))
         }
     }
 

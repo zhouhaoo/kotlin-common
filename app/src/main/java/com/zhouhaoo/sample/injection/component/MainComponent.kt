@@ -18,13 +18,16 @@ package com.zhouhaoo.sample.injection.component
 
 import com.zhouhaoo.common.injection.ActivityScope
 import com.zhouhaoo.common.injection.component.AppComponent
+import com.zhouhaoo.sample.features.SplashActivity
+import com.zhouhaoo.sample.injection.module.MainModule
 import dagger.Component
 
 /**
  * Created by zhou on 18/2/6.
  */
 @ActivityScope
-@Component(dependencies = [(AppComponent::class)])
+@Component(modules = [(MainModule::class)], dependencies = [(AppComponent::class)])
 interface MainComponent {
 
+    fun inject(activity: SplashActivity)
 }
