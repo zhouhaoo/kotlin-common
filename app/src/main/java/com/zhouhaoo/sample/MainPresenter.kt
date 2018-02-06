@@ -14,25 +14,24 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.app
+package com.zhouhaoo.sample
 
-import android.content.Context
-import com.zhouhaoo.common.net.GlobalHttpHandler
-import okhttp3.Interceptor
-import okhttp3.Request
-import okhttp3.Response
+import com.zhouhaoo.common.mvp.BasePresenter
+import com.zhouhaoo.common.mvp.IModel
+import com.zhouhaoo.common.mvp.IView
 
 /**
- * Created by zhou on 18/2/2.
+ * Created by zhou on 18/2/5.
  */
-class GlobalHttpHandlerImpl(var context: Context) : GlobalHttpHandler {
+class MainPresenter constructor(model: DemoModel, view: DemoView)
+    : BasePresenter<DemoModel, DemoView>(model, view) {
 
-    override fun onHttpResultResponse(httpResult: String, chain: Interceptor.Chain, response: Response): Response {
-        var httpResult1 = httpResult
-        return response
-    }
+}
 
-    override fun onHttpRequestBefore(chain: Interceptor.Chain, request: Request): Request {
-        return request
-    }
+interface DemoView : IView {
+
+}
+
+interface DemoModel : IModel {
+
 }

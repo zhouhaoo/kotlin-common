@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,41 +14,59 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.base
+package com.zhouhaoo.common.base
 
 import android.os.Bundle
+import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.zhouhaoo.common.base.delegate.IActivity
+import com.zhouhaoo.common.integration.lifecycle.ActivityLifecycleable
 import com.zhouhaoo.common.mvp.IPresenter
 import com.zhouhaoo.common.mvp.IView
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.Subject
 import javax.inject.Inject
 
 /**
  * Created by zhou on 17/11/14.
  */
-abstract class BaseActivity<P : IPresenter> : AppCompatActivity(), IView {
-
+abstract class BaseActivity<P : IPresenter> : AppCompatActivity(), ActivityLifecycleable,
+        IActivity, IView {
     @Inject
+    @Nullable
     lateinit var mPresenter: P
-    /**
-     * 初始化布局
-     */
-    abstract val layoutId: Int
+
+    private val mLifecycleSubject = BehaviorSubject.create<ActivityEvent>()
+
+    override fun provideLifecycleSubject(): Subject<ActivityEvent> = mLifecycleSubject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val layoutId = layoutId
+        val layoutId = initView(savedInstanceState)
         setContentView(layoutId)
         initData(savedInstanceState)
     }
 
-    abstract fun initData(savedInstanceState: Bundle?)
-
     override fun showLoading() {
+
     }
 
     override fun hideLoading() {
+
     }
 
     override fun showMessage(message: String) {
+
+    }
+
+    override fun useEventBus(): Boolean = true
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mPresenter == null) {
+            mPresenter.onDestroy()
+        }
+        mPresenter = null!!
     }
 }

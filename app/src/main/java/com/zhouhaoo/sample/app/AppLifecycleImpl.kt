@@ -19,13 +19,17 @@ package com.zhouhaoo.sample.app
 import android.app.Application
 import android.content.Context
 import com.zhouhaoo.common.base.delegate.AppLifecycle
+import com.zhouhaoo.sample.BuildConfig
+import timber.log.Timber
 
 /**
  * Created by zhou on 18/2/2.
  */
 class AppLifecycleImpl : AppLifecycle {
     override fun attachBaseContext(context: Context) {
-
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
     override fun onCreate(application: Application) {

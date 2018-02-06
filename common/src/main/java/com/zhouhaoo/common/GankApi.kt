@@ -31,7 +31,6 @@ interface GankApi {
                 @Path("page") page: Int): Observable<BaseData<MutableList<Data>>>
 }
 
-
 open class BaseData<T>(var error: Boolean, @SerializedName("results") var data: T)
 
 data class Data(var desc: String, var type: String, var url: String)

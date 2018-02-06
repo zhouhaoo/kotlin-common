@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,14 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.mvp
+package com.zhouhaoo.sample.injection.module
+
+import dagger.Module
 
 /**
- * Created by zhou on 17/12/15.
+ * Created by zhou on 18/2/6.
  */
-interface MvpView {
+@Module
+class MainModule {
 
 }

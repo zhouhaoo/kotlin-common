@@ -14,25 +14,11 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.app
+package com.zhouhaoo.common.integration.lifecycle
 
-import android.content.Context
-import com.zhouhaoo.common.net.GlobalHttpHandler
-import okhttp3.Interceptor
-import okhttp3.Request
-import okhttp3.Response
+import com.trello.rxlifecycle2.android.ActivityEvent
 
 /**
- * Created by zhou on 18/2/2.
+ * Created by zhou on 18/2/6.
  */
-class GlobalHttpHandlerImpl(var context: Context) : GlobalHttpHandler {
-
-    override fun onHttpResultResponse(httpResult: String, chain: Interceptor.Chain, response: Response): Response {
-        var httpResult1 = httpResult
-        return response
-    }
-
-    override fun onHttpRequestBefore(chain: Interceptor.Chain, request: Request): Request {
-        return request
-    }
-}
+interface ActivityLifecycleable:Lifecycleable<ActivityEvent>

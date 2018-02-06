@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,14 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample
+package com.zhouhaoo.sample.features
 
 import android.os.Bundle
-import com.zhouhaoo.common.mvp.IPresenter
-import com.zhouhaoo.sample.base.BaseActivity
+import com.zhouhaoo.common.base.BaseActivity
+import com.zhouhaoo.common.injection.component.AppComponent
+import com.zhouhaoo.sample.DemoView
+import com.zhouhaoo.sample.MainPresenter
+import com.zhouhaoo.sample.R
 import com.zhouhaoo.sample.base.SchedulerUtils
 import com.zhouhaoo.sample.utils.e
 import com.zhouhaoo.sample.utils.toast
@@ -26,10 +29,15 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.rxkotlin.toObservable
 import kotlinx.android.synthetic.main.activity_splash.*
 
-class SplashActivity<P : IPresenter> : BaseActivity<P>(), DemoView {
+class SplashActivity : BaseActivity<MainPresenter>(), DemoView {
 
-    override val layoutId: Int
-        get() = R.layout.activity_splash
+    override fun setupActivityComponent(appComponent: AppComponent) {
+
+    }
+
+    override fun initView(savedInstanceState: Bundle?): Int {
+        return R.layout.activity_splash
+    }
 
     override fun initData(savedInstanceState: Bundle?) {
         tvHello.setOnClickListener {
@@ -37,7 +45,7 @@ class SplashActivity<P : IPresenter> : BaseActivity<P>(), DemoView {
                     .toObservable()
                     .compose(SchedulerUtils.ioToMain())
                     .doOnNext({
-                        
+
                     })
                     .subscribeBy(onNext = {
                         toast(it)

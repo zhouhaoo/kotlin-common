@@ -14,25 +14,13 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample
+package com.zhouhaoo.common.integration.lifecycle
 
-import com.zhouhaoo.common.mvp.BasePresenter
-import com.zhouhaoo.common.mvp.IModel
-import com.zhouhaoo.common.mvp.IView
+import io.reactivex.subjects.Subject
 
 /**
- * Created by zhou on 18/2/5.
+ * Created by zhou on 18/2/6.
  */
-class DemoPresenter  constructor(model: DemoModel, view: DemoView)
-    : BasePresenter<DemoModel, DemoView>(model, view) {
-    fun test() {
-    }
-}
-
-interface DemoView : IView {
-
-}
-
-interface DemoModel : IModel {
-
+interface Lifecycleable<E> {
+    fun provideLifecycleSubject(): Subject<E>
 }

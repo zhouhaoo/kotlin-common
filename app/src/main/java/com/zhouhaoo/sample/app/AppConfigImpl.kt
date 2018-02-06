@@ -35,7 +35,6 @@ class AppConfigImpl : AppConfig {
             gsonBuilder = { }
             retrofitBuilder = { }
             okhttpBuilder = { }
-
             addInterceptor(HttpLoggingInterceptor())
             globalHttpHandler = GlobalHttpHandlerImpl(context)
             logLevel = LogLevel.RESPONSE

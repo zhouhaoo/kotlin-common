@@ -31,6 +31,7 @@ ext {
             rxKotlin        : '2.2.0',
             traceur         : '1.0.1',
             rxAndroid       : '2.0.1',
+            rxlifecycle2    : "2.2.1",
             rxdownload      : '1.1.9',
             rxPermissions   : '0.9.4@aar',
             glide           : '4.4.0',
@@ -61,7 +62,10 @@ ext {
             traceur      : "com.tspoon.traceur:traceur:$versions.traceur",
             rxRermissions: "com.tbruyelle.rxpermissions:rxpermissions:$versions.rxPermissions"
     ]
-
+    rxlifecycle2 = [
+            "rxlifecycle2"           : "com.trello.rxlifecycle2:rxlifecycle:$versions.rxlifecycle2",
+            "rxlifecycle2-android"   : "com.trello.rxlifecycle2:rxlifecycle-android:$versions.rxlifecycle2",
+    ]
     retrofit = [
             retrofit : "com.squareup.retrofit2:retrofit:$versions.retrofit",
             rxAdapter: "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
@@ -94,6 +98,7 @@ ext {
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values() + okHttp.values()
     rxJavaLibs = rxJava.values()
+    rxlifecycle2s = rxlifecycle2.values()
     otherLibs = [timber, dagger, glide]
 
     annotationProcessorLibs = [daggerCompiler, glideCompiler]

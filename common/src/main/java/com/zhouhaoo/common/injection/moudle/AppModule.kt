@@ -33,7 +33,6 @@ class AppModule(private val application: Application) {
     @Provides
     internal fun provideApplication(): Application = application
 
-
     @Singleton
     @Provides
     internal fun provideRepositoryManager(repositoryManager: RepositoryManager): IRepositoryManager {

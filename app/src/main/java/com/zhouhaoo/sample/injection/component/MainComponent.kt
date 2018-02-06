@@ -14,25 +14,17 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.util
+package com.zhouhaoo.sample.injection.component
 
-import android.content.Context
-import com.zhouhaoo.common.base.App
-import com.zhouhaoo.common.base.BaseApplication
+import com.zhouhaoo.common.injection.ActivityScope
 import com.zhouhaoo.common.injection.component.AppComponent
+import dagger.Component
 
 /**
- * Created by zhou on 18/1/25.
+ * Created by zhou on 18/2/6.
  */
-class CommonUtils {
-    companion object {
-        fun getAppComponent(context: Context): AppComponent {
-            val application = context.applicationContext
-            return if (application is BaseApplication) {
-                application.getAppComponent()
-            } else {
-                throw IllegalStateException("${BaseApplication::class.java} need implements${App::class.java}")
-            }
-        }
-    }
+@ActivityScope
+@Component(dependencies = [(AppComponent::class)])
+interface MainComponent {
+
 }

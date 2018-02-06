@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018  zhouhaoo
+ * Copyright (c) 2017  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,19 +22,12 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
 
 /**
- * Created by zhou on 18/2/5.
+ * Created by zhou on 17/12/15.
  */
-open class BasePresenter<M : IModel, V : IView>(model: M, var view: V) :
-        IPresenter, LifecycleObserver {
-
-    init {
-        onStart()
-    }
-
-    override fun onStart() {
-    }
+abstract class BaseModel : IModel, LifecycleObserver {
 
     override fun onDestroy() {
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

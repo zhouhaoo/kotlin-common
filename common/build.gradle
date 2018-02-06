@@ -52,6 +52,7 @@ dependencies {
     api supportLibs
     api networkLibs
     api rxJavaLibs
+    api rxlifecycle2s
     api otherLibs
 
     implementation(glideOkhttp) {

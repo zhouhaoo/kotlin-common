@@ -14,11 +14,12 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.base.delegate
+package com.zhouhaoo.common.integration
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import com.zhouhaoo.common.base.delegate.IActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,24 +29,34 @@ import javax.inject.Singleton
 @Singleton
 class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCallbacks {
 
-    override fun onActivityPaused(activity: Activity) {
-    }
-
-    override fun onActivityResumed(activity: Activity) {
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+        if (activity is IActivity) {
+//            activity.setupActivityComponent(CommonUtils.getAppComponent(activity))
+        }
     }
 
     override fun onActivityStarted(activity: Activity) {
+
     }
 
-    override fun onActivityDestroyed(activity: Activity) {
+    override fun onActivityPaused(activity: Activity) {
+
     }
 
-    override fun onActivitySaveInstanceState(activity: Activity, savedInstanceState: Bundle?) {
+    override fun onActivityResumed(activity: Activity) {
+
     }
 
     override fun onActivityStopped(activity: Activity) {
+
     }
 
-    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
+    override fun onActivityDestroyed(activity: Activity) {
+
     }
+
+    override fun onActivitySaveInstanceState(activity: Activity, savedInstanceState: Bundle?) {
+
+    }
+
 }
