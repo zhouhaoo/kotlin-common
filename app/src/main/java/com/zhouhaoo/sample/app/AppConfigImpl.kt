@@ -20,7 +20,6 @@ import android.app.Application
 import android.content.Context
 import android.support.v4.app.FragmentManager
 import com.ihsanbal.logging.Level
-import com.ihsanbal.logging.LoggingInterceptor
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.interfaces.AppConfig
@@ -37,14 +36,12 @@ class AppConfigImpl : AppConfig {
             gsonBuilder = { }
             retrofitBuilder = { }
             okhttpBuilder = { }
-            addInterceptor(LoggingInterceptor.Builder()
-                    .loggable(BuildConfig.DEBUG)
-                    .setLevel(Level.BODY)
-                    .log(Platform.INFO)
-                    .request("Request")
-                    .response("Response")
-                    .build())
+            httplogBuilder = {
+                loggable(BuildConfig.DEBUG).setLevel(Level.BODY).log(Platform.INFO)
+                        .request("Request").response("Response")
+            }
             globalHttpHandler = GlobalHttpHandlerImpl(context)
+//            addInterceptor()
         }
     }
 

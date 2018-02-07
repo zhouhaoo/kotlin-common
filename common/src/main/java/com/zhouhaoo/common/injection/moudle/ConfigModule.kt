@@ -18,6 +18,7 @@ package com.zhouhaoo.common.injection.moudle
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.ihsanbal.logging.LoggingInterceptor
 import com.zhouhaoo.common.net.GlobalHttpHandler
 import dagger.Module
 import dagger.Provides
@@ -39,7 +40,7 @@ class ConfigModule {
     /**
      *全局http处理类
      */
-    var globalHttpHandler: GlobalHttpHandler? =null
+    var globalHttpHandler: GlobalHttpHandler? = null
     /**
      * 额外拦截器
      */
@@ -52,6 +53,10 @@ class ConfigModule {
      * ohhttp配置
      */
     var okhttpBuilder: OkHttpClient.Builder.() -> Unit = {}
+    /**
+     * 网络请求日志配置
+     */
+    var httplogBuilder: LoggingInterceptor.Builder.() -> Unit = {}
     /**
      * json解析配置
      */
@@ -76,6 +81,11 @@ class ConfigModule {
     @Provides
     internal fun provideOkHttpClientBuilder(): OkHttpClient.Builder = OkHttpClient.Builder().apply(okhttpBuilder)
 
+    @Singleton
+    @Provides
+    internal fun provideLoggingInterceptorBuilder(): LoggingInterceptor.Builder {
+        return LoggingInterceptor.Builder().apply(httplogBuilder)
+    }
 
     @Singleton
     @Provides

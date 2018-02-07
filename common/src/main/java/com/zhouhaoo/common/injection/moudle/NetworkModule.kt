@@ -17,6 +17,7 @@
 package com.zhouhaoo.common.injection.moudle
 
 import com.google.gson.Gson
+import com.ihsanbal.logging.LoggingInterceptor
 import com.zhouhaoo.common.net.GlobalHttpHandler
 import com.zhouhaoo.common.net.RequestInterceptor
 import dagger.Module
@@ -49,10 +50,12 @@ class NetworkModule {
     @Singleton
     @Provides
     internal fun provideOkHttpClient(builder: OkHttpClient.Builder,
+                                     logBuilder: LoggingInterceptor.Builder,
                                      interceptor: Interceptor,
                                      globalHttpHandler: GlobalHttpHandler?,
                                      mInterceptors: ArrayList<Interceptor>)
             : OkHttpClient {
+        builder.addInterceptor(logBuilder.build())
         if (globalHttpHandler != null) {
             builder.addNetworkInterceptor(interceptor)
             builder.addInterceptor { it.proceed(globalHttpHandler.onHttpRequestBefore(it, it.request())) }

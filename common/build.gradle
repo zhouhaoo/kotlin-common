@@ -54,7 +54,9 @@ dependencies {
     api rxJavaLibs
     api rxlifecycle2s
     api otherLibs
-
+    api(httpLog) {
+        exclude group: 'org.json', module: 'json'
+    }
     implementation(glideOkhttp) {
         exclude group: 'glide-parent'
     }

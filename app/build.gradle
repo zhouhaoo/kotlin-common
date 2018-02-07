@@ -44,9 +44,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation project(':common')
-    implementation('com.github.ihsanbal:LoggingInterceptor:2.0.5') {
-        exclude group: 'org.json', module: 'json'
-    }
     kapt annotationProcessorLibs
 
 //    testImplementation junit
