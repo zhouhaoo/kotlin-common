@@ -37,6 +37,9 @@ class MainPresenter @Inject constructor(model: MainContract.Model, view: MainCon
                 .subscribeBy(
                         onNext = {
                             view.gankData(it)
+                        },
+                        onError = {
+                            it.printStackTrace()
                         }
                 )
     }
