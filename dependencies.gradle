@@ -72,7 +72,7 @@ ext {
             gson     : "com.squareup.retrofit2:converter-gson:$versions.retrofit"
     ]
     okHttp = [
-            logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
+//            logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
             okhttp: "com.squareup.okhttp3:okhttp:$versions.okHttp"
     ]
 

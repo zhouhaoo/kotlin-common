@@ -19,10 +19,13 @@ package com.zhouhaoo.sample.app
 import android.app.Application
 import android.content.Context
 import android.support.v4.app.FragmentManager
+import com.ihsanbal.logging.Level
+import com.ihsanbal.logging.LoggingInterceptor
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.interfaces.AppConfig
-import okhttp3.logging.HttpLoggingInterceptor
+import com.zhouhaoo.sample.BuildConfig
+import okhttp3.internal.platform.Platform
 
 /**
  * Created by zhou on 18/1/25.
@@ -34,9 +37,14 @@ class AppConfigImpl : AppConfig {
             gsonBuilder = { }
             retrofitBuilder = { }
             okhttpBuilder = { }
-            addInterceptor(HttpLoggingInterceptor())
+            addInterceptor(LoggingInterceptor.Builder()
+                    .loggable(BuildConfig.DEBUG)
+                    .setLevel(Level.BODY)
+                    .log(Platform.INFO)
+                    .request("Request")
+                    .response("Response")
+                    .build())
             globalHttpHandler = GlobalHttpHandlerImpl(context)
-//            logLevel = LogLevel.RESPONSE
         }
     }
 

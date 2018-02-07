@@ -19,7 +19,6 @@ package com.zhouhaoo.common.injection.moudle
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.zhouhaoo.common.net.GlobalHttpHandler
-import com.zhouhaoo.common.net.LogLevel
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -41,10 +40,6 @@ class ConfigModule {
      *全局http处理类
      */
     var globalHttpHandler: GlobalHttpHandler? =null
-    /**
-     * 拦截器日志等级
-     */
-    var logLevel: LogLevel = LogLevel.ALL
     /**
      * 额外拦截器
      */
@@ -86,12 +81,6 @@ class ConfigModule {
     @Provides
     internal fun provideGlobalHttpHandler(): GlobalHttpHandler? {
         return globalHttpHandler
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideLevel(): LogLevel {
-        return logLevel
     }
 
     @Singleton
