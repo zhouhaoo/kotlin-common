@@ -22,7 +22,6 @@ import android.support.v4.app.FragmentManager
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.interfaces.AppConfig
-import com.zhouhaoo.common.net.LogLevel
 import okhttp3.logging.HttpLoggingInterceptor
 
 /**
@@ -37,7 +36,7 @@ class AppConfigImpl : AppConfig {
             okhttpBuilder = { }
             addInterceptor(HttpLoggingInterceptor())
             globalHttpHandler = GlobalHttpHandlerImpl(context)
-            logLevel = LogLevel.RESPONSE
+//            logLevel = LogLevel.RESPONSE
         }
     }
 

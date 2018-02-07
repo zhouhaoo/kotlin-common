@@ -26,7 +26,7 @@ import timber.log.Timber
  * Created by zhou on 18/2/5.
  */
 class DefaultFormatPrinter : FormatPrinter {
-    private val TAG = "ArmsHttpLog"
+    private val TAG = "okHttp"
     private val LINE_SEPARATOR = System.getProperty("line.separator")
     private val DOUBLE_SEPARATOR = LINE_SEPARATOR + LINE_SEPARATOR
 
@@ -61,12 +61,15 @@ class DefaultFormatPrinter : FormatPrinter {
     }
 
     override fun printFileRequest(request: Request) {
+
     }
 
     override fun printJsonResponse(chainMs: Long, isSuccessful: Boolean, code: Int, headers: String, contentType: MediaType, bodyString: String, segments: List<String>, message: String, responseUrl: String) {
+
     }
 
     override fun printFileResponse(chainMs: Long, isSuccessful: Boolean, code: Int, headers: String, segments: List<String>, message: String, responseUrl: String) {
+
     }
 
     private fun isEmpty(line: String): Boolean {

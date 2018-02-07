@@ -55,8 +55,8 @@ class NetworkModule {
                                      globalHttpHandler: GlobalHttpHandler?,
                                      mInterceptors: ArrayList<Interceptor>)
             : OkHttpClient {
-        builder.addNetworkInterceptor(interceptor)
         if (globalHttpHandler != null) {
+            builder.addNetworkInterceptor(interceptor)
             builder.addInterceptor { it.proceed(globalHttpHandler.onHttpRequestBefore(it, it.request())) }
         }
         mInterceptors.forEach { builder.addInterceptor(it) }

@@ -21,6 +21,7 @@ import com.zhouhaoo.common.mvp.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -39,7 +40,7 @@ class MainPresenter @Inject constructor(model: MainContract.Model, view: MainCon
                             view.gankData(it)
                         },
                         onError = {
-                            it.printStackTrace()
+                            Timber.e(it)
                         }
                 )
     }

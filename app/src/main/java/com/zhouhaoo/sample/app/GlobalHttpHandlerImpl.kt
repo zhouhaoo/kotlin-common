@@ -27,8 +27,7 @@ import okhttp3.Response
  */
 class GlobalHttpHandlerImpl(var context: Context) : GlobalHttpHandler {
 
-    override fun onHttpResultResponse(httpResult: String, chain: Interceptor.Chain, response: Response): Response {
-        var httpResult1 = httpResult
+    override fun onHttpResultResponse(httpResult: String?, chain: Interceptor.Chain, response: Response): Response {
         return response
     }
 

@@ -24,7 +24,7 @@ import okhttp3.Response
  * Created by zhou on 18/2/1.
  */
 interface GlobalHttpHandler {
-    fun onHttpResultResponse(httpResult: String, chain: Interceptor.Chain, response: Response): Response
+    fun onHttpResultResponse(httpResult: String?, chain: Interceptor.Chain, response: Response): Response
 
     fun onHttpRequestBefore(chain: Interceptor.Chain, request: Request): Request
 }
