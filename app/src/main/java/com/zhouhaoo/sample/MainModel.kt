@@ -29,7 +29,8 @@ import javax.inject.Inject
 class MainModel @Inject constructor(repositoryManager: IRepositoryManager)
     : BaseModel(repositoryManager), MainContract.Model {
 
-    override fun getData(category: String, pageCount: Int, page: Int): Observable<BaseData<MutableList<Data>>> {
+    override fun getData(category: String, pageCount: Int, page: Int):
+            Observable<BaseData<MutableList<Data>>> {
         return repositoryManager.obtainRetrofitService(GankApi::class.java)
                 .getGank(category, pageCount, page)
     }
