@@ -1,7 +1,8 @@
 ## kotlin common
-## 简介
+kotlin common library，使用范例见：[gank.io干货集中营Android客户端 by Kotlin](https://github.com/zhouhaoo/Gank)
+## 说明
 
-## 功能
+## 相关功能
 
 ## 用法
 
@@ -9,9 +10,7 @@
 
 
 ## TODO
-
-- [ ] 开发sample app
-  - [ ] 原型设计
+- [ ] Common包发布到jcenter()仓库
 - [ ] 完善文档
 - [ ] android studio模板生成文件
 
