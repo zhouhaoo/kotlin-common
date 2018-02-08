@@ -14,34 +14,48 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample
+package com.zhouhaoo.sample.app
 
 import android.app.Application
 import android.content.Context
 import android.support.v4.app.FragmentManager
+import com.ihsanbal.logging.Level
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.interfaces.AppConfig
+import com.zhouhaoo.sample.BuildConfig
+import okhttp3.internal.platform.Platform
 
 /**
  * Created by zhou on 18/1/25.
  */
-class TestAppConfig : AppConfig {
+class AppConfigImpl : AppConfig {
     override fun applyOptions(context: Context, module: ConfigModule) {
         module.apply {
-            gsonBuilder = { serializeNulls() }
+            baseUrl = "http://gank.io/api/"
+            gsonBuilder = { }
+            retrofitBuilder = { }
+            okhttpBuilder = { }
+            httplogBuilder = {
+                loggable(BuildConfig.DEBUG).setLevel(Level.BODY).log(Platform.INFO)
+                        .request("Request").response("Response")
+            }
+            globalHttpHandler = GlobalHttpHandlerImpl(context)
+//            addInterceptor()
         }
     }
 
     override fun injectAppLifecycle(context: Context, appLifecycles: ArrayList<AppLifecycle>) {
-
+        appLifecycles.add(AppLifecycleImpl())
     }
 
     override fun injectActivityLifecycle(context: Context, actLifecycles: ArrayList<Application.ActivityLifecycleCallbacks>) {
-
+        actLifecycles.add(ActivityLifecycle())
     }
 
     override fun injectFragmentLifecycle(context: Context, fragLifecycles: ArrayList<FragmentManager.FragmentLifecycleCallbacks>) {
 
     }
 }
+
+

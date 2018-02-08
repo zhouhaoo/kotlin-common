@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,25 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.moudle
+package com.zhouhaoo.sample
 
-import android.app.Application
+import com.zhouhaoo.common.injection.ActivityScope
 import com.zhouhaoo.common.interfaces.IRepositoryManager
-import com.zhouhaoo.common.net.RepositoryManager
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import com.zhouhaoo.common.mvp.BaseModel
+import io.reactivex.Observable
+import javax.inject.Inject
 
 /**
- * Created by zhou on 17/12/14.
+ * Created by zhou on 18/2/6.
  */
-@Module
-class AppModule(private val application: Application) {
+@ActivityScope
+class MainModel @Inject constructor(repositoryManager: IRepositoryManager)
+    : BaseModel(repositoryManager), MainContract.Model {
 
-    @Singleton
-    @Provides
-    internal fun provideApplication(): Application = application
-
-    @Singleton
-    @Provides
-    internal fun provideRepositoryManager(repositoryManager: RepositoryManager): IRepositoryManager {
-        return repositoryManager
+    override fun getData(category: String, pageCount: Int, page: Int):
+            Observable<BaseData<MutableList<Data>>> {
+        return repositoryManager.obtainRetrofitService(GankApi::class.java)
+                .getGank(category, pageCount, page)
     }
+
 }

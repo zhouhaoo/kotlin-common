@@ -27,13 +27,22 @@ import com.zhouhaoo.common.injection.moudle.ConfigModule
  */
 interface AppConfig {
     /**
-     * 配置信息
+     * 全局配置信息
      */
     fun applyOptions(context: Context, module: ConfigModule)
 
+    /**
+     * application生命周期
+     */
     fun injectAppLifecycle(context: Context, appLifecycles: ArrayList<AppLifecycle>)
 
+    /**
+     * activity生命周期
+     */
     fun injectActivityLifecycle(context: Context, actLifecycles: ArrayList<Application.ActivityLifecycleCallbacks>)
 
+    /**
+     * fragment生命周期
+     */
     fun injectFragmentLifecycle(context: Context, fragLifecycles: ArrayList<FragmentManager.FragmentLifecycleCallbacks>)
 }

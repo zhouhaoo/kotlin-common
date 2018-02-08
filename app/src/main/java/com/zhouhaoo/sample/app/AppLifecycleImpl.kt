@@ -14,25 +14,29 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.util
+package com.zhouhaoo.sample.app
 
+import android.app.Application
 import android.content.Context
-import com.zhouhaoo.common.base.App
-import com.zhouhaoo.common.base.BaseApplication
-import com.zhouhaoo.common.injection.component.AppComponent
+import com.zhouhaoo.common.base.delegate.AppLifecycle
+import com.zhouhaoo.sample.BuildConfig
+import timber.log.Timber
 
 /**
- * Created by zhou on 18/1/25.
+ * Created by zhou on 18/2/2.
  */
-class CommonUtils {
-    companion object {
-        fun getAppComponent(context: Context): AppComponent {
-            val application = context.applicationContext
-            return if (application is BaseApplication) {
-                application.getAppComponent()
-            } else {
-                throw IllegalStateException("${BaseApplication::class.java} need implements${App::class.java}")
-            }
+class AppLifecycleImpl : AppLifecycle {
+    override fun attachBaseContext(context: Context) {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
         }
+    }
+
+    override fun onCreate(application: Application) {
+
+    }
+
+    override fun onTerminate(application: Application) {
+
     }
 }

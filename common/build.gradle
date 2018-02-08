@@ -24,8 +24,8 @@ android {
     defaultConfig {
         minSdkVersion minSdkVer
         targetSdkVersion targetSdkVer
-        versionCode versionCode
-        versionName versionName
+        versionCode 1
+        versionName '1.0.0'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -52,8 +52,11 @@ dependencies {
     api supportLibs
     api networkLibs
     api rxJavaLibs
+    api rxlifecycle2s
     api otherLibs
-
+    api(httpLog) {
+        exclude group: 'org.json', module: 'json'
+    }
     implementation(glideOkhttp) {
         exclude group: 'glide-parent'
     }

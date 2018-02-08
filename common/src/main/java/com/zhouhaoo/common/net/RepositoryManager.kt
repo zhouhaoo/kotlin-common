@@ -16,29 +16,20 @@
 
 package com.zhouhaoo.common.net
 
-import android.app.Application
-import android.content.Context
-import com.google.gson.GsonBuilder
-import okhttp3.OkHttpClient
+import com.zhouhaoo.common.interfaces.IRepositoryManager
 import retrofit2.Retrofit
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
- * Created by zhou on 18/1/30.
+ * Created by zhou on 18/2/6.
  */
-interface RetrofitConfiguration {
-    fun configRetrofit(context: Context, builder: Retrofit.Builder)
-}
+@Singleton
+class RepositoryManager @Inject constructor(var mRetrofit: Retrofit) : IRepositoryManager {
 
-interface OkhttpConfiguration {
-    fun configOkhttp(context: Context, builder: OkHttpClient.Builder)
-}
+    override fun <T> obtainRetrofitService(service: Class<T>): T {
+        return mRetrofit.create(service)
+    }
 
-interface GsonConfiguration {
-    open fun configGson(context: Context, builder: GsonBuilder)
-}
 
-inline fun Retrofit.Builder.config(application: Application, retrofitConfiguration:
-RetrofitConfiguration?): Retrofit.Builder {
-    retrofitConfiguration?.configRetrofit(application, this)
-    return this
 }

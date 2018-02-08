@@ -14,28 +14,25 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.moudle
+package com.zhouhaoo.common.mvp
 
-import android.app.Application
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.OnLifecycleEvent
 import com.zhouhaoo.common.interfaces.IRepositoryManager
-import com.zhouhaoo.common.net.RepositoryManager
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
 
 /**
- * Created by zhou on 17/12/14.
+ * Created by zhou on 17/12/15.
  */
-@Module
-class AppModule(private val application: Application) {
+open class BaseModel(var repositoryManager: IRepositoryManager) : IModel, LifecycleObserver {
 
-    @Singleton
-    @Provides
-    internal fun provideApplication(): Application = application
+    override fun onDestroy() {
 
-    @Singleton
-    @Provides
-    internal fun provideRepositoryManager(repositoryManager: RepositoryManager): IRepositoryManager {
-        return repositoryManager
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    internal fun onDestroy(owner: LifecycleOwner) {
+        owner.lifecycle.removeObserver(this)
     }
 }

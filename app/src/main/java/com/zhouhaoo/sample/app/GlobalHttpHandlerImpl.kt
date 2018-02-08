@@ -14,25 +14,24 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.util
+package com.zhouhaoo.sample.app
 
 import android.content.Context
-import com.zhouhaoo.common.base.App
-import com.zhouhaoo.common.base.BaseApplication
-import com.zhouhaoo.common.injection.component.AppComponent
+import com.zhouhaoo.common.net.GlobalHttpHandler
+import okhttp3.Interceptor
+import okhttp3.Request
+import okhttp3.Response
 
 /**
- * Created by zhou on 18/1/25.
+ * Created by zhou on 18/2/2.
  */
-class CommonUtils {
-    companion object {
-        fun getAppComponent(context: Context): AppComponent {
-            val application = context.applicationContext
-            return if (application is BaseApplication) {
-                application.getAppComponent()
-            } else {
-                throw IllegalStateException("${BaseApplication::class.java} need implements${App::class.java}")
-            }
-        }
+class GlobalHttpHandlerImpl(var context: Context) : GlobalHttpHandler {
+
+    override fun onHttpResultResponse(httpResult: String?, chain: Interceptor.Chain, response: Response): Response {
+        return response
+    }
+
+    override fun onHttpRequestBefore(chain: Interceptor.Chain, request: Request): Request {
+        return request
     }
 }

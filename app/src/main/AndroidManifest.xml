@@ -27,7 +27,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".features.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <meta-data
-            android:name="com.zhouhaoo.sample.TestAppConfig"
+            android:name="com.zhouhaoo.sample.app.AppConfigImpl"
             android:value="CommonConfig"/>
     </application>
 

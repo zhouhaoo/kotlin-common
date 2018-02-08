@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,12 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.base
-
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+package com.zhouhaoo.common.interfaces
 
 /**
- * Created by zhou on 17/11/14.
+ * Created by zhou on 18/2/6.
  */
-abstract class BaseActivity : AppCompatActivity() {
-    /**
-     * 初始化布局
-     */
-    abstract val layoutId: Int
+interface IRepositoryManager {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val layoutId = layoutId
-        setContentView(layoutId)
-        initData(savedInstanceState)
-    }
-
-    abstract fun initData(savedInstanceState: Bundle?)
-
+    fun <T> obtainRetrofitService(service: Class<T>): T
 }

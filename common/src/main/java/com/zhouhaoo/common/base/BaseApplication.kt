@@ -20,6 +20,7 @@ import android.app.Application
 import android.content.Context
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
+import com.zhouhaoo.common.injection.component.AppComponent
 import kotlin.properties.Delegates
 
 /**
@@ -28,7 +29,7 @@ import kotlin.properties.Delegates
  *
  * Created by Zhouhaoo on 17/12/11.
  */
-class BaseApplication : Application() {
+class BaseApplication : Application(), App {
 
     private var appLifecycle by Delegates.notNull<AppLifecycle>()
 
@@ -46,5 +47,13 @@ class BaseApplication : Application() {
     override fun onTerminate() {
         super.onTerminate()
         appLifecycle.onTerminate(this)
+    }
+
+    override fun getAppComponent(): AppComponent {
+        return if (appLifecycle is App) {
+            (appLifecycle as App).getAppComponent()
+        } else {
+            throw IllegalStateException("${AppLifecycleImpl::class.java} need implements${App::class.java}")
+        }
     }
 }

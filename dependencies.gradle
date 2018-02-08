@@ -31,9 +31,11 @@ ext {
             rxKotlin        : '2.2.0',
             traceur         : '1.0.1',
             rxAndroid       : '2.0.1',
+            rxlifecycle2    : "2.2.1",
             rxdownload      : '1.1.9',
             rxPermissions   : '0.9.4@aar',
             glide           : '4.4.0',
+            logInterceptor  : '2.0.5',
             stetho          : '1.5.0',
             timber          : '4.5.1',
             sherlock        : '1.0.3@aar',
@@ -61,15 +63,18 @@ ext {
             traceur      : "com.tspoon.traceur:traceur:$versions.traceur",
             rxRermissions: "com.tbruyelle.rxpermissions:rxpermissions:$versions.rxPermissions"
     ]
-
+    rxlifecycle2 = [
+            "rxlifecycle2"        : "com.trello.rxlifecycle2:rxlifecycle:$versions.rxlifecycle2",
+            "rxlifecycle2-android": "com.trello.rxlifecycle2:rxlifecycle-android:$versions.rxlifecycle2",
+    ]
     retrofit = [
             retrofit : "com.squareup.retrofit2:retrofit:$versions.retrofit",
             rxAdapter: "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
             gson     : "com.squareup.retrofit2:converter-gson:$versions.retrofit"
     ]
     okHttp = [
-            logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
-            okhttp: "com.squareup.okhttp3:okhttp:$versions.okHttp"
+//            logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
+okhttp: "com.squareup.okhttp3:okhttp:$versions.okHttp"
     ]
 
     androidTests = [
@@ -90,10 +95,13 @@ ext {
     glide = "com.github.bumptech.glide:glide:$versions.glide"
     glideCompiler = "com.github.bumptech.glide:compiler:$versions.glide"
     glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$versions.glide"
+    //网络请求日志
+    httpLog = "com.github.ihsanbal:LoggingInterceptor:$versions.logInterceptor"
 
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values() + okHttp.values()
     rxJavaLibs = rxJava.values()
+    rxlifecycle2s = rxlifecycle2.values()
     otherLibs = [timber, dagger, glide]
 
     annotationProcessorLibs = [daggerCompiler, glideCompiler]

@@ -18,13 +18,16 @@ package com.zhouhaoo.common.base.delegate
 
 import android.app.Application
 import android.content.Context
-import com.google.gson.GsonBuilder
+import com.zhouhaoo.common.base.App
 import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.common.injection.component.DaggerAppComponent
 import com.zhouhaoo.common.injection.moudle.AppModule
 import com.zhouhaoo.common.injection.moudle.ConfigModule
 import com.zhouhaoo.common.injection.moudle.NetworkModule
+import com.zhouhaoo.common.integration.ActLifecycleImpl
+import com.zhouhaoo.common.integration.ActRxLifecycleImpl
 import com.zhouhaoo.common.interfaces.AppConfig
+import com.zhouhaoo.common.net.RequestInterceptor
 import com.zhouhaoo.common.util.ManifestParser
 import javax.inject.Inject
 
@@ -33,14 +36,18 @@ import javax.inject.Inject
  *
  * Created by zhou on 17/12/14.
  */
-class AppLifecycleImpl(base: Context) : AppLifecycle {
+class AppLifecycleImpl(base: Context) : AppLifecycle, App {
 
     private lateinit var mAppComponent: AppComponent
     private var configs: List<AppConfig> = ManifestParser(base).parse()
     private var mAppLifecycles = ArrayList<AppLifecycle>()
     private var mActivityLifecycles = ArrayList<Application.ActivityLifecycleCallbacks>()
     @Inject
-    lateinit var actLifecycleImpl: ActLifecycleImpl
+    lateinit var actLifecycle: ActLifecycleImpl
+    @Inject
+    lateinit var actRxLifecycle: ActRxLifecycleImpl
+    @Inject
+    lateinit var interceptor: RequestInterceptor
 
     init {
         configs.forEach {
@@ -60,14 +67,17 @@ class AppLifecycleImpl(base: Context) : AppLifecycle {
                 .configModule(getConfigModule(application, configs))
                 .build()
         mAppComponent.inject(this)
+
+        application.registerActivityLifecycleCallbacks(actLifecycle)
+        application.registerActivityLifecycleCallbacks(actRxLifecycle)
+
     }
+
+    override fun getAppComponent(): AppComponent = mAppComponent
 
     private fun getConfigModule(application: Application, configs: List<AppConfig>): ConfigModule {
         var configModule = ConfigModule()
         configs.forEach { it.applyOptions(application, configModule) }
-        val builder = GsonBuilder()
-        builder.apply { configModule.gsonBuilder }
-        builder.create()
         return configModule
     }
 
