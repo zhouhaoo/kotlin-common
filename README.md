@@ -8,16 +8,73 @@
 
 ## 说明
 
+## 用法
+1. 在项目的 build.gradle 中添加：
+
+```
+apply from: "dependencies.gradle"//将dependencies.gradle复制到根目录，并引入gradle文件
+buildscript {
+    ext.kotlin_version = '1.2.21'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}  
+```
+2. app下build.gradle添加依赖
+
+```
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'//注解编译器
+...
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.zhouhaoo:kotlin-common:1.0.0"
+    kapt annotationProcessorLibs //依赖注解
+}
+```
+
+3. 用范例见：[gank.io干货集中营Android客户端 by Kotlin](https://github.com/zhouhaoo/Gank)
+
+
 ## 相关功能
 
-## 用法
-使用范例见：[gank.io干货集中营Android客户端 by Kotlin](https://github.com/zhouhaoo/Gank)
 ## 感谢开源
+
+1. [retrofit]()
+2. []()
+3. []()
+4. []()
+5. []()
+6. []()
+7. []()
+8. []()
+9. []()
+10. []()
 
 
 ## TODO
 - [x] Common包发布到jcenter()仓库
-- [ ] 完善文档
+- [x] 完善文档
 - [ ] android studio模板生成文件
 
 ## 声明
