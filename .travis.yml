@@ -1,5 +1,6 @@
 language: android
 jdk: oraclejdk8
+sudo: true
 before_install:
 - yes | sdkmanager "platforms;android-27"
 - chmod +x gradlew
@@ -17,14 +18,22 @@ android:
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
     - extra-android-m2repository
     - extra-google-android-support
-
+    - extra-android-support
     # The SDK version used to compile your project
     - android-$ANDROID_API_LEVEL
+
+  before_cache:
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  cache:
+  directories:
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
+
   licenses:
     - '.+'
 
 script:
-    - ./gradlew clean
+    - ./gradle clean
 #    - ./gradlew install
 #    - ./gradlew bintrayUpload
-    - ./gradlew assembleDebug
+    - ./gradle assembleDebug
