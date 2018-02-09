@@ -7,7 +7,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars)](https://github.com/zhouhaoo/kotlin-common)
 
 ## 说明
-
+最近学习了kotlin，第一是熟悉一下kotlin的语法和编程方式，第二想做一个common包，已备后续使用。此外，正在准备开发练习的[*`Gank app`*](https://github.com/zhouhaoo/Gank)，使用此common依赖。
 ## 用法
 1. 在项目的 build.gradle 中添加：
 
@@ -53,31 +53,34 @@ dependencies {
 }
 ```
 
-3. 用范例见：[gank.io干货集中营Android客户端 by Kotlin](https://github.com/zhouhaoo/Gank)
-
-
 ## 相关功能
+1. 继承
+2. 
+
+>
+详情见sample代码
 
 ## 感谢开源
 
-1. [retrofit]()
-2. []()
-3. []()
-4. []()
-5. []()
-6. []()
-7. []()
-8. []()
-9. []()
-10. []()
+1. [`MVPArms`](https://github.com/JessYanCoding/MVPArms)
+2. [`Retrofit`](http://square.github.io/retrofit/)
+3. [`Okhttp`](http://square.github.io/okhttp/)
+4. [`Glide`](https://github.com/bumptech/glide)
+5. [`Gson`](https://github.com/google/gson)
+6. [`Timber`](https://github.com/JakeWharton/timber)
+7. [`dagger2`](https://github.com/google/dagger)
+8. [`rxjava2`](https://github.com/ReactiveX/RxJava)
+9. [`rxandroid`](https://github.com/ReactiveX/RxAndroid)
+10. [`rxkotlin`](https://github.com/ReactiveX/RxKotlin)
+11. [`rxlifecycle`](https://github.com/trello/RxLifecycle) 
+12. [`rxpermissions`](https://github.com/tbruyelle/RxPermissions) 
+13. [`LoggingInterceptor`](https://github.com/ihsanbal/LoggingInterceptor)
 
-
+...
 ## TODO
 - [x] Common包发布到jcenter()仓库
 - [x] 完善文档
 - [ ] android studio模板生成文件
-
-## 声明
 
 ## License
 ```
