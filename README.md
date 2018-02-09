@@ -7,9 +7,10 @@
 [![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars)](https://github.com/zhouhaoo/kotlin-common)
 
 ## 说明
-最近学习了kotlin，第一是熟悉一下kotlin的语法和编程方式，第二想做一个common包，已备后续使用。此外，正在准备开发练习的[*`Gank app`*](https://github.com/zhouhaoo/Gank)，使用此common依赖。
-## 用法
-1. 在项目的 build.gradle 中添加：
+最近学习了***`kotlin`***，本项目是熟悉kotlin的语法和编程方式，第二想做一个common包，已备后续使用,已上传[***` Jcenter `***](https://bintray.com/zhouhaoo/android/kotlin-common)仓库。
+<br/>此外，正在准备开发练习的[***`Gank app`***](https://github.com/zhouhaoo/Gank)，使用此`kotlin-common`依赖。
+## 依赖
+1. 在项目的 `build.gradle` 中添加：
 
 ```
 apply from: "dependencies.gradle"//将dependencies.gradle复制到根目录，并引入gradle文件
@@ -37,7 +38,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }  
 ```
-2. app下build.gradle添加依赖
+2. app下`build.gradle`添加依赖
 
 ```
 apply plugin: 'com.android.application'
@@ -53,9 +54,78 @@ dependencies {
 }
 ```
 
-## 相关功能
-1. 继承
-2. 
+## 用法
+1. 实现AppConfig类，为common配置依赖信息
+
+```
+class AppConfigImpl : AppConfig {
+    override fun applyOptions(context: Context, module: ConfigModule) {
+        module.apply {
+            baseUrl = "http://gank.io/api/"
+            gsonBuilder = { }//gson解析配置
+            retrofitBuilder = { }//retroifit配置
+            okhttpBuilder = { }//okhttp配置
+            httplogBuilder = {//网络日志log打印配置
+                loggable(BuildConfig.DEBUG).setLevel(Level.BODY).log(Platform.INFO)
+                        .request("Request").response("Response")
+            }
+            globalHttpHandler = GlobalHttpHandlerImpl(context)//全局请求响应配置
+//            addInterceptor()//添加okhttp拦截器
+        }
+    }
+
+    override fun injectAppLifecycle(context: Context, appLifecycles: ArrayList<AppLifecycle>) {
+        appLifecycles.add(AppLifecycleImpl())//注入application生命周期
+    }
+
+    override fun injectActivityLifecycle(context: Context, actLifecycles: ArrayList<Application.ActivityLifecycleCallbacks>) {
+        actLifecycles.add(ActivityLifecycle())
+    }
+
+    override fun injectFragmentLifecycle(context: Context, fragLifecycles: ArrayList<FragmentManager.FragmentLifecycleCallbacks>) {
+
+    }
+}
+```
+
+2. 配置`AndroidManifest.xml `
+·更改Application为Common中的BaseApplication，`application`节点下加入`meta-data`,加入第一步的AppConfigImpl路径，这样框架才能解析到配置（类似glide配置）。
+
+```
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.zhouhaoo.sample">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:name="com.zhouhaoo.common.base.BaseApplication"//
+       ...
+          `<meta-data
+            android:name="com.zhouhaoo.sample.app.AppConfigImpl"
+            android:value="CommonConfig"/>`
+    </application>
+
+</manifest>
+```
+3. 同步`application`的生命周期,进行需要加载的框架的初始化，例如日志打印控制
+
+```
+class AppLifecycleImpl : AppLifecycle {
+    override fun attachBaseContext(context: Context) {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+    }
+
+    override fun onCreate(application: Application) {
+
+    }
+
+    override fun onTerminate(application: Application) {
+
+    }
+}
+```
+
 
 >
 详情见sample代码
@@ -78,7 +148,7 @@ dependencies {
 
 ...
 ## TODO
-- [x] Common包发布到jcenter()仓库
+- [x] Common包发布到`jcenter()`仓库
 - [x] 完善文档
 - [ ] android studio模板生成文件
 
