@@ -66,3 +66,5 @@ dependencies {
 //    testImplementation junit
 //    androidTestImplementation androidTestsLibs
 }
+
+apply from: "bintrayUpload.gradle"

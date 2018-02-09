@@ -30,6 +30,4 @@ class RepositoryManager @Inject constructor(var mRetrofit: Retrofit) : IReposito
     override fun <T> obtainRetrofitService(service: Class<T>): T {
         return mRetrofit.create(service)
     }
-
-
 }
