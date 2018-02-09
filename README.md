@@ -1,5 +1,8 @@
 ![](screenshot/logo.png)
 
+[ ![Download](https://api.bintray.com/packages/zhouhaoo/android/kotlin-common/images/download.svg) ](https://bintray.com/zhouhaoo/android/kotlin-common/_latestVersion)
+[![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)](https://github.com/zhouhaoo/kotlin-common#license)
+[![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars)](https://github.com/zhouhaoo/kotlin-common)
 ## 说明
 
 ## 相关功能
