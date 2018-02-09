@@ -16,25 +16,21 @@
 
 package com.zhouhaoo.sample.features
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import com.zhouhaoo.common.base.BaseActivity
 import com.zhouhaoo.common.injection.component.AppComponent
-import com.zhouhaoo.sample.*
-import com.zhouhaoo.sample.injection.component.DaggerMainComponent
-import com.zhouhaoo.sample.injection.module.MainModule
-import com.zhouhaoo.sample.utils.toast
-import kotlinx.android.synthetic.main.activity_splash.*
-import java.util.*
+import com.zhouhaoo.common.mvp.IPresenter
+import com.zhouhaoo.sample.R
+import com.zhouhaoo.sample.features.main.MainActivity
 
-class SplashActivity : BaseActivity<MainPresenter>(), MainContract.View {
-
+/**
+ * Created by zhou on 18/2/9.
+ */
+class SplashActivity<P : IPresenter> : BaseActivity<P>() {
     override fun setupActivityComponent(appComponent: AppComponent) {
-        DaggerMainComponent
-                .builder()
-                .appComponent(appComponent)
-                .mainModule(MainModule(this))
-                .build()
-                .inject(this)
+
     }
 
     override fun initView(savedInstanceState: Bundle?): Int {
@@ -42,16 +38,9 @@ class SplashActivity : BaseActivity<MainPresenter>(), MainContract.View {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        tvHello.setOnClickListener {
-            tvContent.text = ""
-            mPresenter.requestData()
-        }
-    }
-
-    override fun gankData(data: BaseData<MutableList<Data>>) {
-        toast("请求成功")
-        var list = data.data
-        val index = Random().nextInt(list.size - 1)
-        tvContent.text = list[index].toString()
+        Handler().postDelayed({
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }, 1500)
     }
 }

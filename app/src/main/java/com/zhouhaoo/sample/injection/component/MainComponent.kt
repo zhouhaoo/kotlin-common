@@ -18,7 +18,7 @@ package com.zhouhaoo.sample.injection.component
 
 import com.zhouhaoo.common.injection.ActivityScope
 import com.zhouhaoo.common.injection.component.AppComponent
-import com.zhouhaoo.sample.features.SplashActivity
+import com.zhouhaoo.sample.features.main.MainActivity
 import com.zhouhaoo.sample.injection.module.MainModule
 import dagger.Component
 
@@ -29,5 +29,5 @@ import dagger.Component
 @Component(modules = [(MainModule::class)], dependencies = [(AppComponent::class)])
 interface MainComponent {
 
-    fun inject(activity: SplashActivity)
+    fun inject(activity: MainActivity)
 }

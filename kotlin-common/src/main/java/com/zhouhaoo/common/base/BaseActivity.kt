@@ -60,11 +60,4 @@ abstract class BaseActivity<P : IPresenter> : AppCompatActivity(), ActivityLifec
 
     override fun useEventBus(): Boolean = true
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (mPresenter != null) {
-            mPresenter.onDestroy()
-        }
-        mPresenter = null!!
-    }
 }
