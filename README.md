@@ -7,8 +7,8 @@
 [![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars)](https://github.com/zhouhaoo/kotlin-common)
 
 ## 说明
-最近学习了***`kotlin`***，本项目是熟悉kotlin的语法和编程方式，第二想做一个common包，已备后续使用,已上传[***` Jcenter `***](https://bintray.com/zhouhaoo/android/kotlin-common)仓库。
-<br/>此外，正在准备开发练习的[***`Gank app`***](https://github.com/zhouhaoo/Gank)，使用此`kotlin-common`依赖。
+最近学习了**`kotlin`**，本项目是熟悉kotlin的语法和编程方式，第二想做一个common包，已备后续使用,已上传[**` Jcenter `**](https://bintray.com/zhouhaoo/android/kotlin-common)仓库。
+<br/>此外，正在准备开发练习的[**`Gank app`**](https://github.com/zhouhaoo/Gank)，使用此`kotlin-common`依赖。
 ## 依赖
 1. 在项目的 `build.gradle` 中添加：
 
