@@ -1,6 +1,7 @@
 ![](screenshot/logo.png)
 
 [ ![Download](https://api.bintray.com/packages/zhouhaoo/android/kotlin-common/images/download.svg) ](https://bintray.com/zhouhaoo/android/kotlin-common/_latestVersion)
+[![Build Status](https://travis-ci.org/zhouhaoo/kotlin-common.svg?branch=master)](https://travis-ci.org/zhouhaoo/kotlin-common)
 [![API 19+](https://img.shields.io/badge/API-19%2B-yellowgreen.svg)](https://github.com/zhouhaoo/kotlin-common)
 [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)](https://github.com/zhouhaoo/kotlin-common#license)
 [![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars)](https://github.com/zhouhaoo/kotlin-common)
