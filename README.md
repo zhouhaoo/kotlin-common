@@ -1,16 +1,16 @@
-## kotlin common
-kotlin common library，使用范例见：[gank.io干货集中营Android客户端 by Kotlin](https://github.com/zhouhaoo/Gank)
+![](screenshot/logo.png)
+
 ## 说明
 
 ## 相关功能
 
 ## 用法
-
+使用范例见：[gank.io干货集中营Android客户端 by Kotlin](https://github.com/zhouhaoo/Gank)
 ## 感谢开源
 
 
 ## TODO
-- [ ] Common包发布到jcenter()仓库
+- [x] Common包发布到jcenter()仓库
 - [ ] 完善文档
 - [ ] android studio模板生成文件
 
