@@ -4,10 +4,9 @@
 [![Build Status](https://travis-ci.org/zhouhaoo/kotlin-common.svg?branch=master)](https://travis-ci.org/zhouhaoo/kotlin-common)
 [![API 19+](https://img.shields.io/badge/API-19%2B-yellowgreen.svg)](https://github.com/zhouhaoo/kotlin-common)
 [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)](https://github.com/zhouhaoo/kotlin-common#license)
-[![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars)](https://github.com/zhouhaoo/kotlin-common)
 
 ## 说明
-本项目是熟悉kotlin的语法和编程方式，另外做一个common包，已备后续使用,已上传[**` Jcenter `**](https://bintray.com/zhouhaoo/android/kotlin-common)仓库。
+本项目是熟悉kotlin的语法和编程方式，另外做一个common包，已备后续使用,已上传至[**` Jcenter `**](https://bintray.com/zhouhaoo/android/kotlin-common)仓库。
 <br/>此外，正准备开发[**`Gank app`**](https://github.com/zhouhaoo/Gank)，使用此[`kotlin-common`](https://github.com/zhouhaoo/kotlin-common#%E4%BE%9D%E8%B5%96)依赖。
 ## 依赖
 1. 在项目的 `build.gradle` 中添加：
