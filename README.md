@@ -6,7 +6,7 @@
 [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)](https://github.com/zhouhaoo/kotlin-common#license)
 
 ## 说明
-本项目是熟悉kotlin的语法和编程方式，另外做一个common包，已备后续使用,已上传至**` Jcenter `**仓库。
+本项目是熟悉kotlin的语法和编程方式，另外做一个common包，已备后续使用,已上传至` Jcenter `仓库。
 <br/>此外，正准备开发[**`Gank app`**](https://github.com/zhouhaoo/Gank)，使用此[`kotlin-common`](https://github.com/zhouhaoo/kotlin-common#%E4%BE%9D%E8%B5%96)依赖。
 ## 依赖
 1. 在项目的 `build.gradle` 中添加：
