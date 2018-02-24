@@ -24,6 +24,7 @@ import com.zhouhaoo.sample.injection.component.DaggerMainComponent
 import com.zhouhaoo.sample.injection.module.MainModule
 import com.zhouhaoo.sample.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 import java.util.*
 
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
@@ -46,6 +47,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
             tvContent.text = ""
             mPresenter.requestData()
         }
+        Timber.d("Lifecycle.Event.ON_CREATE")
     }
 
     override fun gankData(data: BaseData<MutableList<Data>>) {

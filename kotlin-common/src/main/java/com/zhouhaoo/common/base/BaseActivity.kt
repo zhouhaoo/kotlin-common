@@ -59,5 +59,4 @@ abstract class BaseActivity<P : IPresenter> : AppCompatActivity(), ActivityLifec
     }
 
     override fun useEventBus(): Boolean = true
-
 }

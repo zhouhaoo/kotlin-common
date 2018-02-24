@@ -73,10 +73,13 @@ ext {
             gson     : "com.squareup.retrofit2:converter-gson:$versions.retrofit"
     ]
     okHttp = [
-//            logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
-okhttp: "com.squareup.okhttp3:okhttp:$versions.okHttp"
+            okhttp: "com.squareup.okhttp3:okhttp:$versions.okHttp"
     ]
-
+    dagger = [
+            "dagger"                : "com.google.dagger:dagger:$versions.dagger",
+            "dagger-android"        : "com.google.dagger:dagger-android:$versions.dagger",
+            "dagger-android-support": "com.google.dagger:dagger-android-support:$versions.dagger"
+    ]
     androidTests = [
             espressoCore: "com.android.support.test.espresso:espresso-core:$versions.espresso",
             testRunner  : "com.android.support.test:runner:$versions.testRunner"
@@ -89,8 +92,8 @@ okhttp: "com.squareup.okhttp3:okhttp:$versions.okHttp"
     //crash 搜集
     sherlock = "com.github.ajitsing:sherlock:$versions.sherlock"
     //dagger
-    dagger = "com.google.dagger:dagger:$versions.dagger"
     daggerCompiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+    daggerAndroidCompiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
     //glide
     glide = "com.github.bumptech.glide:glide:$versions.glide"
     glideCompiler = "com.github.bumptech.glide:compiler:$versions.glide"
@@ -102,9 +105,10 @@ okhttp: "com.squareup.okhttp3:okhttp:$versions.okHttp"
     networkLibs = retrofit.values() + okHttp.values()
     rxJavaLibs = rxJava.values()
     rxlifecycle2s = rxlifecycle2.values()
-    otherLibs = [timber, dagger, glide]
+    daggerLibs = dagger.values()
+    otherLibs = [timber, glide]
 
-    annotationProcessorLibs = [daggerCompiler, glideCompiler]
+    annotationProcessorLibs = [daggerCompiler, daggerAndroidCompiler, glideCompiler]
 
     androidTestsLibs = androidTests.values()
 }
