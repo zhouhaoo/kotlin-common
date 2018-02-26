@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ package com.zhouhaoo.common.injection
 import javax.inject.Scope
 
 /**
- * Created by zhou on 17/12/11.
+ * Created by zhou on 18/2/26.
  */
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class ActivityScope
+annotation class FragmentScope
