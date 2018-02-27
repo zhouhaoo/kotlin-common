@@ -19,8 +19,14 @@ package com.zhouhaoo.common.integration
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import com.zhouhaoo.common.base.delegate.IActivity
-import com.zhouhaoo.common.util.CommonUtils
+import dagger.Lazy
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,12 +34,20 @@ import javax.inject.Singleton
  * Created by zhou on 18/1/30.
  */
 @Singleton
-class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCallbacks {
+class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCallbacks,
+        HasSupportFragmentInjector {
+
+    @Inject
+    lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    lateinit var mFragmentLifecycle: Lazy<FragmentLifecycleImpl>
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (activity is IActivity) {
-            activity.setupActivityComponent(CommonUtils.getAppComponent(activity))
+            if (activity.useInject())
+                AndroidInjection.inject(activity)
         }
+        registerFragmentCallbacks(activity)
     }
 
     override fun onActivityStarted(activity: Activity) {
@@ -60,4 +74,19 @@ class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCall
 
     }
 
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return mFragmentInjector
+    }
+
+    /**
+     * 注册Fragment的监听
+     * @param activity
+     */
+    private fun registerFragmentCallbacks(activity: Activity) {
+        var useFragment = if (activity is IActivity) activity.useFragment() else true
+        if (activity is FragmentActivity && useFragment) {
+            activity.supportFragmentManager.registerFragmentLifecycleCallbacks(mFragmentLifecycle.get(),
+                    true)
+        }
+    }
 }

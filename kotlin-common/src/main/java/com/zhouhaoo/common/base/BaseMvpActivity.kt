@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,15 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection
+package com.zhouhaoo.common.base
 
-import javax.inject.Scope
+import com.zhouhaoo.common.mvp.IPresenter
+import javax.inject.Inject
 
 /**
- * Created by zhou on 17/12/11.
+ * Created by zhou on 17/11/14.
  */
-@Scope
-@Retention(AnnotationRetention.RUNTIME)
-annotation class ActivityScope
+abstract class BaseMvpActivity<P : IPresenter> : BaseActivity() {
+    @Inject
+    lateinit var mPresenter: P
+}

@@ -16,11 +16,11 @@
 
 package com.zhouhaoo.common.base
 
-import com.zhouhaoo.common.injection.component.AppComponent
+import com.zhouhaoo.common.injection.component.CoreComponent
 
 /**
  * Created by zhou on 18/2/6.
  */
 interface App {
-    fun getAppComponent(): AppComponent
+    fun getCoreComponent(): CoreComponent
 }

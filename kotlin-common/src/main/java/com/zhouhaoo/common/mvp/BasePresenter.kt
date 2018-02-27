@@ -24,7 +24,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 /**
  * Created by zhou on 18/2/5.
  */
-open class BasePresenter<M : IModel, V : IView>(var model: M, var view: V) :
+open class BasePresenter<M : IModel, V : IView>(var mModel: M, var mView: V) :
         IPresenter, LifecycleObserver {
 
     init {
@@ -32,10 +32,16 @@ open class BasePresenter<M : IModel, V : IView>(var model: M, var view: V) :
     }
 
     override fun onStart() {
-
+        if (mView is LifecycleOwner) {
+            (mView as LifecycleOwner).lifecycle.addObserver(this)
+            if (mModel is LifecycleObserver) {
+                (mView as LifecycleOwner).lifecycle.addObserver((mModel as LifecycleObserver))
+            }
+        }
     }
 
     override fun onDestroy() {
+        mModel?.onDestroy()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

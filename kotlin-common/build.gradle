@@ -52,6 +52,7 @@ dependencies {
     api supportLibs
     api networkLibs
     api rxJavaLibs
+    api daggerLibs
     api rxlifecycle2s
     api otherLibs
     api(httpLog) {

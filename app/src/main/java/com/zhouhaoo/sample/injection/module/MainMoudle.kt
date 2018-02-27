@@ -14,20 +14,20 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.injection.component
+package com.zhouhaoo.sample.injection.module
 
 import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.common.injection.component.AppComponent
 import com.zhouhaoo.sample.features.main.MainActivity
-import com.zhouhaoo.sample.injection.module.MainModule
-import dagger.Component
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 /**
- * Created by zhou on 18/2/6.
+ * Created by zhou on 18/2/26.
  */
-@ActivityScope
-@Component(modules = [(MainModule::class)], dependencies = [(AppComponent::class)])
-interface MainComponent {
+@Module
+abstract class MainMoudle {
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [MainPresenterModule::class])
+    abstract fun contributeMainActivity(): MainActivity
 
-    fun inject(activity: MainActivity)
 }

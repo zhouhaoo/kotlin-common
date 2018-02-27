@@ -14,32 +14,28 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.component
+package com.zhouhaoo.common.injection.moudle
 
 import android.app.Application
-import com.google.gson.Gson
-import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
-import com.zhouhaoo.common.injection.moudle.AppModule
-import com.zhouhaoo.common.injection.moudle.ConfigModule
-import com.zhouhaoo.common.injection.moudle.NetworkModule
 import com.zhouhaoo.common.interfaces.IRepositoryManager
-import dagger.Component
-import okhttp3.OkHttpClient
+import com.zhouhaoo.common.net.RepositoryManager
+import dagger.Module
+import dagger.Provides
 import javax.inject.Singleton
 
 /**
  * Created by zhou on 17/12/14.
  */
-@Singleton
-@Component(modules = [AppModule::class, NetworkModule::class, ConfigModule::class])
-interface AppComponent {
-    fun application(): Application
+@Module
+class CoreModule(private val application: Application) {
 
-    fun okhttpClient(): OkHttpClient
+    @Singleton
+    @Provides
+    internal fun provideApplication(): Application = application
 
-    fun repositoryManager(): IRepositoryManager
-
-    fun gson(): Gson
-
-    fun inject(appLifecycle: AppLifecycleImpl)
+    @Singleton
+    @Provides
+    internal fun provideRepositoryManager(repositoryManager: RepositoryManager): IRepositoryManager {
+        return repositoryManager
+    }
 }

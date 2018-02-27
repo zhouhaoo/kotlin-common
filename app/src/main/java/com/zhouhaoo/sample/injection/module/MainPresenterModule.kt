@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,30 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.injection.moudle
+package com.zhouhaoo.sample.injection.module
 
-import android.app.Application
-import com.zhouhaoo.common.interfaces.IRepositoryManager
-import com.zhouhaoo.common.net.RepositoryManager
+import com.zhouhaoo.common.injection.ActivityScope
+import com.zhouhaoo.sample.MainContract
+import com.zhouhaoo.sample.MainModel
+import com.zhouhaoo.sample.features.main.MainActivity
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 /**
- * Created by zhou on 17/12/14.
+ * Created by zhou on 18/2/6.
  */
 @Module
-class AppModule(private val application: Application) {
+class MainPresenterModule {
 
-    @Singleton
+    @ActivityScope
     @Provides
-    internal fun provideApplication(): Application = application
+    internal fun provideMainView(mainActivity: MainActivity): MainContract.View {
+        return mainActivity
+    }
 
-    @Singleton
+    @ActivityScope
     @Provides
-    internal fun provideRepositoryManager(repositoryManager: RepositoryManager): IRepositoryManager {
-        return repositoryManager
+    internal fun provideMainModel(model: MainModel): MainContract.Model {
+        return model
     }
 }

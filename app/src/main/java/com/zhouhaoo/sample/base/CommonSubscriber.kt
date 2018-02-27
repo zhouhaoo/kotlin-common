@@ -22,7 +22,7 @@ import io.reactivex.disposables.Disposable
 /**
  * Created by zhou on 18/2/2.
  */
-open abstract class CommonSubscriber<T> : Observer<T> {
+ abstract class CommonSubscriber<T> : Observer<T> {
 
     override fun onComplete() {
 

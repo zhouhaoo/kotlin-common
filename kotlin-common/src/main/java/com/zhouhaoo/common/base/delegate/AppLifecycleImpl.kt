@@ -19,10 +19,10 @@ package com.zhouhaoo.common.base.delegate
 import android.app.Application
 import android.content.Context
 import com.zhouhaoo.common.base.App
-import com.zhouhaoo.common.injection.component.AppComponent
-import com.zhouhaoo.common.injection.component.DaggerAppComponent
-import com.zhouhaoo.common.injection.moudle.AppModule
+import com.zhouhaoo.common.injection.component.CoreComponent
+import com.zhouhaoo.common.injection.component.DaggerCoreComponent
 import com.zhouhaoo.common.injection.moudle.ConfigModule
+import com.zhouhaoo.common.injection.moudle.CoreModule
 import com.zhouhaoo.common.injection.moudle.NetworkModule
 import com.zhouhaoo.common.integration.ActLifecycleImpl
 import com.zhouhaoo.common.integration.ActRxLifecycleImpl
@@ -38,7 +38,7 @@ import javax.inject.Inject
  */
 class AppLifecycleImpl(base: Context) : AppLifecycle, App {
 
-    private lateinit var mAppComponent: AppComponent
+    private lateinit var mAppComponent: CoreComponent
     private var configs: List<AppConfig> = ManifestParser(base).parse()
     private var mAppLifecycles = ArrayList<AppLifecycle>()
     private var mActivityLifecycles = ArrayList<Application.ActivityLifecycleCallbacks>()
@@ -61,8 +61,8 @@ class AppLifecycleImpl(base: Context) : AppLifecycle, App {
     }
 
     override fun onCreate(application: Application) {
-        mAppComponent = DaggerAppComponent.builder()
-                .appModule(AppModule(application))
+        mAppComponent = DaggerCoreComponent.builder()
+                .coreModule(CoreModule(application))
                 .networkModule(NetworkModule())
                 .configModule(getConfigModule(application, configs))
                 .build()
@@ -73,7 +73,7 @@ class AppLifecycleImpl(base: Context) : AppLifecycle, App {
 
     }
 
-    override fun getAppComponent(): AppComponent = mAppComponent
+    override fun getCoreComponent(): CoreComponent = mAppComponent
 
     private fun getConfigModule(application: Application, configs: List<AppConfig>): ConfigModule {
         var configModule = ConfigModule()

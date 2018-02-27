@@ -14,29 +14,13 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.injection.module
+package com.zhouhaoo.common.injection
 
-import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.sample.MainContract
-import com.zhouhaoo.sample.MainModel
-import dagger.Module
-import dagger.Provides
+import javax.inject.Scope
 
 /**
- * Created by zhou on 18/2/6.
+ * Created by zhou on 18/2/26.
  */
-@Module
-class MainModule(private var view: MainContract.View) {
-
-    @ActivityScope
-    @Provides
-    internal fun provideUserView(): MainContract.View {
-        return this.view
-    }
-
-    @ActivityScope
-    @Provides
-    internal fun provideUserModel(model: MainModel): MainContract.Model {
-        return model
-    }
-}
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class FragmentScope
