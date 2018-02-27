@@ -16,33 +16,20 @@
 
 package com.zhouhaoo.sample.base
 
-import android.app.Activity
 import com.zhouhaoo.common.base.BaseApplication
 import com.zhouhaoo.sample.injection.component.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
 
 /**
  * @see BaseApplication
  * Created by zhou on 18/2/26.
  */
-class BaseApp : BaseApplication(), HasActivityInjector {
-
-    @Inject
-    lateinit var mActivityInjector: DispatchingAndroidInjector<Activity>
-
-    override fun activityInjector(): AndroidInjector<Activity> {
-        return this.mActivityInjector
-    }
-
+class BaseApp : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
-        var build = DaggerAppComponent
+        var appComponent = DaggerAppComponent
                 .builder()
                 .coreComponent(getCoreComponent())
                 .build()
-        build.inject(this)
+        appComponent.inject(this)
     }
 }
