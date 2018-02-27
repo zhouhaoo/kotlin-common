@@ -17,25 +17,24 @@
 package com.zhouhaoo.common.base.delegate
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
 
 /**
- * Created by zhou on 18/2/6.
+ * Created by zhou on 18/2/27.
  */
-interface IActivity {
+interface IFragment {
 
     /**
      * 初始化布局
      */
-    fun initView(savedInstanceState: Bundle?): Int
+    fun initView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): Int
 
     /**
      * 初始化数据
      */
     fun initData(savedInstanceState: Bundle?)
-    /**
-     * 是否使用eventbus
-     */
-    fun useFragment(): Boolean
+
     /**
      * 是否使用eventbus
      */

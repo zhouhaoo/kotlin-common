@@ -42,7 +42,6 @@ class RequestInterceptor @Inject constructor() : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        var text = isText(null)
         var response: Response
         try {
             response = chain.proceed(request)

@@ -14,29 +14,22 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.injection.module
+package com.zhouhaoo.sample.injection.component
 
-import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.sample.MainContract
-import com.zhouhaoo.sample.MainModel
-import dagger.Module
-import dagger.Provides
+import com.zhouhaoo.common.injection.AppScope
+import com.zhouhaoo.common.injection.component.CoreComponent
+import com.zhouhaoo.sample.base.BaseApp
+import com.zhouhaoo.sample.injection.module.MainMoudle
+import dagger.Component
+import dagger.android.AndroidInjectionModule
 
 /**
- * Created by zhou on 18/2/6.
+ * Created by zhou on 18/2/26.
  */
-@Module
-class MainModule(private var view: MainContract.View) {
+@AppScope
+@Component(modules = [AndroidInjectionModule::class, MainMoudle::class],
+        dependencies = [(CoreComponent::class)])
+interface AppComponent {
 
-    @ActivityScope
-    @Provides
-    internal fun provideUserView(): MainContract.View {
-        return this.view
-    }
-
-    @ActivityScope
-    @Provides
-    internal fun provideUserModel(model: MainModel): MainContract.Model {
-        return model
-    }
+    fun inject(baseApp: BaseApp)
 }

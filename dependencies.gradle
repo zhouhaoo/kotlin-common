@@ -27,7 +27,7 @@ ext {
 
             okHttp          : '3.9.1',
             retrofit        : '2.3.0',
-            dagger          : '2.13',
+            dagger          : '2.14.1',
             rxKotlin        : '2.2.0',
             traceur         : '1.0.1',
             rxAndroid       : '2.0.1',

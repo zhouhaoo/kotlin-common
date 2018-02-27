@@ -19,14 +19,14 @@ package com.zhouhaoo.common.util
 import android.content.Context
 import com.zhouhaoo.common.base.App
 import com.zhouhaoo.common.base.BaseApplication
-import com.zhouhaoo.common.injection.component.AppComponent
+import com.zhouhaoo.common.injection.component.CoreComponent
 
 /**
  * Created by zhou on 18/1/25.
  */
 class CommonUtils {
     companion object {
-        fun getAppComponent(context: Context): AppComponent {
+        fun getAppComponent(context: Context): CoreComponent {
             val application = context.applicationContext
             return if (application is BaseApplication) {
                 application.getAppComponent()

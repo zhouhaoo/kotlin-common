@@ -19,8 +19,8 @@ package com.zhouhaoo.common.injection.component
 import android.app.Application
 import com.google.gson.Gson
 import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
-import com.zhouhaoo.common.injection.moudle.AppModule
 import com.zhouhaoo.common.injection.moudle.ConfigModule
+import com.zhouhaoo.common.injection.moudle.CoreModule
 import com.zhouhaoo.common.injection.moudle.NetworkModule
 import com.zhouhaoo.common.interfaces.IRepositoryManager
 import dagger.Component
@@ -31,8 +31,10 @@ import javax.inject.Singleton
  * Created by zhou on 17/12/14.
  */
 @Singleton
-@Component(modules = [AppModule::class, NetworkModule::class, ConfigModule::class])
-interface AppComponent {
+@Component(modules = [ CoreModule::class,
+    NetworkModule::class, ConfigModule::class])
+interface CoreComponent {
+
     fun application(): Application
 
     fun okhttpClient(): OkHttpClient

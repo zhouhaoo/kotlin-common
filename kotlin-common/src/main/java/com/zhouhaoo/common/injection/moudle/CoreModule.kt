@@ -27,7 +27,7 @@ import javax.inject.Singleton
  * Created by zhou on 17/12/14.
  */
 @Module
-class AppModule(private val application: Application) {
+class CoreModule(private val application: Application) {
 
     @Singleton
     @Provides

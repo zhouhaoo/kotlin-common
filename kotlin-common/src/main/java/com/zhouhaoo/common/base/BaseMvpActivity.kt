@@ -16,11 +16,13 @@
 
 package com.zhouhaoo.common.base
 
-import com.zhouhaoo.common.injection.component.CoreComponent
+import com.zhouhaoo.common.mvp.IPresenter
+import javax.inject.Inject
 
 /**
- * Created by zhou on 18/2/6.
+ * Created by zhou on 17/11/14.
  */
-interface App {
-    fun getAppComponent(): CoreComponent
+abstract class BaseMvpActivity<P : IPresenter> : BaseActivity() {
+    @Inject
+    lateinit var mPresenter: P
 }

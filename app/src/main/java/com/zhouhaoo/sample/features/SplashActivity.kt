@@ -20,18 +20,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import com.zhouhaoo.common.base.BaseActivity
-import com.zhouhaoo.common.injection.component.AppComponent
-import com.zhouhaoo.common.mvp.IPresenter
 import com.zhouhaoo.sample.R
 import com.zhouhaoo.sample.features.main.MainActivity
 
 /**
  * Created by zhou on 18/2/9.
  */
-class SplashActivity<P : IPresenter> : BaseActivity<P>() {
-    override fun setupActivityComponent(appComponent: AppComponent) {
-
-    }
+class SplashActivity : BaseActivity() {
 
     override fun initView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_splash
@@ -43,4 +38,18 @@ class SplashActivity<P : IPresenter> : BaseActivity<P>() {
             finish()
         }, 1500)
     }
+
+    override fun showLoading() {
+
+    }
+
+    override fun hideLoading() {
+
+    }
+
+    override fun showMessage(message: String) {
+
+    }
+
+    override fun useInject(): Boolean = false
 }

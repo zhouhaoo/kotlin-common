@@ -17,26 +17,27 @@
 package com.zhouhaoo.sample.features.main
 
 import android.os.Bundle
-import com.zhouhaoo.common.base.BaseActivity
-import com.zhouhaoo.common.injection.component.AppComponent
+import com.google.gson.Gson
+import com.zhouhaoo.common.base.BaseMvpActivity
 import com.zhouhaoo.sample.*
-import com.zhouhaoo.sample.injection.component.DaggerMainComponent
-import com.zhouhaoo.sample.injection.module.MainModule
 import com.zhouhaoo.sample.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import java.util.*
+import javax.inject.Inject
 
-class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
-
-    override fun setupActivityComponent(appComponent: AppComponent) {
-        DaggerMainComponent
-                .builder()
-                .appComponent(appComponent)
-                .mainModule(MainModule(this))
-                .build()
-                .inject(this)
+class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
+    override fun showLoading() {
     }
+
+    override fun hideLoading() {
+    }
+
+    override fun showMessage(message: String) {
+    }
+
+    @Inject
+    lateinit var mGson: Gson
 
     override fun initView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_main

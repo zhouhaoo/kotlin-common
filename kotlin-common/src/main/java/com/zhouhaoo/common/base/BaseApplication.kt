@@ -20,17 +20,15 @@ import android.app.Application
 import android.content.Context
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
-import com.zhouhaoo.common.injection.component.AppComponent
+import com.zhouhaoo.common.injection.component.CoreComponent
 import kotlin.properties.Delegates
 
 /**
  *
- *新建app 需要在manifest声明此类
  *
  * Created by Zhouhaoo on 17/12/11.
  */
-class BaseApplication : Application(), App {
-
+open class BaseApplication : Application(), App{
     private var appLifecycle by Delegates.notNull<AppLifecycle>()
 
     override fun attachBaseContext(base: Context) {
@@ -49,7 +47,7 @@ class BaseApplication : Application(), App {
         appLifecycle.onTerminate(this)
     }
 
-    override fun getAppComponent(): AppComponent {
+    override fun getAppComponent(): CoreComponent {
         return if (appLifecycle is App) {
             (appLifecycle as App).getAppComponent()
         } else {

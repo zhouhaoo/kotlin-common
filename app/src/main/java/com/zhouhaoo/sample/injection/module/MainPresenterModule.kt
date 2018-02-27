@@ -14,13 +14,30 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.base
+package com.zhouhaoo.sample.injection.module
 
-import com.zhouhaoo.common.injection.component.CoreComponent
+import com.zhouhaoo.common.injection.ActivityScope
+import com.zhouhaoo.sample.MainContract
+import com.zhouhaoo.sample.MainModel
+import com.zhouhaoo.sample.features.main.MainActivity
+import dagger.Module
+import dagger.Provides
 
 /**
  * Created by zhou on 18/2/6.
  */
-interface App {
-    fun getAppComponent(): CoreComponent
+@Module
+class MainPresenterModule {
+
+    @ActivityScope
+    @Provides
+    internal fun provideMainView(mainActivity: MainActivity): MainContract.View {
+        return mainActivity
+    }
+
+    @ActivityScope
+    @Provides
+    internal fun provideMainModel(model: MainModel): MainContract.Model {
+        return model
+    }
 }

@@ -19,8 +19,10 @@ package com.zhouhaoo.common.integration
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.support.v4.app.FragmentActivity
 import com.zhouhaoo.common.base.delegate.IActivity
-import com.zhouhaoo.common.util.CommonUtils
+import dagger.Lazy
+import dagger.android.AndroidInjection
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,11 +31,15 @@ import javax.inject.Singleton
  */
 @Singleton
 class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCallbacks {
+    @Inject
+    lateinit var mFragmentLifecycle: Lazy<FragmentLifecycle>
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (activity is IActivity) {
-            activity.setupActivityComponent(CommonUtils.getAppComponent(activity))
+            if (activity.useInject())
+                AndroidInjection.inject(activity)
         }
+        registerFragmentCallbacks(activity)
     }
 
     override fun onActivityStarted(activity: Activity) {
@@ -60,4 +66,15 @@ class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCall
 
     }
 
+    /**
+     * 注册Fragment的监听
+     * @param activity
+     */
+    private fun registerFragmentCallbacks(activity: Activity) {
+        var useFragment = if (activity is IActivity) activity.useFragment() else true
+        if (activity is FragmentActivity && useFragment) {
+            activity.supportFragmentManager.registerFragmentLifecycleCallbacks(mFragmentLifecycle.get(),
+                    true)
+        }
+    }
 }
