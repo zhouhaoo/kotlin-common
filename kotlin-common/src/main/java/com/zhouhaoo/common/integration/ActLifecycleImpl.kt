@@ -19,10 +19,14 @@ package com.zhouhaoo.common.integration
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import com.zhouhaoo.common.base.delegate.IActivity
 import dagger.Lazy
 import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,9 +34,13 @@ import javax.inject.Singleton
  * Created by zhou on 18/1/30.
  */
 @Singleton
-class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCallbacks {
+class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCallbacks,
+        HasSupportFragmentInjector {
+
     @Inject
-    lateinit var mFragmentLifecycle: Lazy<FragmentLifecycle>
+    lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    lateinit var mFragmentLifecycle: Lazy<FragmentLifecycleImpl>
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (activity is IActivity) {
@@ -64,6 +72,10 @@ class ActLifecycleImpl @Inject constructor() : Application.ActivityLifecycleCall
 
     override fun onActivitySaveInstanceState(activity: Activity, savedInstanceState: Bundle?) {
 
+    }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return mFragmentInjector
     }
 
     /**

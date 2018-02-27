@@ -24,6 +24,7 @@ import com.zhouhaoo.common.injection.moudle.CoreModule
 import com.zhouhaoo.common.injection.moudle.NetworkModule
 import com.zhouhaoo.common.interfaces.IRepositoryManager
 import dagger.Component
+import dagger.android.support.AndroidSupportInjectionModule
 import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
@@ -31,7 +32,7 @@ import javax.inject.Singleton
  * Created by zhou on 17/12/14.
  */
 @Singleton
-@Component(modules = [ CoreModule::class,
+@Component(modules = [AndroidSupportInjectionModule::class, CoreModule::class,
     NetworkModule::class, ConfigModule::class])
 interface CoreComponent {
 

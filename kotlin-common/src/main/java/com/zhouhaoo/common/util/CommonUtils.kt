@@ -26,10 +26,10 @@ import com.zhouhaoo.common.injection.component.CoreComponent
  */
 class CommonUtils {
     companion object {
-        fun getAppComponent(context: Context): CoreComponent {
+        fun getCoreComponent(context: Context): CoreComponent {
             val application = context.applicationContext
             return if (application is BaseApplication) {
-                application.getAppComponent()
+                application.getCoreComponent()
             } else {
                 throw IllegalStateException("${BaseApplication::class.java} need implements${App::class.java}")
             }

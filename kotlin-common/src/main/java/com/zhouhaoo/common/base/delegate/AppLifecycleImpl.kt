@@ -73,7 +73,7 @@ class AppLifecycleImpl(base: Context) : AppLifecycle, App {
 
     }
 
-    override fun getAppComponent(): CoreComponent = mAppComponent
+    override fun getCoreComponent(): CoreComponent = mAppComponent
 
     private fun getConfigModule(application: Application, configs: List<AppConfig>): ConfigModule {
         var configModule = ConfigModule()

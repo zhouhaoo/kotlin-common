@@ -27,7 +27,7 @@ import dagger.android.AndroidInjectionModule
  * Created by zhou on 18/2/26.
  */
 @AppScope
-@Component(modules = [AndroidInjectionModule::class, MainMoudle::class],
+@Component(modules = [MainMoudle::class],
         dependencies = [(CoreComponent::class)])
 interface AppComponent {
 

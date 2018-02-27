@@ -17,16 +17,15 @@
 package com.zhouhaoo.sample.features.main
 
 import android.os.Bundle
-import com.google.gson.Gson
 import com.zhouhaoo.common.base.BaseMvpActivity
 import com.zhouhaoo.sample.*
 import com.zhouhaoo.sample.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import java.util.*
-import javax.inject.Inject
 
 class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
+
     override fun showLoading() {
     }
 
@@ -35,9 +34,6 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
 
     override fun showMessage(message: String) {
     }
-
-    @Inject
-    lateinit var mGson: Gson
 
     override fun initView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_main

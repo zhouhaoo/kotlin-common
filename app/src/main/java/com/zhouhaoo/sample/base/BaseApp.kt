@@ -41,7 +41,7 @@ class BaseApp : BaseApplication(), HasActivityInjector {
         super.onCreate()
         var build = DaggerAppComponent
                 .builder()
-                .coreComponent(getAppComponent())
+                .coreComponent(getCoreComponent())
                 .build()
         build.inject(this)
     }

@@ -47,9 +47,9 @@ open class BaseApplication : Application(), App{
         appLifecycle.onTerminate(this)
     }
 
-    override fun getAppComponent(): CoreComponent {
+    override fun getCoreComponent(): CoreComponent {
         return if (appLifecycle is App) {
-            (appLifecycle as App).getAppComponent()
+            (appLifecycle as App).getCoreComponent()
         } else {
             throw IllegalStateException("${AppLifecycleImpl::class.java} need implements${App::class.java}")
         }

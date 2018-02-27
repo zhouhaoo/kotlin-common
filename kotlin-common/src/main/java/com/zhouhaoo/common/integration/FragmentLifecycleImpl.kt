@@ -30,7 +30,7 @@ import javax.inject.Singleton
  * Created by zhou on 18/2/27.
  */
 @Singleton
-class FragmentLifecycle @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks() {
+class FragmentLifecycleImpl @Inject constructor() : FragmentManager.FragmentLifecycleCallbacks() {
 
     override fun onFragmentAttached(fm: FragmentManager, f: Fragment, context: Context) {
         if (f is IFragment) {

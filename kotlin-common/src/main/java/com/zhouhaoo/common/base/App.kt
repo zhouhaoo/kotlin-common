@@ -22,5 +22,5 @@ import com.zhouhaoo.common.injection.component.CoreComponent
  * Created by zhou on 18/2/6.
  */
 interface App {
-    fun getAppComponent(): CoreComponent
+    fun getCoreComponent(): CoreComponent
 }
