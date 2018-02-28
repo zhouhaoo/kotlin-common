@@ -28,4 +28,8 @@ import javax.inject.Inject
 class SettingPresenter @Inject constructor(model: SettingContract.Model, view: SettingContract.View) :
         BasePresenter<SettingContract.Model, SettingContract.View>(model, view) {
 
+    fun test() {
+
+    }
+
 }

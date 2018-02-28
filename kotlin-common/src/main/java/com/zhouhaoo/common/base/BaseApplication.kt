@@ -19,12 +19,14 @@ package com.zhouhaoo.common.base
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.support.v4.app.Fragment
 import com.zhouhaoo.common.base.delegate.AppLifecycle
 import com.zhouhaoo.common.base.delegate.AppLifecycleImpl
 import com.zhouhaoo.common.injection.component.CoreComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -32,14 +34,12 @@ import kotlin.properties.Delegates
  *
  * Created by Zhouhaoo on 17/12/11.
  */
-open class BaseApplication : Application(), App, HasActivityInjector {
+open class BaseApplication : Application(), App, HasActivityInjector, HasSupportFragmentInjector {
     private var appLifecycle by Delegates.notNull<AppLifecycle>()
     @Inject
     lateinit var mActivityInjector: DispatchingAndroidInjector<Activity>
-
-    override fun activityInjector(): AndroidInjector<Activity> {
-        return this.mActivityInjector
-    }
+    @Inject
+    lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -63,5 +63,13 @@ open class BaseApplication : Application(), App, HasActivityInjector {
         } else {
             throw IllegalStateException("${AppLifecycleImpl::class.java} need implements${App::class.java}")
         }
+    }
+
+    override fun activityInjector(): AndroidInjector<Activity> {
+        return this.mActivityInjector
+    }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return mFragmentInjector
     }
 }

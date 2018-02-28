@@ -31,7 +31,7 @@ import io.reactivex.subjects.Subject
 /**
  * Created by zhou on 18/2/27.
  */
-abstract class BaseFragment : Fragment(), IFragment,IView, FragmentLifecycleable {
+abstract class BaseFragment : Fragment(), IFragment, IView, FragmentLifecycleable {
 
     private val mLifecycleSubject = BehaviorSubject.create<FragmentEvent>()
 
@@ -48,5 +48,5 @@ abstract class BaseFragment : Fragment(), IFragment,IView, FragmentLifecycleable
 
     override fun useEventBus(): Boolean = true
 
-    override fun useInject(): Boolean = false
+    override fun useInject(): Boolean = true
 }

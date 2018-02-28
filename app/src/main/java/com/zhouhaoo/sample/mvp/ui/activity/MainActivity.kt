@@ -16,9 +16,14 @@
 
 package com.zhouhaoo.sample.mvp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.zhouhaoo.common.base.BaseMvpActivity
-import com.zhouhaoo.sample.*
+import com.zhouhaoo.sample.BaseData
+import com.zhouhaoo.sample.Data
+import com.zhouhaoo.sample.R
 import com.zhouhaoo.sample.mvp.contract.MainContract
 import com.zhouhaoo.sample.mvp.presenter.MainPresenter
 import com.zhouhaoo.sample.utils.toast
@@ -28,17 +33,22 @@ import java.util.*
 
 class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
 
-    override fun showLoading() {
-    }
-
-    override fun hideLoading() {
-    }
-
-    override fun showMessage(message: String) {
-    }
-
     override fun initView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_main
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.setting, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.setting -> {
+                startActivity(Intent(this, SettingActivity::class.java))
+            }
+        }
+        return true
     }
 
     override fun initData(savedInstanceState: Bundle?) {
@@ -55,4 +65,14 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
         val index = Random().nextInt(list.size - 1)
         tvContent.text = list[index].toString()
     }
+
+    override fun showLoading() {
+    }
+
+    override fun hideLoading() {
+    }
+
+    override fun showMessage(message: String) {
+    }
+
 }

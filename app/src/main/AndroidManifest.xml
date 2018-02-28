@@ -37,6 +37,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".mvp.ui.activity.MainActivity"/>
+        <activity
+            android:name=".mvp.ui.activity.SettingActivity"
+            android:label="设置"/>
 
         <meta-data
             android:name="com.zhouhaoo.sample.app.AppConfigImpl"

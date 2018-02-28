@@ -16,8 +16,8 @@
 
 package com.zhouhaoo.sample.injection.module
 
-import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.sample.mvp.ui.activity.MainActivity
+import com.zhouhaoo.common.injection.FragmentScope
+import com.zhouhaoo.sample.mvp.ui.fragment.SettingFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -25,14 +25,10 @@ import dagger.android.ContributesAndroidInjector
  * Created by zhou on 18/2/26.
  */
 @Module
-abstract class MainMoudle {
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [MainPresenterModule::class])
-    abstract fun contributeMainActivity(): MainActivity
-
-//    @FragmentScope
-//    @ContributesAndroidInjector(modules = [SettingPresenterModule::class])
-//    abstract fun contributeSettingFragment(): SettingFragment
+abstract class SettingMoudle {
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [SettingPresenterModule::class])
+    abstract fun contributeSettingFragment(): SettingFragment
 
 
 }

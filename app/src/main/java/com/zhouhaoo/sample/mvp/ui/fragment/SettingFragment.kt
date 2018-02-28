@@ -37,12 +37,15 @@ class SettingFragment : BaseMvpFragment<SettingPresenter>(), SettingContract.Vie
     override fun showMessage(message: String) {
     }
 
-    override fun initView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): Int {
-        return R.layout.activity_splash
+    override fun initView(inflater: LayoutInflater, container: ViewGroup?,
+                          savedInstanceState: Bundle?): Int {
+        return R.layout.fragment_setting
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-
+//        tvSetting.setOnClickListener {
+//            mPresenter.test()
+//        }
     }
 
 }
