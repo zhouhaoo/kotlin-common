@@ -38,7 +38,7 @@ abstract class BaseFragment : Fragment(), IFragment, IView, FragmentLifecycleabl
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var layoutId = initView(inflater, container, savedInstanceState)
-        return if (layoutId == 0) inflater.inflate(layoutId, container, false)
+        return if (layoutId != 0) inflater.inflate(layoutId, container, false)
         else super.onCreateView(inflater, container, savedInstanceState)
     }
 

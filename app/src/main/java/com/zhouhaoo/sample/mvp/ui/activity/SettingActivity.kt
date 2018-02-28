@@ -33,7 +33,7 @@ class SettingActivity : BaseActivity() {
     override fun initData(savedInstanceState: Bundle?) {
         supportFragmentManager
                 .beginTransaction()
-                .add(R.id.fragContent, SettingFragment())
+                .replace(R.id.fragContent, SettingFragment())
                 .commit()
     }
 
