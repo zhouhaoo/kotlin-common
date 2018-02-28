@@ -40,6 +40,12 @@ class FragmentLifecycleImpl @Inject constructor() : FragmentManager.FragmentLife
         }
     }
 
+    override fun onFragmentActivityCreated(fm: FragmentManager?, f: Fragment, savedInstanceState: Bundle?) {
+        if (f is IFragment) {
+            f.initData(savedInstanceState)
+        }
+    }
+
     override fun onFragmentViewCreated(fm: FragmentManager?, f: Fragment?, v: View?,
                                        savedInstanceState: Bundle?) {
     }
@@ -69,9 +75,6 @@ class FragmentLifecycleImpl @Inject constructor() : FragmentManager.FragmentLife
     }
 
     override fun onFragmentPreCreated(fm: FragmentManager?, f: Fragment?, savedInstanceState: Bundle?) {
-    }
-
-    override fun onFragmentActivityCreated(fm: FragmentManager?, f: Fragment?, savedInstanceState: Bundle?) {
     }
 
     override fun onFragmentPaused(fm: FragmentManager?, f: Fragment?) {

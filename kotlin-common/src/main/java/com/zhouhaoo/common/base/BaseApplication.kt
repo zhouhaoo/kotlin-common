@@ -30,7 +30,6 @@ import kotlin.properties.Delegates
 
 /**
  *
- *
  * Created by Zhouhaoo on 17/12/11.
  */
 open class BaseApplication : Application(), App, HasActivityInjector {

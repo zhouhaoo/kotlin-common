@@ -173,6 +173,7 @@ class AppLifecycleImpl : AppLifecycle {
 - [x] 完善文档
 - [ ] 图片加载
 - [ ] 缓存处理
+- [ ] 全局网路请求错误统一处理
 - [ ] android studio模板生成文件
 
 ## License

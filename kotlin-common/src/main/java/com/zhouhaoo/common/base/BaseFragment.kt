@@ -21,17 +21,28 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.trello.rxlifecycle2.android.FragmentEvent
 import com.zhouhaoo.common.base.delegate.IFragment
+import com.zhouhaoo.common.integration.lifecycle.FragmentLifecycleable
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.Subject
 
 /**
  * Created by zhou on 18/2/27.
  */
-abstract class BaseFragment : Fragment(), IFragment {
+abstract class BaseFragment : Fragment(), IFragment, FragmentLifecycleable {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private val mLifecycleSubject = BehaviorSubject.create<FragmentEvent>()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         var layoutId = initView(inflater, container, savedInstanceState)
         return if (layoutId == 0) inflater.inflate(layoutId, container, false)
         else super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun provideLifecycleSubject(): Subject<FragmentEvent> {
+        return mLifecycleSubject
     }
 
     override fun useEventBus(): Boolean = true
