@@ -16,28 +16,28 @@
 
 package com.zhouhaoo.sample.injection.module
 
-import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.sample.mvp.contract.MainContract
-import com.zhouhaoo.sample.mvp.model.MainModel
-import com.zhouhaoo.sample.mvp.ui.activity.MainActivity
+import com.zhouhaoo.common.injection.FragmentScope
+import com.zhouhaoo.sample.mvp.contract.SettingContract
+import com.zhouhaoo.sample.mvp.model.SettingModel
+import com.zhouhaoo.sample.mvp.ui.fragment.SettingFragment
 import dagger.Module
 import dagger.Provides
 
 /**
- * Created by zhou on 18/2/6.
+ * Created by zhou on 18/2/28.
  */
 @Module
-class MainPresenterModule {
+class SettingPresenterModule {
 
-    @ActivityScope
+    @FragmentScope
     @Provides
-    internal fun provideMainView(mainActivity: MainActivity): MainContract.View {
-        return mainActivity
+    internal fun provideSettingView(settingFragment: SettingFragment): SettingContract.View {
+        return settingFragment
     }
 
-    @ActivityScope
+    @FragmentScope
     @Provides
-    internal fun provideMainModel(model: MainModel): MainContract.Model {
+    internal fun provideSettingModel(model: SettingModel): SettingContract.Model {
         return model
     }
 }

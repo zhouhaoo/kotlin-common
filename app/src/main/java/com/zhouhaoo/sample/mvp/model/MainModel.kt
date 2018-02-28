@@ -14,30 +14,29 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.injection.module
+package com.zhouhaoo.sample.mvp.model
 
 import com.zhouhaoo.common.injection.ActivityScope
+import com.zhouhaoo.common.interfaces.IRepositoryManager
+import com.zhouhaoo.common.mvp.BaseModel
+import com.zhouhaoo.sample.BaseData
+import com.zhouhaoo.sample.Data
+import com.zhouhaoo.sample.GankApi
 import com.zhouhaoo.sample.mvp.contract.MainContract
-import com.zhouhaoo.sample.mvp.model.MainModel
-import com.zhouhaoo.sample.mvp.ui.activity.MainActivity
-import dagger.Module
-import dagger.Provides
+import io.reactivex.Observable
+import javax.inject.Inject
 
 /**
  * Created by zhou on 18/2/6.
  */
-@Module
-class MainPresenterModule {
+@ActivityScope
+class MainModel @Inject constructor(repositoryManager: IRepositoryManager)
+    : BaseModel(repositoryManager), MainContract.Model {
 
-    @ActivityScope
-    @Provides
-    internal fun provideMainView(mainActivity: MainActivity): MainContract.View {
-        return mainActivity
+    override fun getData(category: String, pageCount: Int, page: Int):
+            Observable<BaseData<MutableList<Data>>> {
+        return repositoryManager.obtainRetrofitService(GankApi::class.java)
+                .getGank(category, pageCount, page)
     }
 
-    @ActivityScope
-    @Provides
-    internal fun provideMainModel(model: MainModel): MainContract.Model {
-        return model
-    }
 }

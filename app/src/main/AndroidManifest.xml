@@ -28,7 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".features.SplashActivity"
+            android:name=".mvp.ui.activity.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -36,7 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".features.main.MainActivity"/>
+        <activity android:name=".mvp.ui.activity.MainActivity"/>
 
         <meta-data
             android:name="com.zhouhaoo.sample.app.AppConfigImpl"

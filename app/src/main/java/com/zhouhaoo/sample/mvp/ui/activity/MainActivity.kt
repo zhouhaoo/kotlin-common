@@ -14,11 +14,13 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.features.main
+package com.zhouhaoo.sample.mvp.ui.activity
 
 import android.os.Bundle
 import com.zhouhaoo.common.base.BaseMvpActivity
 import com.zhouhaoo.sample.*
+import com.zhouhaoo.sample.mvp.contract.MainContract
+import com.zhouhaoo.sample.mvp.presenter.MainPresenter
 import com.zhouhaoo.sample.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber

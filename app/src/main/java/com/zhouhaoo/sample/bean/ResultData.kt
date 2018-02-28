@@ -14,23 +14,19 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample
-
-import com.zhouhaoo.common.mvp.IModel
-import com.zhouhaoo.common.mvp.IView
-import io.reactivex.Observable
+package com.zhouhaoo.sample.bean
 
 /**
- * Created by zhou on 18/2/6.
+ * Created by zhou on 18/2/2.
  */
-interface MainContract {
-
-    interface View : IView {
-        fun gankData(data: BaseData<MutableList<Data>>)
+open class ResultData {
+    open fun error(noinline: Throwable) {
+        println("-----------------------$noinline.message")
     }
+}
 
-    interface Model : IModel {
-        fun getData(category: String, pageCount: Int, page: Int):
-                Observable<BaseData<MutableList<Data>>>
+class TesData : ResultData() {
+    override fun error(noinline: Throwable) {
+        super.error(noinline)
     }
 }
