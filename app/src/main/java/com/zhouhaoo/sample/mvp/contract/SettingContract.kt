@@ -14,25 +14,20 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.injection.module
+package com.zhouhaoo.sample.mvp.contract
 
-import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.sample.mvp.ui.activity.MainActivity
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import com.zhouhaoo.common.mvp.IModel
+import com.zhouhaoo.common.mvp.IView
 
 /**
- * Created by zhou on 18/2/26.
+ * Created by zhou on 18/2/28.
  */
-@Module
-abstract class MainMoudle {
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [MainPresenterModule::class])
-    abstract fun contributeMainActivity(): MainActivity
+interface SettingContract {
+    interface View : IView {
 
-//    @FragmentScope
-//    @ContributesAndroidInjector(modules = [SettingPresenterModule::class])
-//    abstract fun contributeSettingFragment(): SettingFragment
+    }
 
+    interface Model : IModel {
 
+    }
 }

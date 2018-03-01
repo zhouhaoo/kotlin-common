@@ -16,28 +16,19 @@
 
 package com.zhouhaoo.sample.injection.module
 
-import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.sample.mvp.contract.MainContract
-import com.zhouhaoo.sample.mvp.model.MainModel
-import com.zhouhaoo.sample.mvp.ui.activity.MainActivity
+import com.zhouhaoo.common.injection.FragmentScope
+import com.zhouhaoo.sample.mvp.ui.fragment.SettingFragment
 import dagger.Module
-import dagger.Provides
+import dagger.android.ContributesAndroidInjector
 
 /**
- * Created by zhou on 18/2/6.
+ * Created by zhou on 18/2/26.
  */
 @Module
-class MainPresenterModule {
+abstract class SettingMoudle {
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [SettingPresenterModule::class])
+    abstract fun contributeSettingFragment(): SettingFragment
 
-    @ActivityScope
-    @Provides
-    internal fun provideMainView(mainActivity: MainActivity): MainContract.View {
-        return mainActivity
-    }
 
-    @ActivityScope
-    @Provides
-    internal fun provideMainModel(model: MainModel): MainContract.Model {
-        return model
-    }
 }

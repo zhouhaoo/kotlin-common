@@ -37,6 +37,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }  
 ```
+
 2. app下`build.gradle`添加依赖
 
 ```
@@ -54,6 +55,7 @@ dependencies {
 ```
 
 ## 用法
+
 1. 实现AppConfig类，为common配置依赖信息
 
 ```
@@ -86,9 +88,31 @@ class AppConfigImpl : AppConfig {
     }
 }
 ```
+2. 在app模块中，新建AppComponent
 
-2. 配置`AndroidManifest.xml `
-·更改Application为Common中的BaseApplication，`application`节点下加入`meta-data`,加入第一步的AppConfigImpl路径，这样框架才能解析到配置（类似glide配置）。
+```
+@AppScope
+@Component( dependencies = [(CoreComponent::class)])
+interface AppComponent {
+    fun inject(baseApp: BaseApp)
+}
+```
+
+3. 在app模块中，新建BaseApp继承BaseApplicationApp
+
+```
+class BaseApp : BaseApplication() {
+    override fun onCreate() {
+        super.onCreate()
+        var appComponent = DaggerAppComponent
+                .builder()
+                .coreComponent(getCoreComponent())
+                .build()
+        appComponent.inject(this)
+    }
+}
+```
+4. 配置`AndroidManifest.xml ` 更改Application为app中的BaseApp，`application`节点下加入`meta-data`,加入第一步的AppConfigImpl路径，这样框架才能解析到配置（类似glide配置）。
 
 ```
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -96,7 +120,7 @@ class AppConfigImpl : AppConfig {
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:name="com.zhouhaoo.common.base.BaseApplication"//
+         android:name=".base.BaseApp"//步骤3新建的BaseApp
        ...
           <meta-data
             android:name="com.zhouhaoo.sample.app.AppConfigImpl"
@@ -105,7 +129,8 @@ class AppConfigImpl : AppConfig {
 
 </manifest>
 ```
-3. 同步`application`的生命周期,进行需要加载的框架的初始化，例如日志打印控制
+
+4. 同步`application`的生命周期,进行需要加载的框架的初始化，例如日志打印控制
 
 ```
 class AppLifecycleImpl : AppLifecycle {
@@ -114,11 +139,8 @@ class AppLifecycleImpl : AppLifecycle {
             Timber.plant(Timber.DebugTree())
         }
     }
-
     override fun onCreate(application: Application) {
-
     }
-
     override fun onTerminate(application: Application) {
 
     }
@@ -149,6 +171,9 @@ class AppLifecycleImpl : AppLifecycle {
 ## TODO
 - [x] Common包发布到`jcenter()`仓库
 - [x] 完善文档
+- [ ] 图片加载
+- [ ] 缓存处理
+- [ ] 全局网路请求错误统一处理
 - [ ] android studio模板生成文件
 
 ## License

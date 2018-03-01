@@ -14,12 +14,13 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample
+package com.zhouhaoo.sample.mvp.presenter
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.zhouhaoo.common.injection.ActivityScope
 import com.zhouhaoo.common.mvp.BasePresenter
+import com.zhouhaoo.sample.mvp.contract.MainContract
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers

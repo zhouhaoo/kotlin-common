@@ -14,18 +14,21 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.features.main
+package com.zhouhaoo.sample.mvp.ui.fragment
 
 import android.os.Bundle
-import com.zhouhaoo.common.base.BaseMvpActivity
-import com.zhouhaoo.sample.*
-import com.zhouhaoo.sample.utils.toast
-import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
-import java.util.*
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import com.zhouhaoo.common.base.BaseMvpFragment
+import com.zhouhaoo.sample.R
+import com.zhouhaoo.sample.mvp.contract.SettingContract
+import com.zhouhaoo.sample.mvp.presenter.SettingPresenter
+import kotlinx.android.synthetic.main.fragment_setting.*
 
-class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
-
+/**
+ * Created by zhou on 18/2/28.
+ */
+class SettingFragment : BaseMvpFragment<SettingPresenter>(), SettingContract.View {
     override fun showLoading() {
     }
 
@@ -35,22 +38,15 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
     override fun showMessage(message: String) {
     }
 
-    override fun initView(savedInstanceState: Bundle?): Int {
-        return R.layout.activity_main
+    override fun initView(inflater: LayoutInflater, container: ViewGroup?,
+                          savedInstanceState: Bundle?): Int {
+        return R.layout.fragment_setting
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        tvHello.setOnClickListener {
-            tvContent.text = ""
-            mPresenter.requestData()
+        tvSetting.setOnClickListener {
+            mPresenter.test()
         }
-        Timber.d("Lifecycle.Event.ON_CREATE")
     }
 
-    override fun gankData(data: BaseData<MutableList<Data>>) {
-        toast("请求成功")
-        var list = data.data
-        val index = Random().nextInt(list.size - 1)
-        tvContent.text = list[index].toString()
-    }
 }

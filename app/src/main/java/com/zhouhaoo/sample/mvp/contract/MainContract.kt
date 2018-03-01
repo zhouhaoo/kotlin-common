@@ -14,25 +14,25 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample
+package com.zhouhaoo.sample.mvp.contract
 
-import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.common.interfaces.IRepositoryManager
-import com.zhouhaoo.common.mvp.BaseModel
+import com.zhouhaoo.common.mvp.IModel
+import com.zhouhaoo.common.mvp.IView
+import com.zhouhaoo.sample.BaseData
+import com.zhouhaoo.sample.Data
 import io.reactivex.Observable
-import javax.inject.Inject
 
 /**
  * Created by zhou on 18/2/6.
  */
-@ActivityScope
-class MainModel @Inject constructor(repositoryManager: IRepositoryManager)
-    : BaseModel(repositoryManager), MainContract.Model {
+interface MainContract {
 
-    override fun getData(category: String, pageCount: Int, page: Int):
-            Observable<BaseData<MutableList<Data>>> {
-        return repositoryManager.obtainRetrofitService(GankApi::class.java)
-                .getGank(category, pageCount, page)
+    interface View : IView {
+        fun gankData(data: BaseData<MutableList<Data>>)
     }
 
+    interface Model : IModel {
+        fun getData(category: String, pageCount: Int, page: Int):
+                Observable<BaseData<MutableList<Data>>>
+    }
 }

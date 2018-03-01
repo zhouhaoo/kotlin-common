@@ -14,19 +14,15 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.model
+package com.zhouhaoo.common.base
+
+import com.zhouhaoo.common.mvp.IPresenter
+import javax.inject.Inject
 
 /**
- * Created by zhou on 18/2/2.
+ * Created by zhou on 18/2/28.
  */
-open class ResultData {
-    open fun error(noinline: Throwable) {
-        println("-----------------------$noinline.message")
-    }
-}
-
-class TesData : ResultData() {
-    override fun error(noinline: Throwable) {
-        super.error(noinline)
-    }
+abstract class BaseMvpFragment<P : IPresenter> : BaseFragment() {
+    @Inject
+    lateinit var mPresenter: P
 }

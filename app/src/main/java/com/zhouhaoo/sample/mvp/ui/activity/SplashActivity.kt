@@ -14,14 +14,13 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.features
+package com.zhouhaoo.sample.mvp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import com.zhouhaoo.common.base.BaseActivity
 import com.zhouhaoo.sample.R
-import com.zhouhaoo.sample.features.main.MainActivity
 
 /**
  * Created by zhou on 18/2/9.
