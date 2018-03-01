@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.fragment_setting.*
  * Created by zhou on 18/2/28.
  */
 class SettingFragment : BaseMvpFragment<SettingPresenter>(), SettingContract.View {
+
     override fun showLoading() {
     }
 
@@ -36,6 +37,7 @@ class SettingFragment : BaseMvpFragment<SettingPresenter>(), SettingContract.Vie
     }
 
     override fun showMessage(message: String) {
+
     }
 
     override fun initView(inflater: LayoutInflater, container: ViewGroup?,
