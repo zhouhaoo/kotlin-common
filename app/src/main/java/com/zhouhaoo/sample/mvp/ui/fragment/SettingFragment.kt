@@ -23,6 +23,7 @@ import com.zhouhaoo.common.base.BaseMvpFragment
 import com.zhouhaoo.sample.R
 import com.zhouhaoo.sample.mvp.contract.SettingContract
 import com.zhouhaoo.sample.mvp.presenter.SettingPresenter
+import com.zhouhaoo.sample.utils.toast
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 /**
@@ -47,6 +48,7 @@ class SettingFragment : BaseMvpFragment<SettingPresenter>(), SettingContract.Vie
 
     override fun initData(savedInstanceState: Bundle?) {
         tvSetting.setOnClickListener {
+            activity!!.toast("hahahahh")
             mPresenter.test()
         }
     }

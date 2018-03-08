@@ -33,18 +33,22 @@ class SettingActivity : BaseActivity() {
     override fun initData(savedInstanceState: Bundle?) {
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragContent, SettingFragment())
-                .commit()
+                .apply {
+                    replace(R.id.fragContent, SettingFragment())
+                    commit()
+                }
     }
 
-
     override fun showLoading() {
+
     }
 
     override fun hideLoading() {
+
     }
 
     override fun showMessage(message: String) {
+
     }
 
     override fun useInject(): Boolean = false

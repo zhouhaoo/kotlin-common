@@ -20,14 +20,13 @@ import com.zhouhaoo.common.injection.AppScope
 import com.zhouhaoo.common.injection.component.CoreComponent
 import com.zhouhaoo.sample.base.BaseApp
 import com.zhouhaoo.sample.injection.module.MainMoudle
-import com.zhouhaoo.sample.injection.module.SettingMoudle
 import dagger.Component
 
 /**
  * Created by zhou on 18/2/26.
  */
 @AppScope
-@Component(modules = [MainMoudle::class, SettingMoudle::class],
+@Component(modules = [MainMoudle::class],
         dependencies = [(CoreComponent::class)])
 interface AppComponent {
 

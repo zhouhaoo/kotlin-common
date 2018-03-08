@@ -42,6 +42,8 @@ class MainPresenter @Inject constructor(model: MainContract.Model, view: MainCon
                         onNext = {
                             mView.gankData(it)
                         }
+                        , onError = {
+                }
                 )
     }
 

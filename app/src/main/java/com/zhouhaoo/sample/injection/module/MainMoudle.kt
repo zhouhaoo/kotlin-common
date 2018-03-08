@@ -17,7 +17,9 @@
 package com.zhouhaoo.sample.injection.module
 
 import com.zhouhaoo.common.injection.ActivityScope
+import com.zhouhaoo.common.injection.FragmentScope
 import com.zhouhaoo.sample.mvp.ui.activity.MainActivity
+import com.zhouhaoo.sample.mvp.ui.fragment.SettingFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -30,9 +32,7 @@ abstract class MainMoudle {
     @ContributesAndroidInjector(modules = [MainPresenterModule::class])
     abstract fun contributeMainActivity(): MainActivity
 
-//    @FragmentScope
-//    @ContributesAndroidInjector(modules = [SettingPresenterModule::class])
-//    abstract fun contributeSettingFragment(): SettingFragment
-
-
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [SettingPresenterModule::class])
+    abstract fun contributeSettingFragment(): SettingFragment
 }

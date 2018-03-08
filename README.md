@@ -168,13 +168,6 @@ class AppLifecycleImpl : AppLifecycle {
 13. [`LoggingInterceptor`](https://github.com/ihsanbal/LoggingInterceptor)
 
 ...
-## TODO
-- [x] Common包发布到`jcenter()`仓库
-- [x] 完善文档
-- [ ] 图片加载
-- [ ] 缓存处理
-- [ ] 全局网路请求错误统一处理
-- [ ] android studio模板生成文件
 
 ## License
 ```
