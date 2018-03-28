@@ -16,11 +16,11 @@
 
 package com.zhouhaoo.sample.mvp.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.zhouhaoo.common.base.BaseMvpActivity
+import com.zhouhaoo.common.util.startActivity
 import com.zhouhaoo.sample.BaseData
 import com.zhouhaoo.sample.Data
 import com.zhouhaoo.sample.R
@@ -45,7 +45,7 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.setting -> {
-                startActivity(Intent(this, SettingActivity::class.java))
+                startActivity(SettingActivity::class.java)
             }
         }
         return true

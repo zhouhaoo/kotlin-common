@@ -19,6 +19,7 @@ package com.zhouhaoo.sample.injection.component
 import com.zhouhaoo.common.injection.AppScope
 import com.zhouhaoo.common.injection.component.CoreComponent
 import com.zhouhaoo.sample.base.BaseApp
+import com.zhouhaoo.sample.injection.module.ApiModules
 import com.zhouhaoo.sample.injection.module.MainMoudle
 import dagger.Component
 
@@ -26,8 +27,8 @@ import dagger.Component
  * Created by zhou on 18/2/26.
  */
 @AppScope
-@Component(modules = [MainMoudle::class],
-        dependencies = [(CoreComponent::class)])
+@Component(modules = [MainMoudle::class, ApiModules::class],
+        dependencies = [CoreComponent::class])
 interface AppComponent {
 
     fun inject(baseApp: BaseApp)

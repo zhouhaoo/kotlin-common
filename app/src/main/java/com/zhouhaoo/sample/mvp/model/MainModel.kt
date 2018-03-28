@@ -17,7 +17,6 @@
 package com.zhouhaoo.sample.mvp.model
 
 import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.common.interfaces.IRepositoryManager
 import com.zhouhaoo.common.mvp.BaseModel
 import com.zhouhaoo.sample.BaseData
 import com.zhouhaoo.sample.Data
@@ -30,12 +29,16 @@ import javax.inject.Inject
  * Created by zhou on 18/2/6.
  */
 @ActivityScope
-class MainModel @Inject constructor(repositoryManager: IRepositoryManager)
-    : BaseModel(repositoryManager), MainContract.Model {
+class MainModel @Inject constructor() : BaseModel(), MainContract.Model {
+    @Inject
+    lateinit var gankApi: GankApi
+    @Inject
+    lateinit var gankApi3: GankApi
 
     override fun getData(category: String, pageCount: Int, page: Int):
             Observable<BaseData<MutableList<Data>>> {
-        return repositoryManager.obtainRetrofitService(GankApi::class.java)
+        var gankApi1 = repositoryManager.obtainRetrofitService(GankApi::class.java)
+        return gankApi1
                 .getGank(category, pageCount, page)
     }
 

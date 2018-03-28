@@ -26,6 +26,7 @@ import com.zhouhaoo.common.interfaces.IRepositoryManager
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import okhttp3.OkHttpClient
+import java.io.File
 import javax.inject.Singleton
 
 /**
@@ -43,6 +44,10 @@ interface CoreComponent {
     fun repositoryManager(): IRepositoryManager
 
     fun gson(): Gson
+    /**
+     * ## 缓存文件
+     */
+    fun cacheFile(): File
 
     fun inject(appLifecycle: AppLifecycleImpl)
 }

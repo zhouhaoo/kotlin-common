@@ -40,7 +40,9 @@ class MainPresenter @Inject constructor(model: MainContract.Model, view: MainCon
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
-                            mView.gankData(it)
+                            mView.apply {
+                                gankData(it)
+                            }
                         }
                         , onError = {
                 }

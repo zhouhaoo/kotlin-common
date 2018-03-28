@@ -46,6 +46,7 @@ open class BasePresenter<M : IModel, V : IView>(var mModel: M, var mView: V) :
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     internal fun onDestroy(owner: LifecycleOwner) {
+        onDestroy()
         owner.lifecycle.removeObserver(this)
     }
 }
