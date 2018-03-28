@@ -38,7 +38,7 @@ import java.io.InputStream
  * Created by zhou on 2018/3/27.
  */
 @GlideModule(glideName = "GlideApp")
-open class GlideConfiguration : AppGlideModule() {
+class GlideConfiguration : AppGlideModule() {
     /**
      * 图片磁盘最大缓存大小
      */
@@ -58,7 +58,6 @@ open class GlideConfiguration : AppGlideModule() {
             setMemoryCache(LruResourceCache(customMemoryCacheSize))
             setBitmapPool(LruBitmapPool(customBitmapPoolSize))
         }
-        //配置
     }
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {

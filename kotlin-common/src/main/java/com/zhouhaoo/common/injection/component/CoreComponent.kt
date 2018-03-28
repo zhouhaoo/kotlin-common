@@ -36,13 +36,21 @@ import javax.inject.Singleton
 @Component(modules = [AndroidSupportInjectionModule::class, CoreModule::class,
     NetworkModule::class, ConfigModule::class])
 interface CoreComponent {
-
+    /**
+     * ## 全局 application
+     */
     fun application(): Application
-
+    /**
+     * ## okhttp
+     */
     fun okhttpClient(): OkHttpClient
-
+    /**
+     * ## 数据
+     */
     fun repositoryManager(): IRepositoryManager
-
+    /**
+     * ## json解析
+     */
     fun gson(): Gson
     /**
      * ## 缓存文件

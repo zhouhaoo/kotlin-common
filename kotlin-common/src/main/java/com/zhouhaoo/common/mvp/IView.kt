@@ -16,6 +16,8 @@
 
 package com.zhouhaoo.common.mvp
 
+import android.content.Context
+
 /**
  * Created by zhou on 18/2/5.
  */
@@ -29,6 +31,8 @@ interface IView {
      * 隐藏加载
      */
     fun hideLoading()
+
+    fun proContext(): Context
 
     /**
      * 显示信息

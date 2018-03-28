@@ -21,9 +21,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.zhouhaoo.common.injection.ActivityScope
 import com.zhouhaoo.common.mvp.BasePresenter
 import com.zhouhaoo.sample.mvp.contract.MainContract
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import com.zhouhaoo.sample.utils.execute
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -36,17 +34,8 @@ class MainPresenter @Inject constructor(model: MainContract.Model, view: MainCon
 
     fun requestData() {
         mModel.getData("Android", 10, 1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = {
-                            mView.apply {
-                                gankData(it)
-                            }
-                        }
-                        , onError = {
-                }
-                )
+                .execute(mView, {
+                })
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
