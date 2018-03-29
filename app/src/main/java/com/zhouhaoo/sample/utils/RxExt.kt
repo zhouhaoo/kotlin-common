@@ -16,13 +16,23 @@
 
 package com.zhouhaoo.sample.utils
 
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
+import com.zhouhaoo.common.glide.GlideApp
 import com.zhouhaoo.common.mvp.IView
 import com.zhouhaoo.sample.BaseData
 import com.zhouhaoo.sample.app.NetErrorListenerImpl
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.exceptions.OnErrorNotImplementedException
+import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
+
+/**
+ * rxkotlin 默认参数
+ */
+private val onErrorStub: (Throwable) -> Unit = { RxJavaPlugins.onError(OnErrorNotImplementedException(it)) }
 
 /**
  * ## 扩展RxJava的subscribe，有两种模式
@@ -30,14 +40,19 @@ import io.reactivex.schedulers.Schedulers
  * * 切换请求线程，处理错误信息，进度加载
  * * 切换请求线程，处理错误信息
  *
- * Created by zhou on 2018/3/28.
+ *  @param iView view层
+ *  @param onNext 处理过后的数据
+ *  @param onError 错误处理
+ * @param loadingStatus 执行状态 true为带进度加载，false 只处理错误toast ，默认为true
+ *
+ * ## Created by zhou on 2018/3/28.
  */
-
-
 fun <T : Any> Observable<BaseData<T>>.execute(
-        iView: IView, onNext: (T) -> Unit,
+        iView: IView,
+        onNext: (T) -> Unit,
         onError: (Throwable) -> Unit = NetErrorListenerImpl(iView.proContext())::errorMessage,
-        onComplete: () -> Unit = {}
+        onComplete: () -> Unit = {},
+        loadingStatus: Boolean = true
 ): Disposable = subscribeOn(Schedulers.io())
         .doOnSubscribe { iView.showLoading() }//显示加载
         .map {
@@ -46,7 +61,7 @@ fun <T : Any> Observable<BaseData<T>>.execute(
         }
         .observeOn(AndroidSchedulers.mainThread())
         .doAfterTerminate(iView::showLoading)//隐藏加载
-        .subscribe(onNext, onError, onComplete)
+        .subscribe(onNext, if (loadingStatus) onError else onErrorStub, onComplete)
 
 /**
  * 创建成功的数据 Observable
@@ -61,3 +76,4 @@ private fun <T> createData(data: T): Observable<T> {
         }
     }
 }
+

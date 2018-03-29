@@ -35,7 +35,7 @@ class MainPresenter @Inject constructor(model: MainContract.Model, view: MainCon
     fun requestData() {
         mModel.getData("Android", 10, 1)
                 .execute(mView, {
-                })
+                }, loadingStatus = false)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
