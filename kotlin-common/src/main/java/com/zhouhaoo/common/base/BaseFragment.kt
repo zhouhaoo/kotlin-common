@@ -24,9 +24,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.zhouhaoo.common.base.delegate.IFragment
+import com.zhouhaoo.common.extensions.getCoreComponent
 import com.zhouhaoo.common.integration.lifecycle.FragmentLifecycleable
 import com.zhouhaoo.common.mvp.IView
-import com.zhouhaoo.common.util.getCoreComponent
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
 

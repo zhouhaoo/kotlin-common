@@ -29,7 +29,7 @@ import com.bumptech.glide.load.engine.cache.MemorySizeCalculator
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import com.zhouhaoo.common.util.DataHelper
-import com.zhouhaoo.common.util.getCoreComponent
+import com.zhouhaoo.common.extensions.getCoreComponent
 import java.io.InputStream
 
 /**

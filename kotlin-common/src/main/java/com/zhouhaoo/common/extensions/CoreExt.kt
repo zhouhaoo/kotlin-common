@@ -14,21 +14,20 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.util
+package com.zhouhaoo.common.extensions
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import com.zhouhaoo.common.base.App
 import com.zhouhaoo.common.base.BaseApplication
 import com.zhouhaoo.common.injection.component.CoreComponent
+import com.zhouhaoo.common.interfaces.IRepositoryManager
 
 /**
  * Created by zhou on 18/1/25.
  *
- * Common常用的扩展
+ * CoreComponent 扩展
  */
-fun Context.getCoreComponent(): CoreComponent {
+inline fun Context.getCoreComponent(): CoreComponent {
     val application = this.applicationContext
     return if (application is BaseApplication) {
         application.getCoreComponent()
@@ -38,12 +37,6 @@ fun Context.getCoreComponent(): CoreComponent {
 }
 
 /**
- *打开activity
+ * 扩展IRepositoryManager 创建retrofit接口
  */
-fun Activity.startActivity(activity: Class<*>) {
-    startActivity(Intent(this, activity))
-}
-
-fun Activity.startActivityForResult(activity: Class<*>) {
-
-}
+inline fun <reified T : Any> IRepositoryManager.create(): T = this.obtainRetrofitService(T::class.java)

@@ -16,9 +16,6 @@
 
 package com.zhouhaoo.sample.utils
 
-import android.graphics.drawable.Drawable
-import android.widget.ImageView
-import com.zhouhaoo.common.glide.GlideApp
 import com.zhouhaoo.common.mvp.IView
 import com.zhouhaoo.sample.BaseData
 import com.zhouhaoo.sample.app.NetErrorListenerImpl
@@ -49,10 +46,10 @@ private val onErrorStub: (Throwable) -> Unit = { RxJavaPlugins.onError(OnErrorNo
  */
 fun <T : Any> Observable<BaseData<T>>.execute(
         iView: IView,
-        onNext: (T) -> Unit,
-        onError: (Throwable) -> Unit = NetErrorListenerImpl(iView.proContext())::errorMessage,
         onComplete: () -> Unit = {},
-        loadingStatus: Boolean = true
+        onError: (Throwable) -> Unit = NetErrorListenerImpl(iView.proContext())::errorMessage,
+        loadingStatus: Boolean = true,
+        onNext: (T) -> Unit
 ): Disposable = subscribeOn(Schedulers.io())
         .doOnSubscribe { iView.showLoading() }//显示加载
         .map {

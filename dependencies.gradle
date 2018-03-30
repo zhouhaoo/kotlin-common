@@ -55,7 +55,8 @@ ext {
             recyclerView     : "com.android.support:recyclerview-v7:$versions.support",
             supportAnnotation: "com.android.support:support-annotations:$versions.support",
 //            gridLayout       : "com.android.support:gridlayout-v7:$versions.support",
-            multiDex         : "com.android.support:multidex:$versions.multiDex"
+            multiDex         : "com.android.support:multidex:$versions.multiDex",
+            androideventbus  : "org.simple:androideventbus:1.0.5.1"
     ]
     rxJava = [
             rxKotlin     : "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin",

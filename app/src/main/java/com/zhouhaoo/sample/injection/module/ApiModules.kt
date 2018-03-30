@@ -16,6 +16,7 @@
 
 package com.zhouhaoo.sample.injection.module
 
+import com.zhouhaoo.common.extensions.create
 import com.zhouhaoo.common.injection.AppScope
 import com.zhouhaoo.common.interfaces.IRepositoryManager
 import com.zhouhaoo.sample.GankApi
@@ -30,6 +31,6 @@ class ApiModules {
     @AppScope
     @Provides
     internal fun provideGankApi(repositoryManager: IRepositoryManager): GankApi {
-        return repositoryManager.obtainRetrofitService(GankApi::class.java)
+        return repositoryManager.create()
     }
 }

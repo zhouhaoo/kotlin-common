@@ -16,12 +16,14 @@
 
 package com.zhouhaoo.sample.mvp.ui.activity
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.zhouhaoo.common.base.BaseMvpActivity
-import com.zhouhaoo.common.util.startActivity
-import com.zhouhaoo.sample.BaseData
+import com.zhouhaoo.common.extensions.fromApi
+import com.zhouhaoo.common.extensions.start
+import com.zhouhaoo.common.extensions.toApi
 import com.zhouhaoo.sample.Data
 import com.zhouhaoo.sample.R
 import com.zhouhaoo.sample.mvp.contract.MainContract
@@ -45,7 +47,8 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.setting -> {
-                startActivity(SettingActivity::class.java)
+                start<SettingActivity>()//跳转
+//                start<SettingActivity>(finishSelf = true)//跳转后关闭自己
             }
         }
         return true
@@ -57,11 +60,16 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
             mPresenter.requestData()
         }
         Timber.d("Lifecycle.Event.ON_CREATE")
+        fromApi(Build.VERSION_CODES.KITKAT) {
+
+        }
+        toApi(Build.VERSION_CODES.KITKAT) {
+
+        }
     }
 
-    override fun gankData(data: BaseData<MutableList<Data>>) {
+    override fun gankData(list: MutableList<Data>) {
         toast("请求成功")
-        var list = data.data
         val index = Random().nextInt(list.size - 1)
         tvContent.text = list[index].toString()
     }

@@ -16,10 +16,10 @@
 
 package com.zhouhaoo.sample.mvp.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import com.zhouhaoo.common.base.BaseActivity
+import com.zhouhaoo.common.extensions.runDelayed
+import com.zhouhaoo.common.extensions.start
 import com.zhouhaoo.sample.R
 
 /**
@@ -32,10 +32,9 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }, 1500)
+        runDelayed(1500) {
+            start<MainActivity>(finishSelf = true)
+        }
     }
 
     override fun showLoading() {

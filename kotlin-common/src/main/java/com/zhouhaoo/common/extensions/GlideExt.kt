@@ -14,25 +14,27 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.sample.mvp.contract
+package com.zhouhaoo.common.extensions
 
-import com.zhouhaoo.common.mvp.IModel
-import com.zhouhaoo.common.mvp.IView
-import com.zhouhaoo.sample.BaseData
-import com.zhouhaoo.sample.Data
-import io.reactivex.Observable
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
+import com.zhouhaoo.common.glide.GlideApp
 
 /**
- * Created by zhou on 18/2/6.
+ * ## 加载图片url扩展
+ *
+ * 用Glide实现
+ *
+ * Created by zhou on 2018/3/29.
  */
-interface MainContract {
+inline fun ImageView.load(url: String) {
+    GlideApp.with(this).load(url).into(this)
+}
 
-    interface View : IView {
-        fun gankData(data: MutableList<Data>)
-    }
+inline fun ImageView.load(drawable: Drawable) {
+    GlideApp.with(this).load(drawable).into(this)
+}
 
-    interface Model : IModel {
-        fun getData(category: String, pageCount: Int, page: Int):
-                Observable<BaseData<MutableList<Data>>>
-    }
+inline fun ImageView.load(resourceID: Int) {
+    GlideApp.with(this).load(resourceID).into(this)
 }

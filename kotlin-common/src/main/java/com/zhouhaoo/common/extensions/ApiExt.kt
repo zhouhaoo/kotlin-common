@@ -14,26 +14,27 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.glide
+package com.zhouhaoo.common.extensions
 
-import android.graphics.drawable.Drawable
-import android.widget.ImageView
+import android.os.Build
 
 /**
- * ## 加载图片url扩展
+ * ## 用于不同版本适配的函数
  *
- * 用Glide实现
- *
- * Created by zhou on 2018/3/29.
+ * Created by zhou on 2018/3/30.
  */
-fun ImageView.load(url: String) {
-    GlideApp.with(this).load(url).into(this)
+
+/**
+ *## 默认不包括比较版本
+ *
+ */
+inline fun toApi(toVersion: Int, inclusive: Boolean = false, action: () -> Unit) {
+    if (Build.VERSION.SDK_INT < toVersion || (inclusive && Build.VERSION.SDK_INT == toVersion)) action()
 }
 
-fun ImageView.load(drawable: Drawable) {
-    GlideApp.with(this).load(drawable).into(this)
-}
-
-fun ImageView.load(resourceID: Int) {
-    GlideApp.with(this).load(resourceID).into(this)
+/**
+ * 默认包括比较版本
+ */
+inline fun fromApi(fromVersion: Int, inclusive: Boolean = true, action: () -> Unit) {
+    if (Build.VERSION.SDK_INT > fromVersion || (inclusive && Build.VERSION.SDK_INT == fromVersion)) action()
 }

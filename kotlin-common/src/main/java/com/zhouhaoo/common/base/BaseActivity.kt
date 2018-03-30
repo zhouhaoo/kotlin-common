@@ -21,9 +21,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.zhouhaoo.common.base.delegate.IActivity
+import com.zhouhaoo.common.extensions.getCoreComponent
 import com.zhouhaoo.common.integration.lifecycle.ActivityLifecycleable
 import com.zhouhaoo.common.mvp.IView
-import com.zhouhaoo.common.util.getCoreComponent
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
 
