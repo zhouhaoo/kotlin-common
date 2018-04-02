@@ -25,4 +25,11 @@ import javax.inject.Inject
 abstract class BaseMvpActivity<P : IPresenter> : BaseActivity() {
     @Inject
     lateinit var mPresenter: P
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (::mPresenter.isInitialized) {
+            mPresenter.onDestroy()
+        }
+    }
 }

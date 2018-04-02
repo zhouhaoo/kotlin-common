@@ -17,6 +17,7 @@
 package com.zhouhaoo.common.net
 
 import com.zhouhaoo.common.interfaces.IRepositoryManager
+import dagger.Lazy
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -25,9 +26,12 @@ import javax.inject.Singleton
  * Created by zhou on 18/2/6.
  */
 @Singleton
-class RepositoryManager @Inject constructor(var mRetrofit: Retrofit) : IRepositoryManager {
+class RepositoryManager @Inject constructor() : IRepositoryManager {
+    @Inject
+    lateinit var mRetrofit: Lazy<Retrofit>
 
+    @Synchronized
     override fun <T> obtainRetrofitService(service: Class<T>): T {
-        return mRetrofit.create(service)
+        return mRetrofit.get().create(service)
     }
 }

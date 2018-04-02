@@ -14,28 +14,27 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.mvp
+package com.zhouhaoo.common.extensions
 
-import android.content.Context
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
+import com.zhouhaoo.common.glide.GlideApp
 
 /**
- * Created by zhou on 18/2/5.
+ * ## 加载图片url扩展
+ *
+ * 用Glide实现
+ *
+ * Created by zhou on 2018/3/29.
  */
-interface IView {
-    /**
-     * 显示加载
-     */
-    fun showLoading()
+inline fun ImageView.load(url: String) {
+    GlideApp.with(this).load(url).into(this)
+}
 
-    /**
-     * 隐藏加载
-     */
-    fun hideLoading()
+inline fun ImageView.load(drawable: Drawable) {
+    GlideApp.with(this).load(drawable).into(this)
+}
 
-    fun proContext(): Context
-
-    /**
-     * 显示信息
-     */
-    fun showMessage(message: String)
+inline fun ImageView.load(resourceID: Int) {
+    GlideApp.with(this).load(resourceID).into(this)
 }

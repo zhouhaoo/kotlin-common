@@ -17,7 +17,6 @@
 package com.zhouhaoo.sample.mvp.model
 
 import com.zhouhaoo.common.injection.FragmentScope
-import com.zhouhaoo.common.interfaces.IRepositoryManager
 import com.zhouhaoo.common.mvp.BaseModel
 import com.zhouhaoo.sample.mvp.contract.SettingContract
 import javax.inject.Inject
@@ -26,7 +25,6 @@ import javax.inject.Inject
  * Created by zhou on 18/2/28.
  */
 @FragmentScope
-class SettingModel @Inject constructor(repositoryManager: IRepositoryManager)
-    : BaseModel(repositoryManager), SettingContract.Model {
+class SettingModel @Inject constructor() : BaseModel(), SettingContract.Model {
 
 }

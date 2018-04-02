@@ -20,10 +20,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.zhouhaoo.common.base.BaseMvpFragment
+import com.zhouhaoo.common.extensions.load
 import com.zhouhaoo.sample.R
 import com.zhouhaoo.sample.mvp.contract.SettingContract
 import com.zhouhaoo.sample.mvp.presenter.SettingPresenter
-import com.zhouhaoo.sample.utils.toast
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 /**
@@ -48,9 +48,9 @@ class SettingFragment : BaseMvpFragment<SettingPresenter>(), SettingContract.Vie
 
     override fun initData(savedInstanceState: Bundle?) {
         tvSetting.setOnClickListener {
-            activity!!.toast("hahahahh")
+            val url = "http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2015/02/1423062384Octocat.png"
+            imageView.load(url)
             mPresenter.test()
         }
     }
-
 }

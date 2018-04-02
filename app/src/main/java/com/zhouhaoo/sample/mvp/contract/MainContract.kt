@@ -28,7 +28,7 @@ import io.reactivex.Observable
 interface MainContract {
 
     interface View : IView {
-        fun gankData(data: BaseData<MutableList<Data>>)
+        fun gankData(data: MutableList<Data>)
     }
 
     interface Model : IModel {

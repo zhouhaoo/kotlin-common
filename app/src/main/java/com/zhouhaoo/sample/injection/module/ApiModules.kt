@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017  zhouhaoo
+ * Copyright (c) 2018  zhouhaoo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,23 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.mvp
+package com.zhouhaoo.sample.injection.module
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.OnLifecycleEvent
+import com.zhouhaoo.common.extensions.create
+import com.zhouhaoo.common.injection.AppScope
 import com.zhouhaoo.common.interfaces.IRepositoryManager
-import javax.inject.Inject
+import com.zhouhaoo.sample.GankApi
+import dagger.Module
+import dagger.Provides
 
 /**
- * Created by zhou on 17/12/15.
+ * Created by zhou on 2018/3/27.
  */
-open class BaseModel : IModel, LifecycleObserver {
-    @Inject
-    lateinit var repositoryManager: IRepositoryManager
-
-    override fun onDestroy() {
-
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    internal fun onDestroy(owner: LifecycleOwner) {
-        owner.lifecycle.removeObserver(this)
+@Module
+class ApiModules {
+    @AppScope
+    @Provides
+    internal fun provideGankApi(repositoryManager: IRepositoryManager): GankApi {
+        return repositoryManager.create()
     }
 }

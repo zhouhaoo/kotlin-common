@@ -14,28 +14,27 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.mvp
+package com.zhouhaoo.common.extensions
 
-import android.content.Context
+import android.os.Build
 
 /**
- * Created by zhou on 18/2/5.
+ * ## 用于不同版本适配的函数
+ *
+ * Created by zhou on 2018/3/30.
  */
-interface IView {
-    /**
-     * 显示加载
-     */
-    fun showLoading()
 
-    /**
-     * 隐藏加载
-     */
-    fun hideLoading()
+/**
+ *## 默认不包括比较版本
+ *
+ */
+inline fun toApi(toVersion: Int, inclusive: Boolean = false, action: () -> Unit) {
+    if (Build.VERSION.SDK_INT < toVersion || (inclusive && Build.VERSION.SDK_INT == toVersion)) action()
+}
 
-    fun proContext(): Context
-
-    /**
-     * 显示信息
-     */
-    fun showMessage(message: String)
+/**
+ * 默认包括比较版本
+ */
+inline fun fromApi(fromVersion: Int, inclusive: Boolean = true, action: () -> Unit) {
+    if (Build.VERSION.SDK_INT > fromVersion || (inclusive && Build.VERSION.SDK_INT == fromVersion)) action()
 }

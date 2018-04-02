@@ -16,14 +16,14 @@
 
 package com.zhouhaoo.sample.mvp.presenter
 
+import android.Manifest
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import com.tbruyelle.rxpermissions2.RxPermissions
+import com.zhouhaoo.common.extensions.requestPermission
 import com.zhouhaoo.common.injection.ActivityScope
 import com.zhouhaoo.common.mvp.BasePresenter
 import com.zhouhaoo.sample.mvp.contract.MainContract
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -33,18 +33,28 @@ import javax.inject.Inject
 @ActivityScope
 class MainPresenter @Inject constructor(model: MainContract.Model, view: MainContract.View)
     : BasePresenter<MainContract.Model, MainContract.View>(model, view) {
+    @Inject
+    lateinit var rxPermissions: RxPermissions
 
     fun requestData() {
-        mModel.getData("Android", 10, 1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = {
-                            mView.gankData(it)
-                        }
-                        , onError = {
-                }
-                )
+//        mModel.getData("Android", 10, 1)
+//                .execute(mView) {
+//                    mView.gankData(it)
+//                }
+        requestPermission(rxPermissions, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA,
+                onSuccess = {
+                    Timber.e("requestPermission onSuccess")
+                },
+                onFailure = {
+                    it.forEach {
+                        Timber.e("requestPermission onFailure$it")
+                    }
+                },
+                onFailureWithNeverAsk = {
+                    it.forEach {
+                        Timber.e("requestPermission onFailureWithNeverAsk$it")
+                    }
+                })
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)

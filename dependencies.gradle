@@ -33,7 +33,7 @@ ext {
             rxAndroid       : '2.0.1',
             rxlifecycle2    : "2.2.1",
             rxdownload      : '1.1.9',
-            rxPermissions   : '0.9.4@aar',
+            rxPermissions2   : '0.9.5@aar',
             glide           : '4.4.0',
             logInterceptor  : '2.0.5',
             stetho          : '1.5.0',
@@ -55,13 +55,14 @@ ext {
             recyclerView     : "com.android.support:recyclerview-v7:$versions.support",
             supportAnnotation: "com.android.support:support-annotations:$versions.support",
 //            gridLayout       : "com.android.support:gridlayout-v7:$versions.support",
-            multiDex         : "com.android.support:multidex:$versions.multiDex"
+            multiDex         : "com.android.support:multidex:$versions.multiDex",
+            androideventbus  : "org.simple:androideventbus:1.0.5.1"
     ]
     rxJava = [
             rxKotlin     : "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin",
             rxAndroid    : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
             traceur      : "com.tspoon.traceur:traceur:$versions.traceur",
-            rxRermissions: "com.tbruyelle.rxpermissions:rxpermissions:$versions.rxPermissions"
+            rxpermissions2: "com.tbruyelle.rxpermissions2:rxpermissions:$versions.rxPermissions2"
     ]
     rxlifecycle2 = [
             "rxlifecycle2"        : "com.trello.rxlifecycle2:rxlifecycle:$versions.rxlifecycle2",

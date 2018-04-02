@@ -14,25 +14,20 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.util
+package com.zhouhaoo.common.extensions
 
 import android.content.Context
-import com.zhouhaoo.common.base.App
-import com.zhouhaoo.common.base.BaseApplication
-import com.zhouhaoo.common.injection.component.CoreComponent
+import android.support.annotation.StringRes
+import android.widget.Toast
 
 /**
- * Created by zhou on 18/1/25.
+ * Created by zhou on 2018/3/30.
  */
-class CommonUtils {
-    companion object {
-        fun getCoreComponent(context: Context): CoreComponent {
-            val application = context.applicationContext
-            return if (application is BaseApplication) {
-                application.getCoreComponent()
-            } else {
-                throw IllegalStateException("${BaseApplication::class.java} need implements${App::class.java}")
-            }
-        }
-    }
-}
+
+inline fun Context.toast(text: CharSequence): Toast = Toast.makeText(this, text, Toast.LENGTH_SHORT).apply { show() }
+
+inline fun Context.longToast(text: CharSequence): Toast = Toast.makeText(this, text, Toast.LENGTH_LONG).apply { show() }
+
+inline fun Context.toast(@StringRes resId: Int): Toast = Toast.makeText(this, resId, Toast.LENGTH_SHORT).apply { show() }
+
+inline fun Context.longToast(@StringRes resId: Int): Toast = Toast.makeText(this, resId, Toast.LENGTH_LONG).apply { show() }

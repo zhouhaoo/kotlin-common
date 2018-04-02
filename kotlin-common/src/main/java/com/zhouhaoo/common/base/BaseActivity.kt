@@ -16,10 +16,12 @@
 
 package com.zhouhaoo.common.base
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.zhouhaoo.common.base.delegate.IActivity
+import com.zhouhaoo.common.extensions.coreComponent
 import com.zhouhaoo.common.integration.lifecycle.ActivityLifecycleable
 import com.zhouhaoo.common.mvp.IView
 import io.reactivex.subjects.BehaviorSubject
@@ -40,6 +42,10 @@ abstract class BaseActivity : AppCompatActivity(), ActivityLifecycleable,
         val layoutId = initView(savedInstanceState)
         setContentView(layoutId)
         initData(savedInstanceState)
+    }
+
+    override fun proContext(): Context {
+        return this.coreComponent().application()
     }
 
     override fun useFragment(): Boolean = true

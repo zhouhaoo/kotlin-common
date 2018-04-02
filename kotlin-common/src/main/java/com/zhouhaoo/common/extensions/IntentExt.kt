@@ -14,28 +14,20 @@
  *  limitations under the License.
  */
 
-package com.zhouhaoo.common.mvp
+package com.zhouhaoo.common.extensions
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.support.v4.app.Fragment
 
 /**
- * Created by zhou on 18/2/5.
+ * Created by zhou on 2018/3/30.
  */
-interface IView {
-    /**
-     * 显示加载
-     */
-    fun showLoading()
+inline fun <reified T : Activity> intentFor(context: Context): Intent = Intent(context, T::class.java)
 
-    /**
-     * 隐藏加载
-     */
-    fun hideLoading()
+inline fun Intent.start(context: Context) = context.startActivity(this)
 
-    fun proContext(): Context
+inline fun Intent.startForResult(activity: Activity, requestCode: Int) = activity.startActivityForResult(this, requestCode)
 
-    /**
-     * 显示信息
-     */
-    fun showMessage(message: String)
-}
+inline fun Intent.startForResult(fragment: Fragment, requestCode: Int) = fragment.startActivityForResult(this, requestCode)

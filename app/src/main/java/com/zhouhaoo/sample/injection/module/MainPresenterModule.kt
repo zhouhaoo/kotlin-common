@@ -16,6 +16,7 @@
 
 package com.zhouhaoo.sample.injection.module
 
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.zhouhaoo.common.injection.ActivityScope
 import com.zhouhaoo.sample.mvp.contract.MainContract
 import com.zhouhaoo.sample.mvp.model.MainModel
@@ -39,5 +40,11 @@ class MainPresenterModule {
     @Provides
     internal fun provideMainModel(model: MainModel): MainContract.Model {
         return model
+    }
+
+    @ActivityScope
+    @Provides
+    internal fun provideRxPermissions(mainActivity: MainActivity): RxPermissions {
+        return RxPermissions(mainActivity)
     }
 }

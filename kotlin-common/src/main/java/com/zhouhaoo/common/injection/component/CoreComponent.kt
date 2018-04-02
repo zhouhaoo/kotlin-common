@@ -26,6 +26,7 @@ import com.zhouhaoo.common.interfaces.IRepositoryManager
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import okhttp3.OkHttpClient
+import java.io.File
 import javax.inject.Singleton
 
 /**
@@ -35,14 +36,26 @@ import javax.inject.Singleton
 @Component(modules = [AndroidSupportInjectionModule::class, CoreModule::class,
     NetworkModule::class, ConfigModule::class])
 interface CoreComponent {
-
+    /**
+     * ## 全局 application
+     */
     fun application(): Application
-
+    /**
+     * ## okhttp
+     */
     fun okhttpClient(): OkHttpClient
-
+    /**
+     * ## 数据
+     */
     fun repositoryManager(): IRepositoryManager
-
+    /**
+     * ## json解析
+     */
     fun gson(): Gson
+    /**
+     * ## 缓存文件
+     */
+    fun cacheFile(): File
 
     fun inject(appLifecycle: AppLifecycleImpl)
 }

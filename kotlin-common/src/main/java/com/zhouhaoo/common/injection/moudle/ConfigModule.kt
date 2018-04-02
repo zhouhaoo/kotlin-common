@@ -16,16 +16,19 @@
 
 package com.zhouhaoo.common.injection.moudle
 
+import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.ihsanbal.logging.LoggingInterceptor
 import com.zhouhaoo.common.net.GlobalHttpHandler
+import com.zhouhaoo.common.util.DataHelper
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import java.io.File
 import javax.inject.Singleton
 
 /**
@@ -61,6 +64,8 @@ class ConfigModule {
      * json解析配置
      */
     var gsonBuilder: GsonBuilder.() -> Unit = {}
+
+    var mCacheFile: File? = null
 
     @Singleton
     @Provides
@@ -101,6 +106,15 @@ class ConfigModule {
     @Provides
     internal fun provideInterceptors(): ArrayList<Interceptor> {
         return mInterceptors
+    }
+
+    /**
+     * 提供缓存文件
+     */
+    @Singleton
+    @Provides
+    internal fun provideCacheFile(application: Application): File {
+        return if (mCacheFile != null) mCacheFile!! else DataHelper.getCacheFile(application)
     }
 
     /**

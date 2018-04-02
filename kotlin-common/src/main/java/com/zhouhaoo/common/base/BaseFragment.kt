@@ -16,6 +16,7 @@
 
 package com.zhouhaoo.common.base
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.zhouhaoo.common.base.delegate.IFragment
+import com.zhouhaoo.common.extensions.coreComponent
 import com.zhouhaoo.common.integration.lifecycle.FragmentLifecycleable
 import com.zhouhaoo.common.mvp.IView
 import io.reactivex.subjects.BehaviorSubject
@@ -40,6 +42,10 @@ abstract class BaseFragment : Fragment(), IFragment, IView, FragmentLifecycleabl
         var layoutId = initView(inflater, container, savedInstanceState)
         return if (layoutId != 0) inflater.inflate(layoutId, container, false)
         else super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun proContext(): Context {
+        return this.context!!.coreComponent().application()
     }
 
     override fun provideLifecycleSubject(): Subject<FragmentEvent> {

@@ -49,7 +49,7 @@ apply plugin: 'kotlin-kapt'//注解编译器
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "com.zhouhaoo:kotlin-common:1.1.0"
+    implementation "com.zhouhaoo:kotlin-common:1.1.2"
     kapt annotationProcessorLibs //依赖注解
 }
 ```

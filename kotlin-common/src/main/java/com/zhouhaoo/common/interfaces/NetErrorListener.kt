@@ -16,8 +16,6 @@
 
 package com.zhouhaoo.common.interfaces
 
-import android.content.Context
-
 /**
  * Created by zhou on 18/2/2.
  */
@@ -25,5 +23,6 @@ interface NetErrorListener {
     /**
      * 网络错误信息
      */
-    fun errorMessage(context: Context, throwable: Throwable)
+    fun errorMessage( throwable: Throwable)
+
 }

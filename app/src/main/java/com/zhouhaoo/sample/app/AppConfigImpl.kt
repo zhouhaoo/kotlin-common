@@ -27,6 +27,11 @@ import com.zhouhaoo.sample.BuildConfig
 import okhttp3.internal.platform.Platform
 
 /**
+ * ## 全局配置
+ *
+ * * 12345
+ * * qwert
+ *
  * Created by zhou on 18/1/25.
  */
 class AppConfigImpl : AppConfig {
@@ -36,12 +41,14 @@ class AppConfigImpl : AppConfig {
             gsonBuilder = { }
             retrofitBuilder = { }
             okhttpBuilder = { }
+            //            glideBuilder ={ }
             httplogBuilder = {
                 loggable(BuildConfig.DEBUG).setLevel(Level.BODY).log(Platform.INFO)
                         .request("Request").response("Response")
             }
             globalHttpHandler = GlobalHttpHandlerImpl(context)
 //            addInterceptor()
+//            glideBuilder
         }
     }
 

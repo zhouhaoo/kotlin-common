@@ -18,6 +18,7 @@ package com.zhouhaoo.sample.app
 
 import android.content.Context
 import android.net.ParseException
+import android.widget.Toast
 import com.google.gson.JsonIOException
 import com.google.gson.JsonParseException
 import com.zhouhaoo.common.interfaces.NetErrorListener
@@ -29,11 +30,12 @@ import java.net.UnknownHostException
 /**
  * Created by zhou on 18/2/2.
  */
-class NetErrorListenerImpl : NetErrorListener {
+class NetErrorListenerImpl(private var context: Context) : NetErrorListener {
 
-    override fun errorMessage(context: Context, throwable: Throwable) {
+    override fun errorMessage(throwable: Throwable) {
+        Toast.makeText(context, throwable.message, Toast.LENGTH_LONG).show()
+        throwable.printStackTrace()
         when (throwable) {
-
             is UnknownHostException -> {
 
             }
