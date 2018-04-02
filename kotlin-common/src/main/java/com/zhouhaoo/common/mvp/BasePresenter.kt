@@ -41,7 +41,7 @@ open class BasePresenter<M : IModel, V : IView>(var mModel: M, var mView: V) :
     }
 
     override fun onDestroy() {
-        mModel?.onDestroy()
+        mModel.onDestroy()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

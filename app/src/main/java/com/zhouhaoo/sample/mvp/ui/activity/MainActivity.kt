@@ -21,10 +21,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.zhouhaoo.common.base.BaseMvpActivity
-import com.zhouhaoo.common.extensions.fromApi
-import com.zhouhaoo.common.extensions.start
-import com.zhouhaoo.common.extensions.toApi
+import com.zhouhaoo.common.extensions.*
 import com.zhouhaoo.sample.Data
+import com.zhouhaoo.sample.GankApi
 import com.zhouhaoo.sample.R
 import com.zhouhaoo.sample.mvp.contract.MainContract
 import com.zhouhaoo.sample.mvp.presenter.MainPresenter
@@ -59,6 +58,10 @@ class MainActivity : BaseMvpActivity<MainPresenter>(), MainContract.View {
             tvContent.text = ""
             mPresenter.requestData()
         }
+        var gankApi = coreComponent()
+                .repositoryManager()
+                .create<GankApi>()
+
         Timber.d("Lifecycle.Event.ON_CREATE")
         fromApi(Build.VERSION_CODES.KITKAT) {
 

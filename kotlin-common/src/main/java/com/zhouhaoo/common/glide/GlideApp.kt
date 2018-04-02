@@ -29,7 +29,7 @@ import com.bumptech.glide.load.engine.cache.MemorySizeCalculator
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import com.zhouhaoo.common.util.DataHelper
-import com.zhouhaoo.common.extensions.getCoreComponent
+import com.zhouhaoo.common.extensions.coreComponent
 import java.io.InputStream
 
 /**
@@ -45,7 +45,7 @@ class GlideConfiguration : AppGlideModule() {
     private val imageDiskCacheMaxSize = 100 * 1024 * 1024L
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        val coreComponent = context.getCoreComponent()
+        val coreComponent = context.coreComponent()
         builder.apply {
             setDiskCache {
                 DiskLruCacheWrapper.create(DataHelper.makeDirs(coreComponent.cacheFile()), imageDiskCacheMaxSize)
@@ -62,7 +62,7 @@ class GlideConfiguration : AppGlideModule() {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         registry.replace(GlideUrl::class.java, InputStream::class.java,
-                OkHttpUrlLoader.Factory(context.getCoreComponent().okhttpClient()))
+                OkHttpUrlLoader.Factory(context.coreComponent().okhttpClient()))
     }
 
     override fun isManifestParsingEnabled() = false

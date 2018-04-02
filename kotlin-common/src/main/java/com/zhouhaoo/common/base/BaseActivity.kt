@@ -21,7 +21,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.zhouhaoo.common.base.delegate.IActivity
-import com.zhouhaoo.common.extensions.getCoreComponent
+import com.zhouhaoo.common.extensions.coreComponent
 import com.zhouhaoo.common.integration.lifecycle.ActivityLifecycleable
 import com.zhouhaoo.common.mvp.IView
 import io.reactivex.subjects.BehaviorSubject
@@ -45,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity(), ActivityLifecycleable,
     }
 
     override fun proContext(): Context {
-        return this.getCoreComponent().application()
+        return this.coreComponent().application()
     }
 
     override fun useFragment(): Boolean = true

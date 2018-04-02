@@ -16,8 +16,8 @@
 
 package com.zhouhaoo.sample.mvp.model
 
+import com.zhouhaoo.common.extensions.create
 import com.zhouhaoo.common.injection.ActivityScope
-import com.zhouhaoo.common.interfaces.create
 import com.zhouhaoo.common.mvp.BaseModel
 import com.zhouhaoo.sample.BaseData
 import com.zhouhaoo.sample.Data
@@ -34,9 +34,7 @@ class MainModel @Inject constructor() : BaseModel(), MainContract.Model {
 
     override fun getData(category: String, pageCount: Int, page: Int):
             Observable<BaseData<MutableList<Data>>> {
-        var gankApi1 = repositoryManager.create<GankApi>()
-        return gankApi1
-                .getGank(category, pageCount, page)
+        return repositoryManager.create<GankApi>().getGank(category, pageCount, page)
     }
 
 }

@@ -27,7 +27,7 @@ import com.zhouhaoo.common.interfaces.IRepositoryManager
  *
  * CoreComponent 扩展
  */
-inline fun Context.getCoreComponent(): CoreComponent {
+inline fun Context.coreComponent(): CoreComponent {
     val application = this.applicationContext
     return if (application is BaseApplication) {
         application.getCoreComponent()
